@@ -1,239 +1,235 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Gerador de Sensibilidade</title>
+<title>SENCIFLIXER – Generador de Sensibilidades</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
 body {
-    background: #000;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a3c);
     color: #fff;
-    padding: 15px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23202020" stroke-width="0.3" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M0,160 C120,120 120,200 240,160 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60 M90,0 C60,30 120,30 90,60 M120,0 C90,30 150,30 120,60"/></svg>');
-    background-position: center;
-}
-/* Título principal */
-h1 {
-    font-size: 22px;
-    text-align: center;
-    margin: 20px 0 5px 0;
-    font-weight: 600;
-}
-.subtitle {
-    font-size: 13px;
-    color: #d0d0d0;
-    text-align: center;
-    margin-bottom: 25px;
-}
-/* Abas */
-.tabs {
     display: flex;
-    gap: 4px;
-    margin-bottom: 22px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
 }
-.tab {
-    flex: 1;
-    padding: 10px 0;
-    border: 1px solid #fff;
-    background: transparent;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-}
-.tab.active {
-    background: #fff;
-    color: #000;
-    font-weight: bold;
-}
-/* Seletores */
-select {
-    width: 100%;
-    padding: 11px 10px;
-    background: #111;
-    border: 1px solid #fff;
-    color: #fff;
-    font-size: 15px;
-    margin-bottom: 15px;
-    appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-}
-/* Botão Gerar */
-#gerarBtn {
-    width: 100%;
-    padding: 10px 0;
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-    font-size: 15px;
-    margin-bottom: 22px;
-    cursor: pointer;
-}
-/* Área de resultados */
-#resultado {
-    border: 1px solid #fff;
-    padding: 12px;
-    background: #111;
-}
-#resultado p {
-    font-size: 15px;
-    margin: 4px 0;
-}
-/* Rodapé */
-footer {
-    font-size: 11px;
-    color: #b0b0b0;
-    text-align: center;
-    margin-top: 30px;
-}
+h1 { color: #ff4d4d; font-size: 32px; margin-bottom:5px; text-align:center;}
+h2 { color: #ff9999; margin-bottom: 20px; text-align:center;}
+input, select, button { padding: 10px; margin: 5px; border-radius: 8px; border: none; font-size:16px; width: 100%; max-width: 300px; }
+button { background-color:#ff4d4d; color:white; cursor:pointer; transition:0.3s; }
+button:hover { background-color:#ff1a1a; }
+#authArea { margin-top:50px; text-align:center; }
+#mainContent { display:none; width:100%; max-width:400px; }
+#resultArea { margin-top:20px; padding:20px; background-color:#3a3a5a; border-radius:12px; text-align:left; }
+span.sensi-value { font-weight:bold; color:#ffcc00; }
+footer { margin-top:30px; font-size:12px; color:#aaa; text-align:center;}
 </style>
 </head>
 <body>
 
-<h1>Sensibilidade / Auxílio</h1>
-<p class="subtitle">Configure a sensibilidade para usar</p>
-
-<div class="tabs">
-    <button class="tab active" id="tabSensi">Sensi</button>
-    <button class="tab" id="tabAux">Auxílio</button>
+<!-- Login -->
+<div id="authArea">
+    <h1>Acceso SENCIFLIXER</h1>
+    <input type="text" id="username" placeholder="Usuario"><br>
+    <input type="password" id="password" placeholder="Clave"><br>
+    <button onclick="checkLogin()">Entrar</button>
+    <p id="errorMsg" style="color:red; display:none;">Usuario o clave incorrecta</p>
 </div>
 
-<div id="conteudoSensi">
-    <select id="marca">
-    <option value="">Selecione</option>
-    <option value="Samsung">Samsung</option>
-    <option value="Apple">Apple</option>
-    <option value="Xiaomi">Xiaomi</option>
-    <option value="Motorola">Motorola</option>
-    <option value="Huawei">Huawei</option>
-    <option value="Oppo">Oppo</option>
-    <option value="Vivo">Vivo</option>
-    <option value="OnePlus">OnePlus</option>
-    <option value="Realme">Realme</option>
-    <option value="Nokia">Nokia</option>
-    <option value="LG">LG</option>
-    <option value="Sony">Sony</option>
-    <option value="Asus">Asus</option>
-    <option value="Lenovo">Lenovo</option>
-    <option value="ZTE">ZTE</option>
-    <option value="Alcatel">Alcatel</option>
-    <option value="Meizu">Meizu</option>
-    <option value="Honor">Honor</option>
-    <option value="HTC">HTC</option>
-    <option value="BlackBerry">BlackBerry</option>
-    <option value="Google">Google (Pixel)</option>
-    </select>>
+<!-- Contenido principal -->
+<div id="mainContent">
+    <h1>SENCIFLIXER</h1>
+    <h2>Generador de sensibilidades profesional</h2>
 
-    <select id="modelo">
-        <option value="">Selecione</option>
+    <label>Marca del celular:</label>
+    <select id="brandSelect">
+        <option value="">Cargando marcas...</option>
     </select>
 
-    <button id="gerarBtn">Gerar</button>
+    <label>Modelo del celular:</label>
+    <select id="modelSelect">
+        <option value="">Selecciona el modelo</option>
+    </select>
 
-    <div id="resultado">
-        <p>Modelo: Galaxy A22</p>
-        <p>Geral: 102</p>
-        <p>Ponto Vermelho: 108</p>
-        <p>Mira 2x: 165</p>
-        <p>Mira 4x: 135</p>
-        <p>Tamanho do Botão: 47</p>
+    <label>Estilo de juego:</label>
+    <select id="playStyle">
+        <option value="sniper">Sniper</option>
+        <option value="support">Support</option>
+        <option value="competitive">Competitive</option>
+    </select>
+
+    <label>Ajuste general (+/-):</label>
+    <input type="number" id="btnAdjust" value="0">
+
+    <button onclick="calculateSens()">Generar Senci</button>
+
+    <div id="resultArea" style="display:none;">
+        <p>Marca: <span id="resBrand"></span></p>
+        <p>Modelo: <span id="resModel"></span></p>
+        <p>General: <span id="sensiGeneral" class="sensi-value"></span></p>
+        <p>Mira: <span id="sensiAim" class="sensi-value"></span></p>
+        <p>2x: <span id="sensi2x" class="sensi-value"></span></p>
+        <p>4x: <span id="sensi4x" class="sensi-value"></span></p>
+        <p>8x/AWM: <span id="sensi8x" class="sensi-value"></span></p>
+        <p>Nocturna: <span id="sensiNight" class="sensi-value"></span></p>
+        <p>Térmica: <span id="sensiThermal" class="sensi-value"></span></p>
+        <p>Automático: <span id="sensiAuto" class="sensi-value"></span></p>
     </div>
-</div>
 
-<div id="conteudoAux" style="display: none;">
-    <p style="text-align: center; padding: 40px 10px; font-size: 15px;">Conteúdo em desenvolvimento</p>
+    <button onclick="exportConfig()">Exportar Configuración</button>
 </div>
 
 <footer>
-    Desenvolvido por @ @nexus.sensix
+    Desarrollado por @nexus.sensix
 </footer>
 
 <script>
-// Dados dos dispositivos (igual a la foto)
+// Login
+function checkLogin() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    if(user === '22' && pass === '22') {
+        document.getElementById('authArea').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    } else {
+        document.getElementById('errorMsg').style.display = 'block';
+    }
+}
+
+// Dispositivos con marcas y modelos
 const dispositivos = {
-    "Samsung": [
-        {nome: "Galaxy A22", geral: 102, ponto: 108, mira2x: 165, mira4x: 135, botao: 47},
-        {nome: "Galaxy S23", geral: 98, ponto: 105, mira2x: 160, mira4x: 130, botao: 45},
-        {nome: "Galaxy A53", geral: 100, ponto: 106, mira2x: 162, mira4x: 132, botao: 46}
-    ],
-    "Apple": [
-        {nome: "iPhone 14", geral: 95, ponto: 102, mira2x: 155, mira4x: 128, botao: 44}
-    ],
-    "Xiaomi": [
-        {nome: "Redmi Note 11", geral: 103, ponto: 109, mira2x: 166, mira4x: 136, botao: 48}
-    ]
+    "Samsung": ["Galaxy S23","Galaxy A53","Galaxy A22"],
+    "Apple": ["iPhone 14","iPhone 14 Pro","iPhone 13"],
+    "Motorola": ["G20","Edge 30","G60"],
+    "Xiaomi": ["Redmi Note 11","Mi 12","Redmi Note 10"],
+    "Huawei": ["P50","Mate 40"],
+    "Oppo": ["Reno 8","Find X5"],
+    "Vivo": ["V23","X80 Pro"],
+    "OnePlus": ["10 Pro","Nord 2"],
+    "Realme": ["GT 2","Narzo 50"],
+    "Nokia": ["G21","X20"],
+    "LG": ["Velvet","Wing"],
+    "Sony": ["Xperia 1","Xperia 5"],
+    "Asus": ["ROG Phone 6","Zenfone 9"],
+    "Lenovo": ["Legion Phone Duel 2","K12"],
+    "ZTE": ["Axon 30","Blade V30"],
+    "Alcatel": ["1S","3L"],
+    "Meizu": ["18s","M16th"],
+    "Honor": ["50","Magic4"],
+    "HTC": ["Desire 22","U20"],
+    "Google": ["Pixel 7","Pixel 6"]
 };
 
-// Atualizar modelos ao escolher marca
-const marcaSel = document.getElementById('marca');
-const modeloSel = document.getElementById('modelo');
+// Llenar primer select (marcas)
+const brandSelect = document.getElementById('brandSelect');
+const modelSelect = document.getElementById('modelSelect');
 
-marcaSel.addEventListener('change', () => {
-    const marca = marcaSel.value;
-    modeloSel.innerHTML = '<option value="">Selecione</option>';
-    
+brandSelect.innerHTML = '<option value="">Selecciona la marca</option>';
+Object.keys(dispositivos).forEach(brand => {
+    const opt = document.createElement('option');
+    opt.value = brand;
+    opt.textContent = brand;
+    brandSelect.appendChild(opt);
+});
+
+// Llenar segundo select según marca
+brandSelect.addEventListener('change', () => {
+    const marca = brandSelect.value;
+    modelSelect.innerHTML = '<option value="">Selecciona el modelo</option>';
     if(dispositivos[marca]) {
-        dispositivos[marca].forEach(mod => {
+        dispositivos[marca].forEach(model => {
             const opt = document.createElement('option');
-            opt.value = mod.nome;
-            opt.textContent = mod.nome;
-            modeloSel.appendChild(opt);
+            opt.value = model;
+            opt.textContent = model;
+            modelSelect.appendChild(opt);
         });
     }
 });
 
-// Atualizar resultados ao clicar Gerar
-const gerarBtn = document.getElementById('gerarBtn');
-const resultadoDiv = document.getElementById('resultado');
+// Generar sensibilidades
+function calculateSens() {
+    const baseGen = 50;
+    const baseAim = 30;
+    const btnAdjust = parseInt(document.getElementById('btnAdjust').value) || 0;
+    const style = document.getElementById('playStyle').value;
+    const brand = brandSelect.value;
+    const model = modelSelect.value;
 
-gerarBtn.addEventListener('click', () => {
-    const marca = marcaSel.value;
-    const modeloNome = modeloSel.value;
+    if(!brand || !model) { alert("Selecciona marca y modelo"); return; }
 
-    if(!marca || !modeloNome) {
-        alert('Selecione marca e modelo!');
-        return;
+    let sensiGeneral, sensiAim, sensi2x, sensi4x, sensi8x, sensiNight, sensiThermal, sensiAuto;
+    switch(style) {
+        case 'sniper':
+            sensiGeneral = baseGen + btnAdjust - 3;
+            sensiAim = baseAim + btnAdjust - 4;
+            sensi2x = 28 + btnAdjust;
+            sensi4x = 20 + btnAdjust;
+            sensi8x = 12 + btnAdjust;
+            sensiNight = 35 + btnAdjust;
+            sensiThermal = 28 + btnAdjust;
+            sensiAuto = 25 + btnAdjust;
+            break;
+        case 'support':
+            sensiGeneral = baseGen + btnAdjust;
+            sensiAim = baseAim + btnAdjust;
+            sensi2x = 35 + btnAdjust;
+            sensi4x = 28 + btnAdjust;
+            sensi8x = 18 + btnAdjust;
+            sensiNight = 42 + btnAdjust;
+            sensiThermal = 34 + btnAdjust;
+            sensiAuto = 32 + btnAdjust;
+            break;
+        case 'competitive':
+            sensiGeneral = baseGen + btnAdjust + 2;
+            sensiAim = baseAim + btnAdjust + 1;
+            sensi2x = 38 + btnAdjust;
+            sensi4x = 32 + btnAdjust;
+            sensi8x = 22 + btnAdjust;
+            sensiNight = 45 + btnAdjust;
+            sensiThermal = 37 + btnAdjust;
+            sensiAuto = 35 + btnAdjust;
+            break;
     }
 
-    const dados = dispositivos[marca].find(m => m.nome === modeloNome);
-    resultadoDiv.innerHTML = `
-        <p>Modelo: ${dados.nome}</p>
-        <p>Geral: ${dados.geral}</p>
-        <p>Ponto Vermelho: ${dados.ponto}</p>
-        <p>Mira 2x: ${dados.mira2x}</p>
-        <p>Mira 4x: ${dados.mira4x}</p>
-        <p>Tamanho do Botão: ${dados.botao}</p>
-    `;
-});
+    document.getElementById('resBrand').textContent = brand;
+    document.getElementById('resModel').textContent = model;
+    document.getElementById('sensiGeneral').textContent = sensiGeneral;
+    document.getElementById('sensiAim').textContent = sensiAim;
+    document.getElementById('sensi2x').textContent = sensi2x;
+    document.getElementById('sensi4x').textContent = sensi4x;
+    document.getElementById('sensi8x').textContent = sensi8x;
+    document.getElementById('sensiNight').textContent = sensiNight;
+    document.getElementById('sensiThermal').textContent = sensiThermal;
+    document.getElementById('sensiAuto').textContent = sensiAuto;
+    document.getElementById('resultArea').style.display = 'block';
+}
 
-// Alternar abas
-const tabSensi = document.getElementById('tabSensi');
-const tabAux = document.getElementById('tabAux');
-const conteudoSensi = document.getElementById('conteudoSensi');
-const conteudoAux = document.getElementById('conteudoAux');
-
-tabSensi.addEventListener('click', () => {
-    tabSensi.classList.add('active');
-    tabAux.classList.remove('active');
-    conteudoSensi.style.display = 'block';
-    conteudoAux.style.display = 'none';
-});
-
-tabAux.addEventListener('click', () => {
-    tabAux.classList.add('active');
-    tabSensi.classList.remove('active');
-    conteudoAux.style.display = 'block';
-    conteudoSensi.style.display = 'none';
-});
+// Exportar configuración JSON
+function exportConfig() {
+    const config = {
+        marca: brandSelect.value,
+        modelo: modelSelect.value,
+        estilo: document.getElementById('playStyle').value,
+        sensibilidades: {
+            general: document.getElementById('sensiGeneral').textContent,
+            mira: document.getElementById('sensiAim').textContent,
+            '2x': document.getElementById('sensi2x').textContent,
+            '4x': document.getElementById('sensi4x').textContent,
+            '8x/AWM': document.getElementById('sensi8x').textContent,
+            nocturna: document.getElementById('sensiNight').textContent,
+            termica: document.getElementById('sensiThermal').textContent,
+            automatico: document.getElementById('sensiAuto').textContent
+        }
+    };
+    const blob = new Blob([JSON.stringify(config, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'sensifire-config.json';
+    a.click();
+}
 </script>
-
 </body>
 </html>
 
