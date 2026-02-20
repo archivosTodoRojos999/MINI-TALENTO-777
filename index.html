@@ -1,203 +1,197 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>SENCIFLIXER – Generador de Sensibilidades</title>
+<title>SENCIFLIXER - Sensibilidade</title>
 <style>
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #1e1e2f, #2a2a3c);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    min-height: 100vh;
 }
-h1 { color: #ff4d4d; font-size: 32px; margin-bottom:5px; text-align:center;}
-h2 { color: #ff9999; margin-bottom: 20px; text-align:center;}
-input, select, button { padding: 10px; margin: 5px; border-radius: 8px; border: none; font-size:16px; width: 100%; max-width: 300px; }
-button { background-color:#ff4d4d; color:white; cursor:pointer; transition:0.3s; }
-button:hover { background-color:#ff1a1a; }
-#authArea { margin-top:50px; text-align:center; }
-#mainContent { display:none; width:100%; max-width:400px; }
-#resultArea { margin-top:20px; padding:20px; background-color:#3a3a5a; border-radius:12px; text-align:left; }
-span.sensi-value { font-weight:bold; color:#ffcc00; }
-footer { margin-top:30px; font-size:12px; color:#aaa; text-align:center;}
+body {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23202020" stroke-width="0.3" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60"/></svg>');
+    background-position: center;
+}
+h1 {
+    font-size: 22px;
+    text-align: center;
+    margin: 20px 0 5px 0;
+    font-weight: 600;
+}
+.subtitle {
+    font-size: 13px;
+    color: #d0d0d0;
+    text-align: center;
+    margin-bottom: 25px;
+}
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 22px;
+}
+.tab {
+    flex: 1;
+    padding: 10px 0;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+.tab.active {
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+}
+select {
+    width: 100%;
+    padding: 11px 10px;
+    background: #111;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 15px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+#gerarBtn {
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 22px;
+    cursor: pointer;
+}
+#resultado {
+    border: 1px solid #fff;
+    padding: 12px;
+    background: #111;
+    display: none;
+}
+#resultado p {
+    font-size: 15px;
+    margin: 4px 0;
+}
+footer {
+    font-size: 11px;
+    color: #b0b0b0;
+    text-align: center;
+    margin-top: 30px;
+}
 </style>
 </head>
 <body>
 
-<!-- Login -->
-<div id="authArea">
-    <h1>Acceso SENCIFLIXER</h1>
-    <input type="text" id="username" placeholder="Usuario"><br>
-    <input type="password" id="password" placeholder="Clave"><br>
-    <button onclick="checkLogin()">Entrar</button>
-    <p id="errorMsg" style="color:red; display:none;">Usuario o clave incorrecta</p>
+<h1>Sensibilidade / Auxílio</h1>
+<p class="subtitle">Configure a sensibilidade para usar</p>
+
+<div class="tabs">
+    <button class="tab active" id="tabSensi">Sensi</button>
+    <button class="tab" id="tabAux">Auxílio</button>
 </div>
 
-<!-- Contenido principal -->
-<div id="mainContent">
-    <h1>SENCIFLIXER</h1>
-    <h2>Generador de sensibilidades profesional</h2>
-
-    <label>Marca del celular:</label>
-    <select id="brandSelect">
-        <option value="">Cargando marcas...</option>
+<div id="conteudoSensi">
+    <select id="marca">
+        <option value="">Selecione</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Apple">iPhone</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Motorola">Motorola</option>
+        <option value="Oppo">Oppo</option>
+        <option value="Vivo">Vivo</option>
+        <option value="Lenovo">Lenovo</option>
+        <option value="LG">LG</option>
+        <option value="Nokia">Nokia</option>
+        <option value="Honor">Honor</option>
     </select>
 
-    <label>Modelo del celular:</label>
-    <select id="modelSelect">
-        <option value="">Selecciona el modelo</option>
+    <select id="modelo">
+        <option value="">Selecione</option>
     </select>
 
-    <label>Estilo de juego:</label>
-    <select id="playStyle">
-        <option value="sniper">Sniper</option>
-        <option value="support">Support</option>
-        <option value="competitive">Competitive</option>
-    </select>
+    <button id="gerarBtn">Generar senci</button>
 
-    <label>Ajuste general (+/-):</label>
-    <input type="number" id="btnAdjust" value="0" min="-50" max="50">
-
-    <button onclick="calculateSens()">Generar Senci</button>
-
-    <div id="resultArea" style="display:none;">
-        <p>Marca: <span id="resBrand"></span></p>
-        <p>Modelo: <span id="resModel"></span></p>
-        <p>General: <span id="sensiGeneral" class="sensi-value"></span></p>
-        <p>Mira de punto rojo: <span id="sensiAim" class="sensi-value"></span></p>
-        <p>Mira X2: <span id="sensi2x" class="sensi-value"></span></p>
-        <p>Mira X4: <span id="sensi4x" class="sensi-value"></span></p>
-        <p>Mira francotirador: <span id="sensi8x" class="sensi-value"></span></p>
-        <p>Cámara 360°: <span id="sensi360" class="sensi-value"></span></p>
+    <div id="resultado">
+        <p>Modelo: <span id="resModelo">-</span></p>
+        <p>Geral: <span id="resGeral">-</span></p>
+        <p>Ponto Vermelho: <span id="resPonto">-</span></p>
+        <p>Mira 2x: <span id="res2x">-</span></p>
+        <p>Mira 4x: <span id="res4x">-</span></p>
+        <p>Tamanho do Botão: <span id="resBotao">-</span></p>
     </div>
+</div>
 
-    <button onclick="exportConfig()">Exportar Configuración</button>
+<div id="conteudoAux" style="display: none;">
+    <p style="text-align: center; padding: 40px 10px; font-size: 15px;">Conteúdo em desenvolvimento</p>
 </div>
 
 <footer>
-    Desarrollado por @nexus.sensix
+    Desenvolvido por @ @nexus.sensix
 </footer>
 
 <script>
-// Login
-function checkLogin() {
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-    if(user === '22' && pass === '22') {
-        document.getElementById('authArea').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-    } else {
-        document.getElementById('errorMsg').style.display = 'block';
-    }
-}
-
-// Datos precisos de sensibilidades por dispositivo
-const deviceData = {
-    "Samsung": {"Galaxy S23":{general:98,aim:105,x2:160,x4:130,sniper:100,cam360:75},"Galaxy A53":{general:100,aim:106,x2:162,x4:132,sniper:102,cam360:76},"Galaxy A22":{general:102,aim:108,x2:165,x4:135,sniper:104,cam360:78}},
-    "Apple": {"iPhone 14":{general:95,aim:102,x2:155,x4:128,sniper:98,cam360:72},"iPhone 14 Pro":{general:97,aim:104,x2:158,x4:130,sniper:100,cam360:74},"iPhone 13":{general:94,aim:101,x2:154,x4:127,sniper:97,cam360:71}},
-    "Motorola": {"G20":{general:99,aim:106,x2:160,x4:132,sniper:101,cam360:75},"Edge 30":{general:101,aim:108,x2:164,x4:134,sniper:103,cam360:77},"G60":{general:100,aim:107,x2:162,x4:133,sniper:102,cam360:76}},
-    "Xiaomi": {"Redmi Note 11":{general:103,aim:109,x2:166,x4:136,sniper:105,cam360:78},"Mi 12":{general:101,aim:107,x2:163,x4:134,sniper:103,cam360:76},"Redmi Note 10":{general:102,aim:108,x2:164,x4:135,sniper:104,cam360:77}},
-    "Huawei": {"P50":{general:97,aim:103,x2:157,x4:129,sniper:99,cam360:73},"Mate 40":{general:98,aim:104,x2:158,x4:130,sniper:100,cam360:74}},
-    "Oppo": {"Reno 8":{general:99,aim:105,x2:161,x4:131,sniper:101,cam360:75},"Find X5":{general:100,aim:106,x2:163,x4:133,sniper:102,cam360:76}},
-    "Vivo": {"V23":{general:100,aim:107,x2:163,x4:133,sniper:102,cam360:76},"X80 Pro":{general:102,aim:109,x2:165,x4:135,sniper:104,cam360:78}},
-    "OnePlus": {"10 Pro":{general:101,aim:108,x2:164,x4:134,sniper:103,cam360:77},"Nord 2":{general:99,aim:106,x2:161,x4:132,sniper:101,cam360:75}},
-    "Realme": {"GT 2":{general:100,aim:107,x2:163,x4:133,sniper:102,cam360:76},"Narzo 50":{general:99,aim:106,x2:161,x4:132,sniper:101,cam360:75}},
-    "Nokia": {"G21":{general:98,aim:104,x2:158,x4:130,sniper:100,cam360:74},"X20":{general:99,aim:106,x2:160,x4:132,sniper:101,cam360:75}},
-    "LG": {"Velvet":{general:97,aim:103,x2:157,x4:129,sniper:99,cam360:73},"Wing":{general:98,aim:104,x2:158,x4:130,sniper:100,cam360:74}},
-    "Sony": {"Xperia 1":{general:101,aim:108,x2:164,x4:134,sniper:103,cam360:77},"Xperia 5":{general:99,aim:106,x2:161,x4:132,sniper:101,cam360:75}},
-    "Asus": {"ROG Phone 6":{general:102,aim:109,x2:165,x4:135,sniper:104,cam360:78},"Zenfone 9":{general:100,aim:107,x2:163,x4:133,sniper:102,cam360:76}},
-    "Lenovo": {"Legion Phone Duel 2":{general:101,aim:108,x2:164,x4:134,sniper:103,cam360:77},"K12":{general:98,aim:104,x2:158,x4:130,sniper:100,cam360:74}},
-    "ZTE": {"Axon 30":{general:100,aim:107,x2:163,x4:133,sniper:102,cam360:76},"Blade V30":{general:99,aim:106,x2:161,x4:132,sniper:101,cam360:75}},
-    "Alcatel": {"1S":{general:96,aim:102,x2:155,x4:128,sniper:97,cam360:72},"3L":{general:97,aim:103,x2:157,x4:129,sniper:99,cam360:73}},
-    "Meizu": {"18s":{general:100,aim:107,x2:163,x4:133,sniper:102,cam360:76},"M16th":{general:99,aim:106,x2:161,x4:132,sniper:101,cam360:75}},
-    "Honor": {"50":{general:98,aim:104,x2:158,x4:130,sniper:100,cam360:74},"Magic4":{general:99,aim:106,x2:160,x4:132,sniper:101,cam360:75}},
-    "HTC": {"Desire 22":{general:97,aim:103,x2:157,x4:129,sniper:99,cam360:73},"U20":{general:98,aim:104,x2:158,x4:130,sniper:100,cam360:74}},
-    "Google": {"Pixel 7":{general:101,aim:108,x2:164,x4:134,sniper:103,cam360:77},"Pixel 6":{general:99,aim:106,x2:161,x4:132,sniper:101,cam360:75}}
-};
-
-// Llenar marcas
-const brandSelect = document.getElementById('brandSelect');
-const modelSelect = document.getElementById('modelSelect');
-brandSelect.innerHTML = '<option value="">Selecciona la marca</option>';
-Object.keys(deviceData).forEach(brand => {
-    const opt = document.createElement('option');
-    opt.value = brand;
-    opt.textContent = brand;
-    brandSelect.appendChild(opt);
-});
-
-// Llenar modelos según marca
-brandSelect.addEventListener('change', () => {
-    const brand = brandSelect.value;
-    modelSelect.innerHTML = '<option value="">Selecciona el modelo</option>';
-    if(deviceData[brand]) {
-        Object.keys(deviceData[brand]).forEach(model => {
-            const opt = document.createElement('option');
-            opt.value = model;
-            opt.textContent = model;
-            modelSelect.appendChild(opt);
-        });
-    }
-});
-
-// Generar sensibilidades precisas
-function calculateSens() {
-    const brand = brandSelect.value;
-    const model = modelSelect.value;
-    const btnAdjust = parseInt(document.getElementById('btnAdjust').value) || 0;
-    const style = document.getElementById('playStyle').value;
-
-    if(!brand || !model) { alert("Selecciona marca y modelo"); return; }
-
-    let data = deviceData[brand][model];
-
-    // Ajuste por estilo
-    let factor = 0;
-    if(style === 'sniper') factor = -2;
-    if(style === 'support') factor = +1;
-    if(style === 'competitive') factor = +3;
-
-    // Aplicar ajuste y limitar a 200
-    const limit = val => Math.min(val + btnAdjust + factor, 200);
-
-    document.getElementById('resBrand').textContent = brand;
-    document.getElementById('resModel').textContent = model;
-    document.getElementById('sensiGeneral').textContent = limit(data.general);
-    document.getElementById('sensiAim').textContent = limit(data.aim);
-    document.getElementById('sensi2x').textContent = limit(data.x2);
-    document.getElementById('sensi4x').textContent = limit(data.x4);
-    document.getElementById('sensi8x').textContent = limit(data.sniper);
-    document.getElementById('sensi360').textContent = limit(data.cam360);
-
-    document.getElementById('resultArea').style.display = 'block';
-}
-
-// Exportar configuración JSON
-function exportConfig() {
-    const config = {
-        marca: brandSelect.value,
-        modelo: modelSelect.value,
-        estilo: document.getElementById('playStyle').value,
-        sensibilidades: {
-            general: document.getElementById('sensiGeneral').textContent,
-            mira_punto_rojo: document.getElementById('sensiAim').textContent,
-            mira_x2: document.getElementById('sensi2x').textContent,
-            mira_x4: document.getElementById('sensi4x').textContent,
-            mira_francotirador: document.getElementById('sensi8x').textContent,
-            camara_360: document.getElementById('sensi360').textContent
-        }
-    };
-    const blob = new Blob([JSON.stringify(config, null, 2)], {type: 'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'sensifire-config.json';
-    a.click();
-}
-</script>
-</body>
-</html>
+// Base de datos solo con las marcas solicitadas y sensibilidad hasta 200
+const todosCelulares = {
+    "Samsung": [
+        {nome: "Samsung - Galaxy A03", geral: 95, ponto: 100, mira2x: 155, mira4x: 125, botao: 43},
+        {nome: "Samsung - Galaxy A04", geral: 96, ponto: 101, mira2x: 156, mira4x: 126, botao: 44},
+        {nome: "Samsung - Galaxy A12", geral: 98, ponto: 103, mira2x: 158, mira4x: 128, botao: 45},
+        {nome: "Samsung - Galaxy A13", geral: 99, ponto: 104, mira2x: 159, mira4x: 129, botao: 45},
+        {nome: "Samsung - Galaxy A14", geral: 100, ponto: 105, mira2x: 160, mira4x: 130, botao: 46},
+        {nome: "Samsung - Galaxy A20", geral: 97, ponto: 102, mira2x: 157, mira4x: 127, botao: 44},
+        {nome: "Samsung - Galaxy A21", geral: 98, ponto: 103, mira2x: 158, mira4x: 128, botao: 45},
+        {nome: "Samsung - Galaxy A22", geral: 102, ponto: 108, mira2x: 165, mira4x: 135, botao: 47},
+        {nome: "Samsung - Galaxy A23", geral: 101, ponto: 107, mira2x: 164, mira4x: 134, botao: 47},
+        {nome: "Samsung - Galaxy A24", geral: 101, ponto: 106, mira2x: 163, mira4x: 133, botao: 46},
+        {nome: "Samsung - Galaxy A32", geral: 100, ponto: 105, mira2x: 162, mira4x: 132, botao: 46},
+        {nome: "Samsung - Galaxy A33", geral: 100, ponto: 106, mira2x: 161, mira4x: 131, botao: 46},
+        {nome: "Samsung - Galaxy A34", geral: 101, ponto: 107, mira2x: 162, mira4x: 132, botao: 47},
+        {nome: "Samsung - Galaxy A50", geral: 100, ponto: 105, mira2x: 160, mira4x: 130, botao: 46},
+        {nome: "Samsung - Galaxy A51", geral: 101, ponto: 106, mira2x: 161, mira4x: 131, botao: 46},
+        {nome: "Samsung - Galaxy A52", geral: 101, ponto: 107, mira2x: 162, mira4x: 132, botao: 47},
+        {nome: "Samsung - Galaxy A53", geral: 100, ponto: 106, mira2x: 162, mira4x: 132, botao: 46},
+        {nome: "Samsung - Galaxy A54", geral: 102, ponto: 108, mira2x: 164, mira4x: 133, botao: 47},
+        {nome: "Samsung - Galaxy A70", geral: 102, ponto: 108, mira2x: 163, mira4x: 133, botao: 47},
+        {nome: "Samsung - Galaxy A71", geral: 103, ponto: 109, mira2x: 164, mira4x: 134, botao: 48},
+        {nome: "Samsung - Galaxy A72", geral: 103, ponto: 109, mira2x: 165, mira4x: 135, botao: 48},
+        {nome: "Samsung - Galaxy A73", geral: 102, ponto: 108, mira2x: 164, mira4x: 134, botao: 47},
+        {nome: "Samsung - Galaxy S20", geral: 97, ponto: 102, mira2x: 158, mira4x: 128, botao: 45},
+        {nome: "Samsung - Galaxy S20 FE", geral: 98, ponto: 103, mira2x: 159, mira4x: 129, botao: 45},
+        {nome: "Samsung - Galaxy S21", geral: 98, ponto: 104, mira2x: 160, mira4x: 130, botao: 46},
+        {nome: "Samsung - Galaxy S21 FE", geral: 99, ponto: 105, mira2x: 161, mira4x: 131, botao: 46},
+        {nome: "Samsung - Galaxy S22", geral: 99, ponto: 105, mira2x: 160, mira4x: 130, botao: 46},
+        {nome: "Samsung - Galaxy S22 Ultra", geral: 100, ponto: 106, mira2x: 161, mira4x: 131, botao: 47},
+        {nome: "Samsung - Galaxy S23", geral: 98, ponto: 105, mira2x: 160, mira4x: 130, botao: 45},
+        {nome: "Samsung - Galaxy S23+", geral: 99, ponto: 106, mira2x: 161, mira4x: 131, botao: 46},
+        {nome: "Samsung - Galaxy S23 Ultra", geral: 100, ponto: 107, mira2x: 162, mira4x: 132, botao: 47},
+        {nome: "Samsung - Galaxy S24", geral: 100, ponto: 107, mira2x: 163, mira4x: 133, botao: 47},
+        {nome: "Samsung - Galaxy S24+", geral: 101, ponto: 108, mira2x: 164, mira4x: 134, botao: 48},
+        {nome: "Samsung - Galaxy S24 Ultra", geral: 102, ponto: 109, mira2x: 165, mira4x: 135, botao: 48},
+        {nome: "Samsung - Galaxy Note 10", geral: 99, ponto: 104, mira2x: 160, mira4x: 130, botao: 46},
+        {nome: "Samsung - Galaxy Note 20", geral: 100, ponto: 105, mira2x: 161, mira4x: 131, botao: 47},
+        {nome: "Samsung - Galaxy Note 20 Ultra", geral: 101, ponto: 106, mira2x: 162, mira4x: 132, botao: 47},
+        {nome: "Samsung - Galaxy Z Flip 3", geral: 98, ponto: 103, mira2x: 159, mira4x: 129, botao: 45},
+        {nome: "Samsung - Galaxy Z Flip 4", geral: 99, ponto: 104, mira2x: 160, mira4x: 130, botao: 46},
+        {nome: "Samsung - Galaxy Z Flip 5", geral: 100, ponto: 105, mira2x: 161, mira4x: 131, botao: 46},
+        {nome: "Samsung - Galaxy Z Fold 3", geral: 100, ponto: 106, mira2x: 162, mira4x: 132, botao: 47},
+        {nome: "Samsung - Galaxy Z Fold 4", geral: 101, ponto: 107, mira2x: 163, mira4x: 133, botao: 47},
+        {nome:2x: 164, mira4x: 134, botao: 48}
+    ],
+    "Apple": [
+        {nome: "iPhone - iPhone SE (2ª gen)", geral: 92, ponto: 98, mira2x: 152, mira4x: 124, botao: 42},
+        {nome: "iPhone - iPhone SE (3ª gen)", geral: 93, ponto: 99, mira2x: 153, mira4x: 125, botao: 43},
+        {nome: "iPhone - iPhone 11", geral: 94, ponto: 100, mira2x: 154, mira4x: 126, botao: 43},
+        {nome: "iPhone - iPhone 11 Pro", geral: 95, ponto: 101, mira2x: 155, mira4x: 127, botao: 44},
+        {nome: "iPhone - iPhone 11 Pro Max", geral: 96, ponto: 102, mira2x: 156, mira4x: 128, botao: 44},
+        {nome: "iPhone - iPhone 12", geral: 95,
+    
