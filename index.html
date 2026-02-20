@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,7 +22,6 @@ button { background-color:#ff4d4d; color:white; cursor:pointer; transition:0.3s;
 button:hover { background-color:#ff1a1a; }
 #authArea { margin-top:50px; text-align:center; }
 #mainContent { display:none; width:100%; max-width:400px; }
-#instructions { background-color: #2a2a3c; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
 #resultArea { margin-top:20px; padding:20px; background-color:#3a3a5a; border-radius:12px; text-align:left; }
 span.sensi-value { font-weight:bold; color:#ffcc00; }
 </style>
@@ -44,26 +42,14 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
     <h1>SENCIFLIXER</h1>
     <h2>Generador de sensibilidades profesional</h2>
 
-    <div id="instructions">
-        <strong>Instrucciones:</strong>
-        <ul>
-            <li>Selecciona la marca de tu celular.</li>
-            <li>Selecciona tu modelo (aparecerá según la marca).</li>
-            <li>Elige tu estilo de juego: Sniper, Support o Competitive.</li>
-            <li>Ajusta la sensibilidad si quieres cambiar el valor base.</li>
-            <li>Presiona "Calcular Sensibilidades" para ver los resultados.</li>
-            <li>Presiona "Exportar Configuración" para descargar el archivo JSON.</li>
-        </ul>
-    </div>
-
     <label>Marca del celular:</label>
-    <select id="deviceType" onchange="updateModels()">
-        <option value="">Selecciona una marca</option>
+    <select id="brandSelect">
+        <option value="">Cargando marcas...</option>
     </select>
 
     <label>Modelo:</label>
-    <select id="deviceModel">
-        <option value="">Selecciona un modelo</option>
+    <select id="modelSelect">
+        <option value="">Selecciona el modelo</option>
     </select>
 
     <label>Estilo de juego:</label>
@@ -79,22 +65,23 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
     <button onclick="calculateSens()">Calcular Sensibilidades</button>
 
     <div id="resultArea" style="display:none;">
-        <strong>Resultados:</strong><br>
-        General: <span id="sensiGeneral" class="sensi-value"></span><br>
-        Mira: <span id="sensiAim" class="sensi-value"></span><br>
-        2x: <span id="sensi2x" class="sensi-value"></span><br>
-        4x: <span id="sensi4x" class="sensi-value"></span><br>
-        8x/AWM: <span id="sensi8x" class="sensi-value"></span><br>
-        Nocturna: <span id="sensiNight" class="sensi-value"></span><br>
-        Térmica: <span id="sensiThermal" class="sensi-value"></span><br>
-        Automático: <span id="sensiAuto" class="sensi-value"></span><br>
+        <p>Marca: <span id="resBrand"></span></p>
+        <p>Modelo: <span id="resModel"></span></p>
+        <p>General: <span id="sensiGeneral" class="sensi-value"></span></p>
+        <p>Mira: <span id="sensiAim" class="sensi-value"></span></p>
+        <p>2x: <span id="sensi2x" class="sensi-value"></span></p>
+        <p>4x: <span id="sensi4x" class="sensi-value"></span></p>
+        <p>8x/AWM: <span id="sensi8x" class="sensi-value"></span></p>
+        <p>Nocturna: <span id="sensiNight" class="sensi-value"></span></p>
+        <p>Térmica: <span id="sensiThermal" class="sensi-value"></span></p>
+        <p>Automático: <span id="sensiAuto" class="sensi-value"></span></p>
     </div>
 
     <button onclick="exportConfig()">Exportar Configuración</button>
 </div>
 
 <script>
-// Login usuario y clave 22
+// Login
 function checkLogin() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
@@ -106,51 +93,44 @@ function checkLogin() {
     }
 }
 
-// Lista de marcas y modelos
-const phoneData = {
-    "Apple": ["iPhone 14", "iPhone 14 Pro", "iPhone 13", "iPhone 13 Pro"],
-    "Samsung": ["S23", "S23+", "S23 Ultra", "A53", "A73"],
-    "Huawei": ["P50", "P50 Pro", "Mate 40", "Mate 50"],
-    "Xiaomi": ["Mi 12", "Redmi Note 11", "Redmi Note 10", "Poco X4"],
-    "Oppo": ["Reno 8", "Reno 7", "Find X5"],
-    "Vivo": ["V23", "V21", "X80 Pro"],
-    "OnePlus": ["10 Pro", "9 Pro", "Nord 2"],
-    "Realme": ["GT 2", "9 Pro", "Narzo 50"],
-    "Motorola": ["Edge 30", "G82", "G72"],
-    "Google Pixel": ["Pixel 7", "Pixel 6a", "Pixel 6"],
-    "Sony": ["Xperia 1 IV", "Xperia 5 IV", "Xperia 10 IV"],
-    "LG": ["Wing", "Velvet", "V60"],
-    "Nokia": ["X20", "G50", "C30"],
-    "Asus": ["Zenfone 9", "ROG Phone 6"],
-    "Lenovo": ["Legion 3", "K14 Note"],
-    "ZTE": ["Axon 30", "Blade V30"],
-    "TCL": ["20 Pro", "30 SE"],
-    "Honor": ["Magic 5", "X8"]
+// Ejemplo JSON de marcas y modelos (puedes ampliarlo)
+const deviceData = {
+    "Samsung": ["Galaxy S23", "Galaxy A53", "Galaxy A22"],
+    "Apple": ["iPhone 14", "iPhone 14 Pro", "iPhone 13"],
+    "Motorola": ["Edge 30", "G20", "G60"],
+    "Xiaomi": ["Redmi Note 11", "Redmi Note 10", "Mi 12"],
+    "Huawei": ["P50", "Mate 40"],
+    "Oppo": ["Reno 8", "Find X5"],
+    "Vivo": ["V23", "X80 Pro"],
+    "OnePlus": ["10 Pro", "Nord 2"],
+    "Realme": ["GT 2", "Narzo 50"]
 };
 
-// Llenar selector de marcas
-const deviceSelect = document.getElementById('deviceType');
-for (let brand in phoneData) {
-    let option = document.createElement('option');
+// Llenar marcas
+const brandSelect = document.getElementById('brandSelect');
+const modelSelect = document.getElementById('modelSelect');
+
+brandSelect.innerHTML = '<option value="">Selecciona la marca</option>';
+Object.keys(deviceData).forEach(brand => {
+    const option = document.createElement('option');
     option.value = brand;
     option.textContent = brand;
-    deviceSelect.appendChild(option);
-}
+    brandSelect.appendChild(option);
+});
 
 // Actualizar modelos según marca
-function updateModels() {
-    const modelSelect = document.getElementById('deviceModel');
-    const brand = deviceSelect.value;
-    modelSelect.innerHTML = '<option value="">Selecciona un modelo</option>';
-    if(brand && phoneData[brand]) {
-        phoneData[brand].forEach(model => {
+brandSelect.addEventListener('change', () => {
+    const brand = brandSelect.value;
+    modelSelect.innerHTML = '<option value="">Selecciona el modelo</option>';
+    if(brand && deviceData[brand]) {
+        deviceData[brand].forEach(model => {
             const option = document.createElement('option');
             option.value = model;
             option.textContent = model;
             modelSelect.appendChild(option);
         });
     }
-}
+});
 
 // Generador de sensibilidades
 function calculateSens() {
@@ -158,9 +138,12 @@ function calculateSens() {
     const baseAim = 30;
     const btnAdjust = parseInt(document.getElementById('btnAdjust').value) || 0;
     const style = document.getElementById('playStyle').value;
+    const brand = brandSelect.value;
+    const model = modelSelect.value;
+
+    if(!brand || !model) { alert("Selecciona marca y modelo"); return; }
 
     let sensiGeneral, sensiAim, sensi2x, sensi4x, sensi8x, sensiNight, sensiThermal, sensiAuto;
-
     switch(style) {
         case 'sniper':
             sensiGeneral = baseGen + btnAdjust - 3;
@@ -194,6 +177,8 @@ function calculateSens() {
             break;
     }
 
+    document.getElementById('resBrand').textContent = brand;
+    document.getElementById('resModel').textContent = model;
     document.getElementById('sensiGeneral').textContent = sensiGeneral;
     document.getElementById('sensiAim').textContent = sensiAim;
     document.getElementById('sensi2x').textContent = sensi2x;
@@ -205,11 +190,11 @@ function calculateSens() {
     document.getElementById('resultArea').style.display = 'block';
 }
 
-// Exportar configuración
+// Exportar configuración JSON
 function exportConfig() {
     const config = {
-        marca: deviceSelect.value,
-        modelo: document.getElementById('deviceModel').value,
+        marca: brandSelect.value,
+        modelo: modelSelect.value,
         estilo: document.getElementById('playStyle').value,
         sensibilidades: {
             general: document.getElementById('sensiGeneral').textContent,
@@ -226,10 +211,10 @@ function exportConfig() {
     const blob = new Blob([JSON.stringify(config, null, 2)], {type: 'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'sensifire-2026-config.json';
+    a.download = 'sensifire-config.json';
     a.click();
 }
 </script>
 
 </body>
-</html>
+</html> 
