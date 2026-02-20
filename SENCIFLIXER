@@ -1,0 +1,68 @@
+              case 'sniper':
+                  sensiGeneral = baseGen + btnAdjust - 3;
+                  sensiAim = baseAim + btnAdjust - 4;
+                  sensi2x = 28 + btnAdjust;
+                  sensi4x = 20 + btnAdjust;
+                  sensi8x = 12 + btnAdjust;
+                  sensiNight = 35 + btnAdjust;
+                  sensiThermal = 28 + btnAdjust;
+                  sensiAuto = 25 + btnAdjust;
+                  break;
+              case 'support':
+                  sensiGeneral = baseGen + btnAdjust;
+                  sensiAim = baseAim + btnAdjust;
+                  sensi2x = 35 + btnAdjust;
+                  sensi4x = 28 + btnAdjust;
+                  sensi8x = 18 + btnAdjust;
+                  sensiNight = 42 + btnAdjust;
+                  sensiThermal = 34 + btnAdjust;
+                  sensiAuto = 32 + btnAdjust;
+                  break;
+              case 'competitive':
+                  sensiGeneral = baseGen + btnAdjust + 2;
+                  sensiAim = baseAim + btnAdjust + 1;
+                  sensi2x = 38 + btnAdjust;
+                  sensi4x = 32 + btnAdjust;
+                  sensi8x = 22 + btnAdjust;
+                  sensiNight = 45 + btnAdjust;
+                  sensiThermal = 37 + btnAdjust;
+                  sensiAuto = 35 + btnAdjust;
+                  break;
+          }
+
+          // Mostrar resultados
+          document.getElementById('sensiGeneral').textContent = sensiGeneral;
+          document.getElementById('sensiAim').textContent = sensiAim;
+          document.getElementById('sensi2x').textContent = sensi2x;
+          document.getElementById('sensi4x').textContent = sensi4x;
+          document.getElementById('sensi8x').textContent = sensi8x;
+          document.getElementById('sensiNight').textContent = sensiNight;
+          document.getElementById('sensiThermal').textContent = sensiThermal;
+          document.getElementById('sensiAuto').textContent = sensiAuto;
+          document.getElementById('resultArea').style.display = 'block';
+      }
+
+      // Función para exportar configuración
+      function exportConfig() {
+          const config = {
+              dispositivo: document.getElementById('deviceType').value + ' - ' + document.getElementById('deviceModel').value,
+              estilo: document.getElementById('playStyle').value,
+              sensibilidades: {
+                  general: document.getElementById('sensiGeneral').textContent,
+                  mira: document.getElementById('sensiAim').textContent,
+                  '2x': document.getElementById('sensi2x').textContent,
+                  '4x': document.getElementById('sensi4x').textContent,
+                  '8x/AWM': document.getElementById('sensi8x').textContent,
+                  nocturna: document.getElementById('sensiNight').textContent,
+                  termica: document.getElementById('sensiThermal').textContent,
+                  automatico: document.getElementById('sensiAuto').textContent
+              }
+          };
+
+          const blob = new Blob([JSON.stringify(config, null, 2)], {type: 'application/json'});
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'sensifire-2026-config.json';
+          a.click();
+      }
+  </script>
