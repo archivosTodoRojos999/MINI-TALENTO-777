@@ -240,12 +240,35 @@ for(let i=0;i<100;i++){
     });
 }
 
+// Animación de partículas coloridas
+const canvas = document.getElementById('fondoAnimado');
+const ctx = canvas.getContext('2d');
+let w, h;
+function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+window.addEventListener('resize', resize);
+resize();
+
+// Colores variados para partículas
+const colores = ['#ff3c3c','#3cff7f','#3c8cff','#ffde3c','#ff3cff','#3cfff3'];
+
+const particulas = [];
+for(let i=0;i<100;i++){
+    particulas.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        vx: (Math.random()-0.5)*0.3,
+        vy: (Math.random()-0.5)*0.3,
+        size: Math.random()*2+1,
+        color: colores[Math.floor(Math.random()*colores.length)]
+    });
+}
+
 function animar(){
     ctx.clearRect(0,0,w,h);
     for(let p of particulas){
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fillStyle='rgba(255,255,255,0.05)';
+        ctx.fillStyle=p.color + '33'; // transparencia suave
         ctx.fill();
         p.x += p.vx;
         p.y += p.vy;
