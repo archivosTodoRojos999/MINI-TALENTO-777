@@ -5,89 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>SENCIFLIXER - Sensibilidade</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-body {
-    background: #000;
-    color: #fff;
-    padding: 15px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23202020" stroke-width="0.3" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60"/></svg>');
-    background-position: center;
-}
-h1 {
-    font-size: 22px;
-    text-align: center;
-    margin: 20px 0 5px 0;
-    font-weight: 600;
-}
-.subtitle {
-    font-size: 13px;
-    color: #d0d0d0;
-    text-align: center;
-    margin-bottom: 25px;
-}
-.tabs {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 22px;
-}
-.tab {
-    flex: 1;
-    padding: 10px 0;
-    border: 1px solid #fff;
-    background: transparent;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-}
-.tab.active {
-    background: #fff;
-    color: #000;
-    font-weight: bold;
-}
-select {
-    width: 100%;
-    padding: 11px 10px;
-    background: #111;
-    border: 1px solid #fff;
-    color: #fff;
-    font-size: 15px;
-    margin-bottom: 15px;
-    appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-}
-#gerarBtn {
-    width: 100%;
-    padding: 10px 0;
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-    font-size: 15px;
-    margin-bottom: 22px;
-    cursor: pointer;
-}
-#resultado {
-    border: 1px solid #fff;
-    padding: 12px;
-    background: #111;
-    display: none;
-}
-#resultado p {
-    font-size: 15px;
-    margin: 4px 0;
-}
-footer {
-    font-size: 11px;
-    color: #b0b0b0;
-    text-align: center;
-    margin-top: 30px;
-}
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif; }
+body { background:#000; color:#fff; padding:15px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23202020" stroke-width="0.3" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60"/></svg>'); background-position:center; }
+h1 { font-size:22px; text-align:center; margin:20px 0 5px 0; font-weight:600; }
+.subtitle { font-size:13px; color:#d0d0d0; text-align:center; margin-bottom:25px; }
+.tabs { display:flex; gap:4px; margin-bottom:22px; }
+.tab { flex:1; padding:10px 0; border:1px solid #fff; background:transparent; color:#fff; font-size:15px; cursor:pointer; }
+.tab.active { background:#fff; color:#000; font-weight:bold; }
+select { width:100%; padding:11px 10px; background:#111; border:1px solid #fff; color:#fff; font-size:15px; margin-bottom:15px; appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill="%23ffffff" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat:no-repeat; background-position:right 10px center; }
+#gerarBtn, #gerarBtnAux { width:100%; padding:10px 0; background:transparent; border:1px solid #fff; color:#fff; font-size:15px; margin-bottom:22px; cursor:pointer; }
+#resultado, #resultadoAux { border:1px solid #fff; padding:12px; background:#111; display:none; }
+#resultado p, #resultadoAux p { font-size:15px; margin:4px 0; }
+footer { font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px; }
 </style>
 </head>
 <body>
@@ -100,26 +29,19 @@ footer {
     <button class="tab" id="tabAux">Auxílio</button>
 </div>
 
+<!-- Contenido Sensi -->
 <div id="conteudoSensi">
     <select id="marca">
         <option value="">Selecione</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">iPhone</option>
-        <option value="Xiaomi">Xiaomi</option>
-        <option value="Motorola">Motorola</option>
-        <option value="Oppo">Oppo</option>
-        <option value="Vivo">Vivo</option>
-        <option value="Lenovo">Lenovo</option>
-        <option value="LG">LG</option>
-        <option value="Nokia">Nokia</option>
-        <option value="Honor">Honor</option>
     </select>
 
     <select id="modelo">
         <option value="">Selecione</option>
     </select>
 
-    <button id="gerarBtn">Generar senci</button>
+    <button id="gerarBtn">Generar Sensi</button>
 
     <div id="resultado">
         <p>Modelo: <span id="resModelo">-</span></p>
@@ -127,12 +49,32 @@ footer {
         <p>Ponto Vermelho: <span id="resPonto">-</span></p>
         <p>Mira 2x: <span id="res2x">-</span></p>
         <p>Mira 4x: <span id="res4x">-</span></p>
-        <p>Tamanho do Botão: <span id="resBotao">-</span></p>
+        <p>Tamaño del Botón: <span id="resBotao">-</span></p>
     </div>
 </div>
 
-<div id="conteudoAux" style="display: none;">
-    <p style="text-align: center; padding: 40px 10px; font-size: 15px;">Conteúdo em desenvolvimento</p>
+<!-- Contenido Auxílio -->
+<div id="conteudoAux" style="display:none;">
+    <select id="marcaAux">
+        <option value="">Selecione</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Apple">iPhone</option>
+    </select>
+
+    <select id="modeloAux">
+        <option value="">Selecione</option>
+    </select>
+
+    <button id="gerarBtnAux">Generar Auxílio</button>
+
+    <div id="resultadoAux">
+        <p>Modelo: <span id="resModeloAux">-</span></p>
+        <p>Geral: <span id="resGeralAux">-</span></p>
+        <p>Ponto Vermelho: <span id="resPontoAux">-</span></p>
+        <p>Mira 2x: <span id="res2xAux">-</span></p>
+        <p>Mira 4x: <span id="res4xAux">-</span></p>
+        <p>Tamaño del Botón: <span id="resBotaoAux">-</span></p>
+    </div>
 </div>
 
 <footer>
@@ -140,58 +82,98 @@ footer {
 </footer>
 
 <script>
-// Base de datos solo con las marcas solicitadas y sensibilidad hasta 200
+// Base Sensi
 const todosCelulares = {
     "Samsung": [
-        {nome: "Samsung - Galaxy A03", geral: 95, ponto: 100, mira2x: 155, mira4x: 125, botao: 43},
-        {nome: "Samsung - Galaxy A04", geral: 96, ponto: 101, mira2x: 156, mira4x: 126, botao: 44},
-        {nome: "Samsung - Galaxy A12", geral: 98, ponto: 103, mira2x: 158, mira4x: 128, botao: 45},
-        {nome: "Samsung - Galaxy A13", geral: 99, ponto: 104, mira2x: 159, mira4x: 129, botao: 45},
-        {nome: "Samsung - Galaxy A14", geral: 100, ponto: 105, mira2x: 160, mira4x: 130, botao: 46},
-        {nome: "Samsung - Galaxy A20", geral: 97, ponto: 102, mira2x: 157, mira4x: 127, botao: 44},
-        {nome: "Samsung - Galaxy A21", geral: 98, ponto: 103, mira2x: 158, mira4x: 128, botao: 45},
-        {nome: "Samsung - Galaxy A22", geral: 102, ponto: 108, mira2x: 165, mira4x: 135, botao: 47},
-        {nome: "Samsung - Galaxy A23", geral: 101, ponto: 107, mira2x: 164, mira4x: 134, botao: 47},
-        {nome: "Samsung - Galaxy A24", geral: 101, ponto: 106, mira2x: 163, mira4x: 133, botao: 46},
-        {nome: "Samsung - Galaxy A32", geral: 100, ponto: 105, mira2x: 162, mira4x: 132, botao: 46},
-        {nome: "Samsung - Galaxy A33", geral: 100, ponto: 106, mira2x: 161, mira4x: 131, botao: 46},
-        {nome: "Samsung - Galaxy A34", geral: 101, ponto: 107, mira2x: 162, mira4x: 132, botao: 47},
-        {nome: "Samsung - Galaxy A50", geral: 100, ponto: 105, mira2x: 160, mira4x: 130, botao: 46},
-        {nome: "Samsung - Galaxy A51", geral: 101, ponto: 106, mira2x: 161, mira4x: 131, botao: 46},
-        {nome: "Samsung - Galaxy A52", geral: 101, ponto: 107, mira2x: 162, mira4x: 132, botao: 47},
-        {nome: "Samsung - Galaxy A53", geral: 100, ponto: 106, mira2x: 162, mira4x: 132, botao: 46},
-        {nome: "Samsung - Galaxy A54", geral: 102, ponto: 108, mira2x: 164, mira4x: 133, botao: 47},
-        {nome: "Samsung - Galaxy A70", geral: 102, ponto: 108, mira2x: 163, mira4x: 133, botao: 47},
-        {nome: "Samsung - Galaxy A71", geral: 103, ponto: 109, mira2x: 164, mira4x: 134, botao: 48},
-        {nome: "Samsung - Galaxy A72", geral: 103, ponto: 109, mira2x: 165, mira4x: 135, botao: 48},
-        {nome: "Samsung - Galaxy A73", geral: 102, ponto: 108, mira2x: 164, mira4x: 134, botao: 47},
-        {nome: "Samsung - Galaxy S20", geral: 97, ponto: 102, mira2x: 158, mira4x: 128, botao: 45},
-        {nome: "Samsung - Galaxy S20 FE", geral: 98, ponto: 103, mira2x: 159, mira4x: 129, botao: 45},
-        {nome: "Samsung - Galaxy S21", geral: 98, ponto: 104, mira2x: 160, mira4x: 130, botao: 46},
-        {nome: "Samsung - Galaxy S21 FE", geral: 99, ponto: 105, mira2x: 161, mira4x: 131, botao: 46},
-        {nome: "Samsung - Galaxy S22", geral: 99, ponto: 105, mira2x: 160, mira4x: 130, botao: 46},
-        {nome: "Samsung - Galaxy S22 Ultra", geral: 100, ponto: 106, mira2x: 161, mira4x: 131, botao: 47},
-        {nome: "Samsung - Galaxy S23", geral: 98, ponto: 105, mira2x: 160, mira4x: 130, botao: 45},
-        {nome: "Samsung - Galaxy S23+", geral: 99, ponto: 106, mira2x: 161, mira4x: 131, botao: 46},
-        {nome: "Samsung - Galaxy S23 Ultra", geral: 100, ponto: 107, mira2x: 162, mira4x: 132, botao: 47},
-        {nome: "Samsung - Galaxy S24", geral: 100, ponto: 107, mira2x: 163, mira4x: 133, botao: 47},
-        {nome: "Samsung - Galaxy S24+", geral: 101, ponto: 108, mira2x: 164, mira4x: 134, botao: 48},
-        {nome: "Samsung - Galaxy S24 Ultra", geral: 102, ponto: 109, mira2x: 165, mira4x: 135, botao: 48},
-        {nome: "Samsung - Galaxy Note 10", geral: 99, ponto: 104, mira2x: 160, mira4x: 130, botao: 46},
-        {nome: "Samsung - Galaxy Note 20", geral: 100, ponto: 105, mira2x: 161, mira4x: 131, botao: 47},
-        {nome: "Samsung - Galaxy Note 20 Ultra", geral: 101, ponto: 106, mira2x: 162, mira4x: 132, botao: 47},
-        {nome: "Samsung - Galaxy Z Flip 3", geral: 98, ponto: 103, mira2x: 159, mira4x: 129, botao: 45},
-        {nome: "Samsung - Galaxy Z Flip 4", geral: 99, ponto: 104, mira2x: 160, mira4x: 130, botao: 46},
-        {nome: "Samsung - Galaxy Z Flip 5", geral: 100, ponto: 105, mira2x: 161, mira4x: 131, botao: 46},
-        {nome: "Samsung - Galaxy Z Fold 3", geral: 100, ponto: 106, mira2x: 162, mira4x: 132, botao: 47},
-        {nome: "Samsung - Galaxy Z Fold 4", geral: 101, ponto: 107, mira2x: 163, mira4x: 133, botao: 47},
-        {nome:2x: 164, mira4x: 134, botao: 48}
+        {nome:"Samsung - Galaxy A03", geral:95, ponto:100, mira2x:155, mira4x:125, botao:43},
+        {nome:"Samsung - Galaxy S23", geral:98, ponto:105, mira2x:160, mira4x:130, botao:45},
+        {nome:"Samsung - Galaxy Z Fold 5", geral:102, ponto:108, mira2x:164, mira4x:134, botao:48}
     ],
     "Apple": [
-        {nome: "iPhone - iPhone SE (2ª gen)", geral: 92, ponto: 98, mira2x: 152, mira4x: 124, botao: 42},
-        {nome: "iPhone - iPhone SE (3ª gen)", geral: 93, ponto: 99, mira2x: 153, mira4x: 125, botao: 43},
-        {nome: "iPhone - iPhone 11", geral: 94, ponto: 100, mira2x: 154, mira4x: 126, botao: 43},
-        {nome: "iPhone - iPhone 11 Pro", geral: 95, ponto: 101, mira2x: 155, mira4x: 127, botao: 44},
-        {nome: "iPhone - iPhone 11 Pro Max", geral: 96, ponto: 102, mira2x: 156, mira4x: 128, botao: 44},
-        {nome: "iPhone - iPhone 12", geral: 95,
-    
+        {nome:"iPhone - iPhone SE (2ª gen)", geral:92, ponto:98, mira2x:152, mira4x:124, botao:42},
+        {nome:"iPhone - iPhone 11", geral:94, ponto:100, mira2x:154, mira4x:126, botao:43},
+        {nome:"iPhone - iPhone 12", geral:95, ponto:101, mira2x:155, mira4x:127, botao:44}
+    ]
+};
+
+// Base Auxílio (valores más altos)
+const todosCelularesAux = {
+    "Samsung": [
+        {nome:"Samsung - Galaxy A03", geral:115, ponto:120, mira2x:175, mira4x:145, botao:53},
+        {nome:"Samsung - Galaxy S23", geral:118, ponto:125, mira2x:180, mira4x:150, botao:55},
+        {nome:"Samsung - Galaxy Z Fold 5", geral:122, ponto:130, mira2x:185, mira4x:155, botao:58}
+    ],
+    "Apple": [
+        {nome:"iPhone - iPhone SE (2ª gen)", geral:112, ponto:118, mira2x:172, mira4x:144, botao:52},
+        {nome:"iPhone - iPhone 11", geral:114, ponto:120, mira2x:174, mira4x:146, botao:53},
+        {nome:"iPhone - iPhone 12", geral:115, ponto:121, mira2x:175, mira4x:147, botao:54}
+    ]
+};
+
+// Funciones Sensi
+const marcaSelect = document.getElementById("marca");
+const modeloSelect = document.getElementById("modelo");
+marcaSelect.addEventListener("change",()=>{
+    const marca=marcaSelect.value;
+    modeloSelect.innerHTML='<option value="">Selecione</option>';
+    if(todosCelulares[marca]) todosCelulares[marca].forEach(c=>{
+        const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloSelect.appendChild(option);
+    });
+});
+document.getElementById("gerarBtn").addEventListener("click",()=>{
+    const marca=marcaSelect.value; const modelo=modeloSelect.value;
+    if(!marca||!modelo)return alert("Seleccione marca y modelo!");
+    const cel=todosCelulares[marca].find(c=>c.nome===modelo);
+    if(cel){
+        document.getElementById("resModelo").textContent=cel.nome;
+        document.getElementById("resGeral").textContent=cel.geral;
+        document.getElementById("resPonto").textContent=cel.ponto;
+        document.getElementById("res2x").textContent=cel.mira2x;
+        document.getElementById("res4x").textContent=cel.mira4x;
+        document.getElementById("resBotao").textContent=cel.botao;
+        document.getElementById("resultado").style.display="block";
+    }
+});
+
+// Funciones Auxílio
+const marcaAux=document.getElementById("marcaAux");
+const modeloAux=document.getElementById("modeloAux");
+marcaAux.addEventListener("change",()=>{
+    const marca=marcaAux.value;
+    modeloAux.innerHTML='<option value="">Selecione</option>';
+    if(todosCelularesAux[marca]) todosCelularesAux[marca].forEach(c=>{
+        const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloAux.appendChild(option);
+    });
+});
+document.getElementById("gerarBtnAux").addEventListener("click",()=>{
+    const marca=marcaAux.value; const modelo=modeloAux.value;
+    if(!marca||!modelo)return alert("Seleccione marca y modelo!");
+    const cel=todosCelularesAux[marca].find(c=>c.nome===modelo);
+    if(cel){
+        document.getElementById("resModeloAux").textContent=cel.nome;
+        document.getElementById("resGeralAux").textContent=cel.geral;
+        document.getElementById("resPontoAux").textContent=cel.ponto;
+        document.getElementById("res2xAux").textContent=cel.mira2x;
+        document.getElementById("res4xAux").textContent=cel.mira4x;
+        document.getElementById("resBotaoAux").textContent=cel.botao;
+        document.getElementById("resultadoAux").style.display="block";
+    }
+});
+
+// Pestañas
+const tabSensi=document.getElementById("tabSensi");
+const tabAux=document.getElementById("tabAux");
+const conteudoSensi=document.getElementById("conteudoSensi");
+const conteudoAux=document.getElementById("conteudoAux");
+tabSensi.addEventListener("click",()=>{
+    tabSensi.classList.add("active"); tabAux.classList.remove("active");
+    conteudoSensi.style.display="block"; conteudoAux.style.display="none";
+});
+tabAux.addEventListener("click",()=>{
+    tabAux.classList.add("active"); tabSensi.classList.remove("active");
+    conteudoSensi.style.display="none"; conteudoAux.style.display="block";
+});
+</script>
+
+</body>
+</html>
