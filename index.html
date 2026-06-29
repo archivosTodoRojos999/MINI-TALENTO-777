@@ -46,7 +46,7 @@
                 from { opacity: 0; transform: scale(0.95); }
                 to { opacity: 1; transform: scale(1); }
             }
-            /* ✅ NUEVO: BORDE ARCOÍRIS ANIMADO SOLO PARA EL GENERADOR */
+            /* ✅ BORDE ARCOÍRIS ANIMADO */
             .borde-arcoiris {
                 position: relative;
                 border-radius: 0.75rem;
@@ -67,11 +67,54 @@
                 0% { background-position: 0% 50%; }
                 100% { background-position: 400% 50%; }
             }
+            /* ✅ ESTILOS NUEVOS: AJUSTES Y CLAVE VIP */
+            .posicion-ajustes {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                z-index: 10;
+            }
+            .ventana-vip {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                max-width: 380px;
+                background: #0a0a0a;
+                border: 2px solid #F1C40F;
+                border-radius: 0.75rem;
+                padding: 2rem;
+                z-index: 9999;
+                box-shadow: 0 0 25px rgba(241, 196, 15, 0.6);
+            }
+            .ventana-sensibilidades {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 92%;
+                max-width: 420px;
+                background: #080808;
+                border: 2px solid #D90429;
+                border-radius: 0.75rem;
+                padding: 2rem;
+                z-index: 9999;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: 0 0 30px rgba(217, 4, 41, 0.5);
+            }
+            .fondo-oscuro {
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.85);
+                z-index: 9998;
+            }
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start 2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body class="bg-grisOscuro text-white min-h-screen font-sans overflow-x-hidden">
     <!-- 📢 ANUNCIO INICIAL -->
@@ -90,9 +133,16 @@
             <p class="text-xs text-dorado/80 mt-1">🔒 Protección Anti-Robo de Configuración</p>
         </header>
 
-        <!-- ✅ SE AGREGÓ LA CLASE borde-arcoiris AQUÍ -->
-        <div class="bg-negro/70 p-6 rounded-xl borde-arcoiris shadow-lg mb-6">
-            <label class="block mb-2 font-semibold">📲 Marca del dispositivo:</label>
+        <!-- ✅ SE AGREGÓ BOTÓN AJUSTES + CLASE BORDE ARCOÍRIS SIN CAMBIAR NADA MÁS -->
+        <div class="bg-negro/70 p-6 rounded-xl borde-arcoiris shadow-lg mb-6 relative">
+            <!-- BOTÓN AJUSTES ESQUINA IZQUIERDA ARRIBA -->
+            <div class="posicion-ajustes">
+                <button id="btnAjustes" class="bg-dorado hover:bg-dorado/90 text-negro font-bold px-3 py-1.5 rounded text-sm shadow-md">
+                    ⚙️ Ajustes
+                </button>
+            </div>
+
+            <label class="block mb-2 font-semibold mt-8">📲 Marca del dispositivo:</label>
             <select id="marca" class="w-full p-3 rounded bg-grisOscuro border border-gray-600 focus:border-rojo outline-none mb-4">
                 <option value="">— Selecciona marca —</option>
                 <option value="Samsung">Samsung</option>
@@ -130,7 +180,7 @@
         <!-- ⏳ CARGA -->
         <div id="zonaCarga" class="text-center py-8 oculto">
             <div class="w-16 h-16 border-[6px] border-gray-600 border-t-rojo rounded-full animacion-carga mx-auto mb-4"></div>
-            <p class="text-dorado">⏱️ Calibrando sistema... 6 segundos</p>
+            <p class="text-dorado"> Calibrando sistema, espere...</p>
         </div>
 
         <!-- ✅ RESULTADO -->
@@ -147,6 +197,74 @@
             <p class="text-center mt-4 text-gray-200">💡 <strong>Botón de disparo recomendado: 42px</strong> — esto asegura el recorrido ideal para levantar mira.</p>
             <p class="text-center text-dorado text-sm mt-2">⚠️ No es trampa ni hack: es ajuste optimizado para la respuesta táctil de tu pantalla.</p>
             <p class="text-center text-xs text-gray-400 mt-1">🔒 Datos protegidos contra copia y extracción</p>
+        </div>
+    </div>
+
+    <!-- ✅ VENTANA CLAVE VIP -->
+    <div id="fondoVIP" class="fondo-oscuro oculto"></div>
+    <div id="ventanaVIP" class="ventana-vip oculto">
+        <h3 class="text-center text-dorado text-xl font-bold mb-5">🔑 Clave VIP</h3>
+        <input type="password" id="claveVIP" placeholder="Ingresar clave" class="w-full p-3 mb-4 rounded bg-grisOscuro border border-dorado/50 text-center text-lg outline-none focus:border-dorado">
+        <button id="confirmarVIP" class="w-full bg-dorado hover:bg-dorado/90 text-negro font-bold py-2.5 rounded">Confirmar</button>
+        <button id="cerrarVIP" class="w-full mt-3 bg-rojo/80 hover:bg-rojo text-white py-2 rounded">Cerrar</button>
+    </div>
+
+    <!-- ✅ VENTANA SENSIBILIDADES FAMOSOS - TAL CUAL LO PEDISTE -->
+    <div id="fondoSensibilidades" class="fondo-oscuro oculto"></div>
+    <div id="ventanaSensibilidades" class="ventana-sensibilidades oculto">
+        <button id="cerrarSensibilidades" class="float-right text-rojo font-bold text-xl">✕</button>
+        <div class="clear-both"></div>
+
+        <p class="text-center text-dorado text-xl font-bold my-6">LAS MEJORES SENCIBILIDADES DE BRASIL</p>
+
+        <div class="text-center text-lg mb-5">
+            <strong>APELAPATO</strong><br>
+            144<br>
+            164<br>
+            42<br>
+            178<br>
+            96<br>
+            64
+        </div>
+
+        <div class="text-center text-lg mb-5">
+            <strong>LDZIN</strong><br>
+            177<br>
+            114<br>
+            183<br>
+            179<br>
+            51<br>
+            88
+        </div>
+
+        <div class="text-center text-lg mb-5">
+            <strong>URIEL XITER</strong><br>
+            156<br>
+            179<br>
+            52<br>
+            128<br>
+            100<br>
+            169
+        </div>
+
+        <div class="text-center text-lg mb-5">
+            <strong>MARECHAL</strong><br>
+            129<br>
+            142<br>
+            130<br>
+            100<br>
+            135<br>
+            144
+        </div>
+
+        <div class="text-center text-lg mb-3">
+            <strong>TWO9</strong><br>
+            173<br>
+            64<br>
+            163<br>
+            175<br>
+            84<br>
+            132
         </div>
     </div>
 
@@ -279,80 +397,79 @@
                     "iPhone 12 Pro": {g:190,p:175,m2:169,m4:154,f:121,c:180},
                     "iPhone 14 Pro": {g:200,p:190,m2:184,m4:172,f:134,c:193}
                 },
-                "Sony": {
-                    "Xperia L4 / 10": {g:182,p:165,m2:159,m4:143,f:113,c:172},
-                    "Xperia 5 / 1": {g:195,p:182,m2:175,m4:161,f:126,c:185},
-                    "Xperia 10 V": {g:186,p:171,m2:164,m4:148,f:117,c:176},
-                    "Xperia 5 IV": {g:198,p:187,m2:180,m4:167,f:130,c:189}
-                },
-                "Infinix": {
-                    "Smart 6 / Hot 11/12": {g:174,p:159,m2:152,m4:135,f:105,c:164},
-                    "Note 12 / Zero": {g:188,p:173,m2:166,m4:151,f:119,c:178},
-                    "Smart 7": {g:176,p:161,m2:154,m4:137,f:107,c:166},
-                    "Hot 30": {g:185,p:170,m2:163,m4:147,f:116,c:175},
-                    "Tecno Spark 10": {g:179,p:164,m2:157,m4:140,f:109,c:169},
-                    "Tecno Camon 20": {g:192,p:178,m2:172,m4:156,f:123,c:182}
-                },
-                "Asus": {
-                    "Zenfone 8 / 9": {g:196,p:184,m2:177,m4:163,f:128,c:187},
-                    "ROG Phone": {g:200,p:191,m2:185,m4:174,f:136,c:194},
-                    "Zenfone 10": {g:198,p:188,m2:181,m4:168,f:131,c:190},
-                    "ROG Phone 7": {g:200,p:193,m2:187,m4:177,f:138,c:197}
-                },
-                "OnePlus": {
-                    "Nord CE": {g:190,p:176,m2:170,m4:155,f:122,c:180},
-                    "OnePlus 9 / 10 / 11": {g:198,p:186,m2:180,m4:167,f:130,c:189},
-                    "Nord N30": {g:192,p:179,m2:173,m4:158,f:124,c:183},
-                    "OnePlus 12": {g:200,p:192,m2:186,m4:176,f:137,c:196}
-                },
-                "ZTE": {
-                    "Blade A54": {g:173,p:158,m2:151,m4:134,f:103,c:163},
-                    "Blade V50": {g:182,p:166,m2:159,m4:143,f:112,c:172},
-                    "Nubia Neo 5G": {g:190,p:177,m2:170,m4:155,f:122,c:181},
-                    "Nubia RedMagic 8": {g:200,p:191,m2:185,m4:173,f:135,c:194}
-                },
-                "Google": {
-                    "Pixel 4a / 5": {g:185,p:170,m2:164,m4:149,f:117,c:176},
-                    "Pixel 6 / 7": {g:194,p:181,m2:174,m4:162,f:125,c:184},
-                    "Pixel 7a": {g:196,p:183,m2:177,m4:163,f:128,c:187},
-                    "Pixel 8 Pro": {g:200,p:190,m2:184,m4:172,f:134,c:193}
-                },
-                "Nokia": {
-                    "G11 / G22": {g:172,p:157,m2:150,m4:133,f:102,c:162},
-                    "X20 / XR20": {g:186,p:170,m2:164,m4:149,f:118,c:177},
-                    "G42": {g:178,p:163,m2:156,m4:139,f:108,c:168},
-                    "C32": {g:170,p:155,m2:148,m4:131,f:101,c:161}
-                },
-                "Alcatel": {
-                    "1S 2021": {g:168,p:153,m2:146,m4:128,f:98,c:159},
-                    "3L 2022": {g:174,p:159,m2:152,m4:135,f:105,c:165},
-                    "1V": {g:171,p:156,m2:149,m4:132,f:102,c:162}
-                },
-                "Lenovo": {
-                    "A7 / A8": {g:175,p:160,m2:153,m4:136,f:105,c:165},
-                    "K14 Plus": {g:180,p:165,m2:158,m4:142,f:111,c:171},
-                    "Tab M10": {g:162,p:147,m2:140,m4:123,f:94,c:153},
-                    "Legion Phone": {g:200,p:190,m2:184,m4:172,f:134,c:193}
-                },
-                "Blackview": {
-                    "A55": {g:176,p:161,m2:154,m4:137,f:106,c:166},
-                    "BV5300": {g:183,p:168,m2:161,m4:145,f:114,c:173},
-                    "BV9300": {g:191,p:177,m2:170,m4:156,f:122,c:181}
-                },
-                "Umidigi": {
-                    "A15": {g:177,p:162,m2:155,m4:138,f:107,c:167},
-                    "A13 Pro": {g:184,p:169,m2:162,m4:146,f:115,c:174},
-                    "Bison 2": {g:192,p:178,m2:172,m4:157,f:123,c:182}
-                },
-                "Doogee": {
-                    "X96": {g:175,p:160,m2:153,m4:136,f:105,c:165},
-                    "S59": {g:182,p:167,m2:160,m4:144,f:113,c:172},
-                    "V30": {g:188,p:174,m2:167,m4:152,f:120,c:179}
-                }
-            });
-
-            // Carga de modelos
-            const selMarca = document.getElementById('marca');
+                 "Sony": {
+                     "Xperia L4 / 10": {g:182,p:165,m2:159,m4:143,f:113,c:172},
+                     "Xperia 5 / 1": {g:195,p:182,m2:175,m4:161,f:126,c:185},
+                     "Xperia 10 V": {g:186,p:171,m2:164,m4:148,f:117,c:176},
+                     "Xperia 5 IV": {g:198,p:187,m2:180,m4:167,f:130,c:189}
+                 },
+                 "Infinix": {
+                     "Smart 6 / Hot 11/12": {g:174,p:159,m2:152,m4:135,f:105,c:164},
+                     "Note 12 / Zero": {g:188,p:173,m2:166,m4:151,f:119,c:178},
+                     "Smart 7": {g:176,p:161,m2:154,m4:137,f:107,c:166},
+                     "Hot 30": {g:185,p:170,m2:163,m4:147,f:116,c:175},
+                     "Tecno Spark 10": {g:179,p:164,m2:157,m4:140,f:109,c:169},
+                     "Tecno Camon 20": {g:192,p:178,m2:172,m4:156,f:123,c:182}
+                 },
+                 "Asus": {
+                     "Zenfone 8 / 9": {g:196,p:184,m2:177,m4:163,f:128,c:187},
+                     "ROG Phone": {g:200,p:191,m2:185,m4:174,f:136,c:194},
+                     "Zenfone 10": {g:198,p:188,m2:181,m4:168,f:131,c:190},
+                     "ROG Phone 7": {g:200,p:193,m2:187,m4:177,f:138,c:197}
+                 },
+                 "OnePlus": {
+                     "Nord CE": {g:190,p:176,m2:170,m4:155,f:122,c:180},
+                     "OnePlus 9 / 10 / 11": {g:198,p:186,m2:180,m4:167,f:130,c:189},
+                     "Nord N30": {g:192,p:179,m2:173,m4:158,f:124,c:183},
+                     "OnePlus 12": {g:200,p:192,m2:186,m4:176,f:137,c:196}
+                 },
+                 "ZTE": {
+                     "Blade A54": {g:173,p:158,m2:151,m4:134,f:103,c:163},
+                     "Blade V50": {g:182,p:166,m2:159,m4:143,f:112,c:172},
+                     "Nubia Neo 5G": {g:190,p:177,m2:170,m4:155,f:122,c:181},
+                     "Nubia RedMagic 8": {g:200,p:191,m2:185,m4:173,f:135,c:194}
+                 },
+                 "Google": {
+                     "Pixel 4a / 5": {g:185,p:170,m2:164,m4:149,f:117,c:176},
+                     "Pixel 6 / 7": {g:194,p:181,m2:174,m4:162,f:125,c:184},
+                     "Pixel 7a": {g:196,p:183,m2:177,m4:163,f:128,c:187},
+                     "Pixel 8 Pro": {g:200,p:190,m2:184,m4:172,f:134,c:193}
+                 },
+                 "Nokia": {
+                     "G11 / G22": {g:172,p:157,m2:150,m4:133,f:102,c:162},
+                     "X20 / XR20": {g:186,p:170,m2:164,m4:149,f:118,c:177},
+                     "G42": {g:178,p:163,m2:156,m4:139,f:108,c:168},
+                     "C32": {g:170,p:155,m2:148,m4:131,f:101,c:161}
+                 },
+                 "Alcatel": {
+                     "1S 2021": {g:168,p:153,m2:146,m4:128,f:98,c:159},
+                     "3L 2022": {g:174,p:159,m2:152,m4:135,f:105,c:165},
+                     "1V": {g:171,p:156,m2:149,m4:132,f:102,c:162}
+                 },
+                 "Lenovo": {
+                     "A7 / A8": {g:175,p:160,m2:153,m4:136,f:105,c:165},
+                     "K14 Plus": {g:180,p:165,m2:158,m4:142,f:111,c:171},
+                     "Tab M10": {g:162,p:147,m2:140,m4:123,f:94,c:153},
+                     "Legion Phone": {g:200,p:190,m2:184,m4:172,f:134,c:193}
+                 },
+                 "Blackview": {
+                     "A55": {g:176,p:161,m2:154,m4:137,f:106,c:166},
+                     "BV5300": {g:183,p:168,m2:161,m4:145,f:114,c:173},
+                     "BV9300": {g:191,p:177,m2:170,m4:156,f:122,c:181}
+                 },
+                 "Umidigi": {
+                     "A15": {g:177,p:162,m2:155,m4:138,f:107,c:167},
+                     "A13 Pro": {g:184,p:169,m2:162,m4:146,f:115,c:174},
+                     "Bison 2": {g:192,p:178,m2:172,m4:157,f:123,c:182}
+                 },
+                 "Doogee": {
+                     "X96": {g:175,p:160,m2:153,m4:136,f:105,c:165},
+                     "S59": {g:182,p:167,m2:160,m4:144,f:113,c:172},
+                     "V30": {g:188,p:174,m2:167,m4:152,f:120,c:179}
+                 }
+             });
+             // Carga de modelos
+             const selMarca = document.getElementById('marca');
              const selModelo = document.getElementById('modelo');
              selMarca.addEventListener('change', () => {
                  selModelo.innerHTML = "<option value=''>— Elegir modelo —</option>";
@@ -388,9 +505,44 @@
                      document.getElementById('zonaResultado').classList.remove('oculto');
                  }, 6000);
              });
+             // ✅ FUNCIONES NUEVAS: AJUSTES Y CLAVE VIP = 55
+             const btnAjustes = document.getElementById('btnAjustes');
+             const fondoVIP = document.getElementById('fondoVIP');
+             const ventanaVIP = document.getElementById('ventanaVIP');
+             const claveVIP = document.getElementById('claveVIP');
+             const confirmarVIP = document.getElementById('confirmarVIP');
+             const cerrarVIP = document.getElementById('cerrarVIP');
+             const fondoSensibilidades = document.getElementById('fondoSensibilidades');
+             const ventanaSensibilidades = document.getElementById('ventanaSensibilidades');
+             const cerrarSensibilidades = document.getElementById('cerrarSensibilidades');
+             btnAjustes.addEventListener('click', () => {
+                 fondoVIP.classList.remove('oculto');
+                 ventanaVIP.classList.remove('oculto');
+                 claveVIP.value = '';
+             });
+             cerrarVIP.addEventListener('click', () => {
+                 fondoVIP.classList.add('oculto');
+                 ventanaVIP.classList.add('oculto');
+             });
+             confirmarVIP.addEventListener('click', () => {
+                 if(claveVIP.value === '55') {
+                     fondoVIP.classList.add('oculto');
+                     ventanaVIP.classList.add('oculto');
+                     fondoSensibilidades.classList.remove('oculto');
+                     ventanaSensibilidades.classList.remove('oculto');
+                 } else {
+                     alert("❌ Clave incorrecta");
+                 }
+             });
+             cerrarSensibilidades.addEventListener('click', () => {
+                 fondoSensibilidades.classList.add('oculto');
+                 ventanaSensibilidades.classList.add('oculto');
+             });
              Object.seal(window);
              Object.freeze(document);
          })();
      </script>
  </body>
  </html>
+                 
+ 
