@@ -176,37 +176,72 @@
                 🚀 GENERAR SENSIBILIDAD PRECISA
             </button>
         </div>
-
-        <!-- ESTILO COMPLETO DEL CÍRCULO DE CARGA GRANDE ESTILO SIRI -->
+<!-- ESTILO COMPLETO: CÍRCULO CARGA ESTILO SIRI - CON EFECTO INTERIOR Y COLORES -->
 <style>
 .carga-grande-siri {
   width: 120px;
   height: 120px;
   margin: 0 auto;
   position: relative;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(217, 4, 41, 0.22), rgba(0, 0, 0, 0) 65%);
+  overflow: hidden;
 }
+/* BORDE EXTERIOR */
 .carga-grande-siri::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 6px solid rgba(217, 4, 41, 0.15);
-  border-top: 6px solid #D90429;
-  border-right: 6px solid #D90429;
-  animation: girarCargaSiri 1.4s linear infinite;
-  box-shadow: 0 0 18px rgba(217, 4, 41, 0.35);
+  background: conic-gradient(
+    #D90429 0deg,
+    #F13849 60deg,
+    #D90429 120deg,
+    #B20322 180deg,
+    #D90429 240deg,
+    #F13849 300deg,
+    #D90429 360deg
+  );
+  background-size: 100% 100%;
+  animation: girarTotal 1.6s linear infinite;
+  box-shadow: 0 0 22px rgba(217, 4, 41, 0.45), inset 0 0 15px rgba(217, 4, 41, 0.2);
 }
-@keyframes girarCargaSiri {
+/* EFECTO INTERIOR DINÁMICO IGUAL SIRI */
+.carga-grande-siri::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(217, 4, 41, 0.85) 0deg,
+    rgba(255, 120, 140, 0.75) 70deg,
+    rgba(217, 4, 41, 0.85) 140deg,
+    rgba(150, 20, 40, 0.65) 210deg,
+    rgba(217, 4, 41, 0.85) 280deg,
+    rgba(255, 120, 140, 0.75) 360deg
+  );
+  mask: radial-gradient(circle, transparent 42%, black 45%, black 78%, transparent 82%);
+  -webkit-mask: radial-gradient(circle, transparent 42%, black 45%, black 78%, transparent 82%);
+  animation: girarInterior 2.2s ease-in-out infinite alternate;
+  filter: blur(1.2px) brightness(1.3);
+}
+@keyframes girarTotal {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+@keyframes girarInterior {
+  0% { transform: rotate(0deg) scale(0.96); }
+  100% { transform: rotate(360deg) scale(1.04); }
+}
 </style>
 
-<!-- ELEMENTO COMPLETO PARA PONER DENTRO DEL GENERADOR -->
+<!-- ELEMENTO PARA COLOCAR DIRECTAMENTE EN EL GENERADOR -->
 <div id="zonaCarga" class="text-center py-10 oculto">
     <div class="carga-grande-siri mb-5"></div>
-    <p class="text-dorado text-lg"> Calibrando sistema, espere..</p>
+    <p class="text-dorado text-lg">⏱️ Calibrando sistema... 6 segundos</p>
 </div>
+        
         
         
         <!-- ✅ RESULTADO -->
