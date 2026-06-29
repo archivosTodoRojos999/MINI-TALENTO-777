@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXTIN SENCI, CREADOR:LUCIANO SALA</title>
+    <title>LUXTIN SENCI - Generador de Sensibilidades Free Fire</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -46,32 +46,52 @@
                 from { opacity: 0; transform: scale(0.95); }
                 to { opacity: 1; transform: scale(1); }
             }
+            /* ✅ NUEVO: BORDE ARCOÍRIS ANIMADO SOLO PARA EL GENERADOR */
+            .borde-arcoiris {
+                position: relative;
+                border-radius: 0.75rem;
+                background: #000;
+                z-index: 1;
+            }
+            .borde-arcoiris::before {
+                content: "";
+                position: absolute;
+                top: -3px; left: -3px; right: -3px; bottom: -3px;
+                border-radius: 0.9rem;
+                background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+                background-size: 400% 400%;
+                animation: arcoiris 4s linear infinite;
+                z-index: -1;
+            }
+            @keyframes arcoiris {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 400% 50%; }
+            }
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start 2P&display=swap" rel="stylesheet">
 </head>
 <body class="bg-grisOscuro text-white min-h-screen font-sans overflow-x-hidden">
     <!-- 📢 ANUNCIO INICIAL -->
     <div id="pantallaAnuncio" class="fixed inset-0 bg-negro z-50 contenedor-centro">
         <h1 class="text-rojo text-[clamp(1.8rem,5vw,4rem)] font-juego sombra-texto-rojo text-center px-4">
-            LUXTIN SENCI™
-                  S.L
+            LUXTIN SENCI
         </h1>
     </div>
 
     <!-- 🧩 CONTENEDOR PRINCIPAL -->
     <div id="contenedorPrincipal" class="max-w-2xl mx-auto p-6 py-10 oculto fade-in">
         <header class="text-center mb-10">
-            <h2 class="text-dorado text-2xl md:text-3xl font-bold mb-2">LUXTIN SENCI, CREADOR:LUCIANO SALA</h2>
+            <h2 class="text-dorado text-2xl md:text-3xl font-bold mb-2">🎯 Generador de Sensibilidades - Free Fire</h2>
             <p class="text-gray-300">Calibradas para dar <strong>todo a la cabeza</strong> — pareces experto sin ser hack</p>
             <p class="text-sm text-gray-400 mt-1">Escala hasta 200 • Botón recomendado: <span class="text-dorado font-bold">42</span></p>
             <p class="text-xs text-dorado/80 mt-1">🔒 Protección Anti-Robo de Configuración</p>
         </header>
 
-        <!-- 📱 SELECCIÓN DE MARCA Y MODELO -->
-        <div class="bg-negro/70 p-6 rounded-xl border border-rojo/30 shadow-lg mb-6">
+        <!-- ✅ SE AGREGÓ LA CLASE borde-arcoiris AQUÍ -->
+        <div class="bg-negro/70 p-6 rounded-xl borde-arcoiris shadow-lg mb-6">
             <label class="block mb-2 font-semibold">📲 Marca del dispositivo:</label>
             <select id="marca" class="w-full p-3 rounded bg-grisOscuro border border-gray-600 focus:border-rojo outline-none mb-4">
                 <option value="">— Selecciona marca —</option>
@@ -110,7 +130,7 @@
         <!-- ⏳ CARGA -->
         <div id="zonaCarga" class="text-center py-8 oculto">
             <div class="w-16 h-16 border-[6px] border-gray-600 border-t-rojo rounded-full animacion-carga mx-auto mb-4"></div>
-            <p class="text-dorado">⏱️ Calibrando sistema, espere...</p>
+            <p class="text-dorado">⏱️ Calibrando sistema... 6 segundos</p>
         </div>
 
         <!-- ✅ RESULTADO -->
@@ -333,23 +353,22 @@
 
             // Carga de modelos
             const selMarca = document.getElementById('marca');
-            const selModelo = document.getElementById('modelo');
-            selMarca.addEventListener('change', () => {
-                selModelo.innerHTML = "<option value=''>— Elegir modelo —</option>";
-                const baseDatos = descifrar(baseDatosEncriptada);
-                if(baseDatos && baseDatos[selMarca.value]){
-                    Object.keys(baseDatos[selMarca.value]).forEach(mod => {
-                        const opt = document.createElement("option");
-                        opt.value = mod;
-                        opt.textContent = mod;
-                        selModelo.appendChild(opt);
-                    });
-                }
-            });
-
-            // Generador de sensibilidades
-            document.getElementById('generarBtn').addEventListener('click', () => {
-                if(!selMarca.value || !selModelo.value) return alert("⚠️ Elige marca y modelo exacto");
+             const selModelo = document.getElementById('modelo');
+             selMarca.addEventListener('change', () => {
+                 selModelo.innerHTML = "<option value=''>— Elegir modelo —</option>";
+                 const baseDatos = descifrar(baseDatosEncriptada);
+                 if(baseDatos && baseDatos[selMarca.value]){
+                     Object.keys(baseDatos[selMarca.value]).forEach(mod => {
+                         const opt = document.createElement("option");
+                         opt.value = mod;
+                         opt.textContent = mod;
+                         selModelo.appendChild(opt);
+                     });
+                 }
+             });
+             // Generador de sensibilidades
+             document.getElementById('generarBtn').addEventListener('click', () => {
+                 if(!selMarca.value || !selModelo.value) return alert("⚠️ Elige marca y modelo exacto");
                  document.getElementById('zonaResultado').classList.add('oculto');
                  document.getElementById('zonaCarga').classList.remove('oculto');
                  setTimeout(() => {
