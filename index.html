@@ -177,12 +177,38 @@
             </button>
         </div>
 
-        <!-- ⏳ CARGA -->
-        <div id="zonaCarga" class="text-center py-8 oculto">
-            <div class="w-16 h-16 border-[6px] border-gray-600 border-t-rojo rounded-full animacion-carga mx-auto mb-4"></div>
-            <p class="text-dorado"> Calibrando sistema, espere...</p>
-        </div>
+        <!-- ESTILO COMPLETO DEL CÍRCULO DE CARGA GRANDE ESTILO SIRI -->
+<style>
+.carga-grande-siri {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  position: relative;
+}
+.carga-grande-siri::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 6px solid rgba(217, 4, 41, 0.15);
+  border-top: 6px solid #D90429;
+  border-right: 6px solid #D90429;
+  animation: girarCargaSiri 1.4s linear infinite;
+  box-shadow: 0 0 18px rgba(217, 4, 41, 0.35);
+}
+@keyframes girarCargaSiri {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 
+<!-- ELEMENTO COMPLETO PARA PONER DENTRO DEL GENERADOR -->
+<div id="zonaCarga" class="text-center py-10 oculto">
+    <div class="carga-grande-siri mb-5"></div>
+    <p class="text-dorado text-lg"> Calibrando sistema, espere..</p>
+</div>
+        
+        
         <!-- ✅ RESULTADO -->
         <div id="zonaResultado" class="oculto bg-negro/70 p-6 rounded-xl border border-dorado/40 shadow-xl">
             <h3 class="text-center text-dorado font-bold text-xl mb-4">✅ Sensibilidad Exacta para tu equipo</h3>
