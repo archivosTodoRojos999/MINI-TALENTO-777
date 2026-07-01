@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXTIN - SENCI </title>
+    <title>LUXTIN - SENCI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -115,10 +115,10 @@
                 background: rgba(0,0,0,0.85);
                 z-index: 9998;
             }
-            /* ✅ MODO PC / CELULAR */
+            /* ✅ MODO PC / CELULAR - MISMO TAMAÑO */
             .modo-pc {
-                max-width: 950px !important;
-                padding: 2.5rem 5rem !important;
+                max-width: 600px !important;
+                padding: 1.5rem !important;
                 transition: all 0.4s ease;
             }
             .modo-celu {
@@ -126,14 +126,15 @@
                 padding: 1.5rem !important;
                 transition: all 0.4s ease;
             }
+            /* ✅ NOMBRES LATERALES EN ROJO */
             .texto-lado {
                 position: fixed;
                 top: 50%;
                 transform: translateY(-50%);
                 font-size: clamp(3rem, 8vw, 5rem);
                 font-weight: bold;
-                color: rgba(241, 196, 15, 0.18);
-                text-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+                color: rgba(217, 4, 41, 0.22);
+                text-shadow: 0 0 15px rgba(217, 4, 41, 0.45);
                 z-index: 0;
                 pointer-events: none;
                 font-family: 'Press Start 2P', monospace;
@@ -176,7 +177,7 @@
             position: fixed;
             inset: 0;
             z-index: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='320' height='140' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='20' y='80' font-family='Arial, sans-serif' font-size='32' fill='rgba(241, 196, 15, 0.15)' font-weight='bold' transform='rotate(-10)'%3ELUXTIN SENCI%3C/text%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='320' height='140' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='20' y='80' font-family='Arial, sans-serif' font-size='32' fill='rgba(217, 4, 41, 0.15)' font-weight='bold' transform='rotate(-10)'%3ELUXTIN SENCI%3C/text%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 320px 140px;
         }
@@ -243,15 +244,15 @@
     <!-- 🧩 CONTENEDOR PRINCIPAL -->
     <div id="contenedorPrincipal" class="max-w-2xl mx-auto p-6 py-10 oculto fade-in relative z-10 modo-celu">
         <header class="text-center mb-10">
-            <h2 class="text-dorado text-2xl md:text-3xl font-bold mb-2">LUXTIN - SENCI </h2>
+            <h2 class="text-rojo text-2xl md:text-3xl font-bold mb-2">LUXTIN - SENCI</h2>
             <p class="text-gray-300">Calibradas para dar <strong>todo a la cabeza</strong> — pareces experto sin ser hack</p>
             <p class="text-sm text-gray-400 mt-1">Escala hasta 200 • Botón recomendado: <span class="text-dorado font-bold">42</span></p>
-            <p class="text-xs text-dorado/80 mt-1">🔒 Protección Anti-Robo de Configuración</p>
+            <p class="text-xs text-rojo/80 mt-1">🔒 Protección Anti-Robo de Configuración</p>
         </header>
 
         <!-- ✅ BOTONES: AJUSTES + CELU + PC -->
         <div class="posicion-ajustes">
-            <button id="btnAjustes" class="bg-negro hover:bg-negro/90 text-negro font-bold px-3 py-1.5 rounded text-sm shadow-md">
+            <button id="btnAjustes" class="bg-dorado hover:bg-dorado/90 text-negro font-bold px-3 py-1.5 rounded text-sm shadow-md">
                 ⚙️
             </button>
             <button id="btnCelu" class="boton-modo boton-activo"> CELU</button>
@@ -293,16 +294,17 @@
                 <option value="">— Primero elige la marca —</option>
             </select>
 
-            <label class="block mb-2 font-semibold text-dorado">🔥 Nivel de Sensibilidad:</label>
-            <select id="nivel" class="w-full p-3 rounded bg-grisOscuro border border-dorado/60 focus:border-dorado outline-none mb-5">
+            <label class="block mb-2 font-semibold text-rojo">🔥 Nivel de Sensibilidad:</label>
+            <select id="nivel" class="w-full p-3 rounded bg-grisOscuro border border-rojo/60 focus:border-rojo outline-none mb-5">
                 <option value="">— Elige potencia —</option>
                 <option value="suave"> Suave</option>
                 <option value="media"> Media</option>
-                <option value="alta"> ULTRA HACKER</option>
+                <option value="alta"> Alta</option>
+                                            
             </select>
 
             <button id="generarBtn" class="w-full bg-rojo hover:bg-rojo/90 font-bold py-3 rounded-lg text-lg shadow-lg">
-                 Generar senci
+                 GENERAR SENCI
             </button>
         </div>
 
@@ -343,12 +345,12 @@
 
         <div id="zonaCarga" class="text-center py-8 oculto">
             <div class="carga-grande-siri mb-4"></div>
-            <p class="text-dorado text-lg">⚡ Calibrando..espere..</p>
+            <p class="text-rojo text-lg">⚡ Calibrando... 6 seg</p>
         </div>
 
         <!-- ✅ RESULTADO -->
-        <div id="zonaResultado" class="oculto bg-negro/70 p-6 rounded-xl border border-dorado/40 shadow-xl">
-            <h3 class="text-center text-dorado font-bold text-xl mb-4">✅ Sensibilidad Lista</h3>
+        <div id="zonaResultado" class="oculto bg-negro/70 p-6 rounded-xl border border-rojo/40 shadow-xl">
+            <h3 class="text-center text-rojo font-bold text-xl mb-4">✅ Sensibilidad Lista</h3>
             <div id="nivelSeleccionado" class="text-center text-rojo font-bold mb-3 text-lg"></div>
             <div class="grid grid-cols-2 gap-3 text-lg">
                 <div class="bg-grisOscuro/70 p-3 rounded">General: <span id="gen" class="font-bold text-rojo"></span></div>
@@ -358,7 +360,7 @@
                 <div class="bg-grisOscuro/70 p-3 rounded">Francotirador: <span id="fran" class="font-bold text-rojo"></span></div>
                 <div class="bg-grisOscuro/70 p-3 rounded">Cámara 360: <span id="cam" class="font-bold text-rojo"></span></div>
             </div>
-            <p class="text-center mt-4 text-gray-200">🎯 Botón de disparo recomendado: <strong class="text-dorado">42</strong></p>
+            <p class="text-center mt-4 text-gray-200"> Botón de disparo recomendado: <strong class="text-dorado">42</strong></p>
         </div>
     </div>
 
@@ -376,7 +378,7 @@
     <div id="ventanaSensibilidades" class="ventana-sensibilidades oculto">
         <button id="cerrarSensibilidades" class="float-right text-rojo font-bold text-xl">✕</button>
         <div class="clear-both"></div>
-        <p class="text-center text-dorado text-xl font-bold my-6">LAS MEJORES DE BRASIL</p>
+        <p class="text-center text-rojo text-xl font-bold my-6">LAS MEJORES DE BRASIL</p>
         <div class="text-center mb-4"><strong>APELAPATO</strong><br>144 • 164 • 42 • 178 • 96 • 64</div>
         <div class="text-center mb-4"><strong>LDZIN</strong><br>177 • 114 • 183 • 179 • 51 • 88</div>
         <div class="text-center mb-4"><strong>URIEL XITER</strong><br>156 • 179 • 52 • 128 • 100 • 169</div>
@@ -426,7 +428,7 @@
             });
 
             // ======================================
-            // 📋 BASE DE DATOS COMPLETA: MARCAS Y MODELOS SEPARADOS
+            // 📋 BASE DE DATOS COMPLETA
             // ======================================
             const baseDatos = {
                 "Samsung": {
@@ -486,11 +488,10 @@
                     "Honor 9X": { suave: {g:162,p:147,m2:140,m4:124,f:95,c:155}, media: {g:177,p:161,m2:155,m4:139,f:107,c:167}, alta: {g:194,p:181,m2:175,m4:161,f:126,c:185} }
                 },
                 "Oppo": {
-                    "A15": { suave: {g:162,p:147,m2:140,m4:124,f:95,c:155}, media: {g:177,p:161,m2:155,m4:139,f:107,c:167}, alta: {g:194,p:181,m2:175,m4:161,f:126,c:185} },
-                    "A16": { suave: {g:162,p:147,m2:140,m4:124,f:95,c:155}, media: {g:177,p:161,m2:155,m4:139,f:107,c:167}, alta: {g:194,p:181,m2:175,m4:161,f:126,c:185} },
-                    "A17": { suave: {g:162,p:147,m2:140,m4:124,f:95,c:155}, media: {g:177,p:161,m2:155,m4:139,f:107,c:167}, alta: {g:194,p:181,m2:175,m4:161,f:126,c:185} },
-                    "A54": { suave: {g:170,p:155,m2:148,m4:132,f:101,c:161}, media: {g:185,p:169,m2:163,m4:148,f:117,c:176}, alta: {g:200,p:190,m2:186,m4:174,f:136,c:197} },
-                    "A76": { suave: {g:175,p:160,m2:153,m4:137,f:105,c:166}, media: {g:192,p:178,m2:171,m4:156,f:123,c:182}, alta: {g:200,p:195,m2:189,m4:179,f:140,c:200} },
+                    "A15": { suave: {g:162,p:147,m2:140,m4:124,f:95,c:155}, media: {g:177,p:161,m2:155,m4:139,f:107,c:1                    "A15": { suave: {g:162,p:147,m2:140,m4:124,f:95,c:155}, media: {g:177,p:161,m2:155,m4:139,f:107,c:167}, alta: {g:194,p:181,m2:175,m4:161,f:126,c:185} },
+                    "A16": { suave: {g:160,p:145,m2:138,m4:122,f:93,c:153}, media: {g:175,p:160,m2:153,m4:137,f:106,c:166}, alta: {g:192,p:179,m2:172,m4:157,f:124,c:184} },
+                    "A54": { suave: {g:172,p:157,m2:150,m4:134,f:102,c:162}, media: {g:189,p:175,m2:168,m4:153,f:120,c:179}, alta: {g:200,p:194,m2:188,m4:179,f:140,c:199} },
+                    "A76": { suave: {g:175,p:160,m2:153,m4:137,f:105,c:165}, media: {g:192,p:178,m2:171,m4:157,f:123,c:182}, alta: {g:200,p:195,m2:189,m4:180,f:141,c:200} },
                     "Reno 8": { suave: {g:180,p:165,m2:159,m4:143,f:110,c:171}, media: {g:196,p:183,m2:177,m4:163,f:128,c:188}, alta: {g:200,p:199,m2:194,m4:187,f:144,c:200} }
                 },
                 "Realme": {
@@ -647,4 +648,3 @@
     </script>
 </body>
 </html>
-                                                                                                                                
