@@ -2,248 +2,159 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUXTIN SENCI - CREADOR: LUCIANO SALA ^_^</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LUXT TEAM TV • CANALES DIRECTV + INICIO SESIÓN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 📌 LIBRERÍA OFICIAL DE GOOGLE PARA INICIO DE SESIÓN -->
+    <script src="https://accounts.google.com/gsi/client" async></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         negro: '#000000',
-                        rojo: '#D90429',
+                        rojoLux: '#D90429',
+                        azulDirectv: '#0066CC',
                         dorado: '#F1C40F',
-                        verdeFF: '#28C76F',
-                        grisOscuro: '#1E1E1E',
-                        azulOscuro: '#0F172A'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
+                        grisOscuro: '#121212',
+                        grisMedio: '#1E1E1E',
+                        azulFondo: '#0F172A'
+                    }
                 }
             }
         }
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .texto-sombra { text-shadow: 0 0 8px #D90429; }
-            .borde-arcoiris { border: 4px solid transparent; background-clip: padding-box, border-box; background-origin: padding-box, border-box; background-image: linear-gradient(#1E1E1E, #1E1E1E), linear-gradient(90deg, red, orange, yellow, green, blue, purple); }
-            .fondo-luxtin { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='30' y='30' font-family='Arial' font-size='12' font-weight='bold' fill='%23D90429' text-anchor='middle'%3ELUXTIN SENCI%3C/text%3E%3C/svg%3E"); background-size: 180px 180px; background-color: #0F172A; }
-            .carga-siri { width: 120px; height: 120px; border-radius: 50%; position: relative; }
-            .carga-siri::before { content:''; position:absolute; inset:0; border-radius:50%; border:6px solid rgba(217,4,41,0.15); border-top:6px solid #D90429; border-right:6px solid #000; animation: girar 1.4s linear infinite; box-shadow: 0 0 25px #D90429; }
-            .modo-pc { max-width: 1000px; margin: 0 auto; }
-            .modo-celu { max-width: 100%; margin: 0 10px; }
-            .codigo-animado { position: fixed; color: #28C76F; font-family: monospace; font-weight: bold; opacity: 0.7; animation: escribir 3s ease-in-out infinite; pointer-events: none; }
+            .texto-lujo { text-shadow: 0 0 10px #D90429; }
+            .borde-directv { box-shadow: 0 0 12px #0066CC; border:1px solid #0066CC; }
+            .fondo-app { background: linear-gradient(140deg, #0F172A 0%, #121212 50%, #1E1E1E 100%); }
+            .anim-entrada { animation: entrada 1.2s ease-out; }
+            .anim-carga { animation: girar 1.5s linear infinite; }
+            .tarjeta-canal { transition: all 0.3s ease; cursor:pointer; }
+            .tarjeta-canal:hover { transform: scale(1.03); box-shadow: 0 0 10px rgba(0,102,204,0.4); }
+            .scroll-oculto { -ms-overflow-style: none; scrollbar-width: none; }
+            .scroll-oculto::-webkit-scrollbar { display: none; }
+            .seccion-sesion { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; }
         }
-        @keyframes girar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes escribir { 0%,100% { opacity:0.4; transform: translateY(0); } 50% { opacity:0.8; transform: translateY(-10px); } }
-        @keyframes entrada { 0% { opacity:0; transform: scale(0.8); } 100% { opacity:1; transform: scale(1); } }
+        @keyframes entrada { 0%{opacity:0; transform:scale(0.9)} 100%{opacity:1; transform:scale(1)} }
+        @keyframes girar { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+        a { display:block; width:100%; height:100%; }
     </style>
 </head>
-<body class="fondo-luxtin min-h-screen overflow-x-hidden">
-    <!-- CÓDIGOS ANIMADOS DE FONDO -->
-    <div class="codigo-animado top-[10%] left-[5%] text-xl">if(headshot){kill++;}</div>
-    <div class="codigo-animado top-[30%] right-[8%] text-2xl text-rojo">LUXTIN.CALIBRAR(); // FF ACTUALIZADO</div>
-    <div class="codigo-animado bottom-[20%] left-[15%] text-lg">sensi = 200; // MÁXIMO POTENCIAL</div>
-    <div class="codigo-animado top-[60%] right-[12%] text-xl">calibra(dispositivo, "ROJO"); ✅</div>
+<body class="fondo-app min-h-screen overflow-x-hidden">
 
-    <!-- PANTALLA DE ENTRADA -->
-    <div id="pantallaEntrada" class="fixed inset-0 z-50 bg-negro flex items-center justify-center" style="animation: entrada 0.8s ease-out;">
-        <div class="text-center">
-            <h1 class="text-[clamp(2.5rem,6vw,5rem)] font-bold text-rojo texto-sombra tracking-widest">LUXTIN SENCI</h1>
-            <p class="text-dorado text-xl">EL MEJOR GENERADOR DE FREE FIRE</p>
-            <div class="carga-siri mx-auto mt-8"></div>
-        </div>
+    <!-- PANTALLA DE INICIO → IGUAL QUE QUERÍAS -->
+    <div id="pantallaInicio" class="fixed inset-0 z-50 bg-negro flex flex-col items-center justify-center">
+        <h1 class="text-[clamp(2.8rem,7vw,5rem)] font-bold text-rojoLux texto-lujo tracking-widest anim-entrada">LUXT TEAM TV</h1>
+        <p class="text-dorado text-xl mb-6">DIRECTV • PELÍCULAS • PARTIDOS • INICIO SESIÓN</p>
+        <div class="w-20 h-20 border-4 border-azulDirectv/30 border-t-azulDirectv rounded-full anim-carga"></div>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL -->
-    <div id="contenedorPrincipal" class="hidden py-8 px-4">
-        <!-- BOTONES DE MODO PC/CELU -->
-        <div class="flex justify-center gap-4 mb-6">
-            <button id="btnPC" class="bg-rojo hover:bg-rojo/80 text-white font-bold py-2 px-6 rounded-lg transition-all">🖥️ PC</button>
-            <button id="btnCelu" class="bg-grisOscuro hover:bg-grisOscuro/80 text-white font-bold py-2 px-6 rounded-lg transition-all active">📱 CELU</button>
-            <button id="btnAjustes" class="bg-azulOscuro hover:bg-azulOscuro/80 text-white font-bold py-2 px-4 rounded-lg transition-all">⚙️ AJUSTES VIP</button>
-        </div>
+    <!-- 📌 CONFIGURACIÓN DE GOOGLE -->
+    <div id="g_id_onload" 
+       data-client_id="685219413996-g8rl4p4s5h75fngk1gjiia994dhp6c2v.apps.googleusercontent.com" <!-- ← PONÉ TU ID DE GOOGLE CUANDO LO CREES -->
+         data-callback="respuestaInicioSesion"
+         data-auto_prompt="false">
+    </div>
 
-        <!-- MARCAS LATERALES SOLO MODO PC -->
-        <div id="marcasLaterales" class="hidden fixed left-8 top-1/2 -translate-y-1/2 text-rojo font-bold text-4xl texto-sombra">LUXTIN</div>
-        <div id="marcasLateralesDer" class="hidden fixed right-8 top-1/2 -translate-y-1/2 text-rojo font-bold text-4xl texto-sombra">SENCI</div>
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="contenido" class="hidden min-h-screen pb-10">
+        <nav class="sticky top-0 z-40 bg-negro/90 backdrop-blur-md px-4 py-3 flex items-center justify-between">
+            <h2 class="text-xl font-bold text-azulDirectv">📺 LUXT TEAM TV</h2>
+            <div id="infoUsuario" class="text-white text-sm"></div>
+        </nav>
 
-        <!-- CAJA PRINCIPAL CON BORDE ARCOÍRIS -->
-        <div class="borde-arcoiris rounded-2xl bg-grisOscuro/95 p-6 shadow-2xl" id="cajaGenerador">
-            <h2 class="text-center text-dorado text-2xl font-bold mb-6">GENERADOR DE SENSIBILIDADES - FF ACTUALIZADO</h2> 
-                        <!-- SELECCIÓN MARCA Y MODELO - TODOS INCLUIDOS, SEPARADOS -->
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="text-white font-semibold block mb-2">SELECCIONAR MARCA:</label>
-                    <select id="selMarca" class="w-full bg-azulOscuro text-white p-3 rounded-lg border border-rojo/40 focus:outline-none focus:ring-2 focus:ring-rojo">
-                        <option value="">-- Elige Marca --</option>
-                        <option value="motorola">Motorola</option>
-                        <option value="samsung">Samsung</option>
-                        <option value="apple">Apple / iPhone</option>
-                        <option value="xiaomi">Xiaomi / Redmi / POCO</option>
-                        <option value="oppo">OPPO / Realme</option>
-                        <option value="vivo">Vivo / iQOO</option>
-                        <option value="huawei">Huawei / Honor</option>
-                        <option value="infinix">Infinix / Tecno</option>
-                        <option value="sony">Sony Xperia</option>
-                        <option value="oneplus">OnePlus</option>
-                        <option value="otros">Otras Marcas</option>
-                    </select>
+        <!-- 🟢 SECCIÓN DE INICIO DE SESIÓN CON GOOGLE -->
+        <section class="px-4 py-4">
+            <div class="seccion-sesion max-w-md mx-auto text-center">
+                <h3 class="text-xl font-bold text-dorado mb-3"><i class="fa fa-user-circle-o mr-2"></i> INICIAR SESIÓN CON GOOGLE</h3>
+                <p class="text-gray-300 text-sm mb-4">Accedé de forma segura con tu cuenta de Gmail — nunca compartas tu clave aquí, todo se gestiona desde Google 🛡️</p>
+                <!-- BOTÓN OFICIAL PERSONALIZADO -->
+                <div class="g_id_signin" 
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="filled_black"
+                     data-text="signin_with"
+                     data-size="large"
+                     data-logo_alignment="left">
                 </div>
-                <div>
-                    <label class="text-white font-semibold block mb-2">SELECCIONAR MODELO:</label>
-                    <select id="selModelo" class="w-full bg-azulOscuro text-white p-3 rounded-lg border border-rojo/40 focus:outline-none focus:ring-2 focus:ring-rojo">
-                        <option value="">-- Primero elige Marca --</option>
-                    </select>
+                <div id="datosUsuario" class="mt-4 text-white text-sm hidden"></div>
+            </div>
+        </section>
+
+        <!-- AVISO CANALES -->
+        <section class="px-4 py-2">
+            <div class="bg-azulDirectv/10 border border-azulDirectv/40 rounded-lg p-3 text-center">
+                <p class="text-white text-sm">✅ Al tocar cualquier canal abre plataforma oficial DGO 📡</p>
+            </div>
+        </section>
+
+        <!-- 🟢 DEPORTES -->
+        <section class="px-4 py-3">
+            <h3 class="text-xl font-bold text-dorado mb-3 flex items-center gap-2"><i class="fa fa-futbol-o"></i> DEPORTES • DSPORTS</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
+                    <a href="https://www.dgo.com.ar/canal/dsports" target="_blank" rel="noopener noreferrer">
+                        <p class="font-bold text-white">DSports</p><p class="text-gray-400 text-xs">610 / 1610 HD</p>
+                    </a>
                 </div>
-            </div>
-
-            <!-- CARGA -->
-            <div id="zonaCarga" class="hidden text-center my-8">
-                <div class="carga-siri mx-auto"></div>
-                <p class="text-dorado mt-4 text-lg">CALIBRANDO DISPOSITIVO... 6 SEG</p>
-            </div>
-
-            <!-- RESULTADOS -->
-            <div id="zonaResultados" class="hidden">
-                <div class="bg-negro/70 p-5 rounded-xl border border-verdeFF/50">
-                    <h3 class="text-verdeFF font-bold text-xl mb-4 text-center">✅ SENSIBILIDAD ULTRA CALIBRADA - PEGA TODO ROJO</h3>
-                    <div class="grid md:grid-cols-3 gap-4 text-white">
-                        <div><span class="text-dorado">General:</span> <span id="valGeneral" class="font-bold text-xl"></span>/200</div>
-                        <div><span class="text-dorado">Mira Roja:</span> <span id="valRoja" class="font-bold text-xl"></span>/200</div>
-                        <div><span class="text-dorado">Mira 2x:</span> <span id="val2x" class="font-bold text-xl"></span>/200</div>
-                        <div><span class="text-dorado">Mira 4x:</span> <span id="val4x" class="font-bold text-xl"></span>/200</div>
-                        <div><span class="text-dorado">Francotirador:</span> <span id="valSniper" class="font-bold text-xl"></span>/200</div>
-                        <div><span class="text-dorado">Botón Disparo:</span> <span id="valDisparo" class="font-bold text-xl">42</span>/100 ⭐ RECOMENDADO</div>
-                    </div>
-                    <p class="text-center text-gray-300 mt-4 text-sm">🔒 Configuración protegida contra copia / Actualizado a última versión FF</p>
+                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
+                    <a href="https://www.dgo.com.ar/canal/dsports-2" target="_blank" rel="noopener noreferrer">
+                        <p class="font-bold text-white">DSports 2</p><p class="text-gray-400 text-xs">612 / 1612 HD</p>
+                    </a>
+                </div>
+                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
+                    <a href="https://www.dgo.com.ar/canal/tyc-sports" target="_blank" rel="noopener noreferrer">
+                        <p class="font-bold text-white">TyC Sports</p><p class="text-gray-400 text-xs">Fútbol Argentina</p>
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <!-- VENTANA VIP -->
-            <div id="ventanaVIP" class="hidden fixed inset-0 bg-negro/90 z-40 flex items-center justify-center">
-                <div class="bg-grisOscuro p-8 rounded-xl max-w-md w-full mx-4 border-2 border-dorado">
-                    <h3 class="text-dorado font-bold text-2xl mb-4 text-center">🔑 ACCESO VIP</h3>
-                    <input type="password" id="claveVIP" placeholder="Ingresar Clave: 55" class="w-full p-3 rounded-lg bg-azulOscuro text-white border border-rojo mb-4">
-                    <button id="entrarVIP" class="w-full bg-dorado hover:bg-dorado/80 text-negro font-bold py-3 rounded-lg">INGRESAR</button>
-                    <div id="contenidoVIP" class="hidden mt-5 text-white text-sm space-y-3">
-                        <p class="text-verdeFF font-semibold text-center">📢 LAS MEJORES SENSIBILIDADES DE BRASIL</p>
-                        <div class="bg-negro/60 p-3 rounded">
-                            <p class="font-bold text-dorado">APELAPATO</p>
-                            <p>144 | 164 | 42 | 178 | 96 | 64</p>
-                        </div>
-                        <div class="bg-negro/60 p-3 rounded">
-                            <p class="font-bold text-dorado">LDZIN</p>
-                            <p>177 | 114 | 183 | 179 | 51 | 88</p>
-                        </div>
-                        <div class="bg-negro/60 p-3 rounded">
-                            <p class="font-bold text-dorado">URIEL XITER</p>
-                            <p>156 | 179 | 52 | 168 | 92 | 58</p>
-                        </div>
-                    </div>
+        <!-- 🟢 ENTRETENIMIENTO • GRAN HERMANO -->
+        <section class="px-4 py-3">
+            <h3 class="text-xl font-bold text-dorado mb-3 flex items-center gap-2"><i class="fa fa-home"></i> ENTRETENIMIENTO</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
+                    <a href="https://www.dgo.com.ar/programacion/gran-hermano" target="_blank" rel="noopener noreferrer">
+                        <p class="font-bold text-white">Gran Hermano</p><p class="text-gray-400 text-xs">En vivo 24h</p>
+                    </a>
+                </div>
+                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
+                    <a href="https://www.dgo.com.ar/canal/telefe" target="_blank" rel="noopener noreferrer">
+                        <p class="font-bold text-white">Telefe</p><p class="text-gray-400 text-xs">Señal General</p>
+                    </a>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
-        // BASE DE DATOS COMPLETA DE DISPOSITIVOS + AJUSTES ÚNICOS
-        const baseDispositivos = {
-            motorola: {
-                modelos: ["Moto G20","Moto G30","Moto G50","Moto G60","Edge 20","Edge 30","Edge 40","Edge 50 Fusion","Edge 60","Razr 50","Razr 60 Ultra","Moto E13","Moto E22","Moto G04","Moto G13","Moto G22","Moto G34","Moto G54","Moto G73","Moto G84","Moto G Power","Todos los demás modelos Motorola"],
-                base: [162,158,145,138,92,42]
-            },
-            samsung: {
-                modelos: ["A04","A05","A14","A15","A24","A25","A34","A35","A54","A55","S20 FE","S21","S22","S23","S24","S25 Ultra","Z Flip 5/6","Z Fold 5/6","M14","M34","M54","Todos los modelos Galaxy A/S/M/Z"],
-                base: [172,165,152,140,98,42]
-            },
-            apple: {
-                modelos: ["iPhone SE 2020/22","iPhone 11","12","13","14","15","16","17","Pro/Pro Max/Plus/X/XS/XR/12 Mini/13 Mini/14 Plus/15 Plus/Todos modelos iOS"],
-                base: [182,175,160,148,105,42]
-            },
-            xiaomi: {
-                modelos: ["Redmi 12/13/14C","Redmi Note 12/13/14 Pro","POCO X5/X6/F5/F6","Mi 11/12/13","12T/13T/14T Series","Todos modelos Xiaomi/Redmi/POCO"],
-                base: [178,170,156,144,95,42]
-            },
-            oppo: {modelos: ["A15/A16/A17/A18/A38/A58/A78","Reno 8/9/10/11/12 Series","Realme C30/C31/C35/C51/C53/C55/C67","Realme 10/11/12 Pro+","Todos OPPO/Realme"], base:[174,168,154,142,94,42]},
-            vivo: {modelos: ["Y02/Y11/Y15/Y16/Y20/Y21/Y22/Y27/Y35/Y55","V25/V27/V29/V30 Series","iQOO Z7/Z8/Z9/Z10/Neo 8/9/11/12","Todos Vivo/iQOO"], base:[170,162,150,138,90,42]},
-            huawei: {modelos: ["P30/P40/P50/P60/Mate 30/40/50/60/Nova 9/10/11/12/13","Honor X6/X7/X8/X9/Magic 4/5/6/Lite/Pro/Todos Huawei/Honor"], base:[166,159,148,136,88,42]},
-            infinix: {modelos: ["Smart 7/8/9/10/11/Hot 20/30/40/50/Note 30/40/50 Pro/Tecno Spark/Pova/Camon/Pop/Todos Infinix/Tecno/Itel"], base:[160,155,142,130,85,42]},
-            sony: {modelos: ["Xperia 1/5/10/IV/V/VI/VIII/Pro-I/Todos modelos Sony"], base:[176,169,158,146,96,42]},
-            oneplus: {modelos: ["Nord CE/N20/N30/N40/10R/11/12/13/Open/Todos modelos OnePlus"], base:[180,173,162,150,100,42]},
-            otros: {modelos: ["Google Pixel 6/7/8/9/XL/Pro/Nokia/MicroMax/BLU/Alcatel/Lenovo/TCL/Cat/Fairphone/Y todos los dispositivos móviles existentes"], base:[164,157,144,132,86,42]}
-        };
-
-        // CARGA MARCAS -> MODELOS
-        document.getElementById('selMarca').addEventListener('change', function(){
-            const marca = this.value;
-            const selMod = document.getElementById('selModelo');
-            selMod.innerHTML = "";
-            if(marca && baseDispositivos[marca]){
-                baseDispositivos[marca].modelos.forEach(m=>{
-                    const opt = document.createElement('option');
-                    opt.value = marca +"|"+m;
-                    opt.textContent = m;
-                    selMod.appendChild(opt);
-                });
-            } else selMod.innerHTML = "<option value=''>-- Primero elige Marca --</option>";
-        });
-
-        // MOSTRAR CARGA + RESULTADOS
-        document.getElementById('selModelo').addEventListener('change', function(){
-            if(!this.value) return;
-            document.getElementById('zonaCarga').classList.remove('hidden');
-            document.getElementById('zonaResultados').classList.add('hidden');
-            setTimeout(()=>{
-                const [marca,modelo] = this.value.split("|");
-                const datos = baseDispositivos[marca].base;
-                // AJUSTE ÚNICO POR MODELO
-                const semilla = modelo.length % 17;
-                const final = datos.map((v,i)=> Math.min(200, Math.max(40, v + (semilla*(i+1)%12))));
-                // ASIGNAR
-                document.getElementById('valGeneral').textContent = final[0];
-                document.getElementById('valRoja').textContent = final[1];
-                document.getElementById('val2x').textContent = final[2];
-                document.getElementById('val4x').textContent = final[3];
-                document.getElementById('valSniper').textContent = final[4];
-                document.getElementById('valDisparo').textContent = 42;
-                document.getElementById('zonaCarga').classList.add('hidden');
-                document.getElementById('zonaResultados').classList.remove('hidden');
-            }, 6000); // 6 SEG EXACTOS
-        });
-
-        // MODO PC / CELU
-        document.getElementById('btnPC').addEventListener('click', ()=>{
-            document.getElementById('cajaGenerador').classList.replace('modo-celu','modo-pc');
-            document.querySelectorAll('#marcasLaterales, #marcasLateralesDer').forEach(el=>el.classList.remove('hidden'));
-            document.getElementById('btnPC').classList.add('bg-rojo');
-            document.getElementById('btnCelu').classList.remove('bg-rojo');
-        });
-        document.getElementById('btnCelu').addEventListener('click', ()=>{
-            document.getElementById('cajaGenerador').classList.replace('modo-pc','modo-celu');
-            document.querySelectorAll('#marcasLaterales, #marcasLateralesDer').forEach(el=>el.classList.add('hidden'));
-            document.getElementById('btnCelu').classList.add('bg-rojo');
-            document.getElementById('btnPC').classList.remove('bg-rojo');
-        });
-
-        // ACCESO VIP CLAVE = 55
-        document.getElementById('btnAjustes').addEventListener('click', ()=> document.getElementById('ventanaVIP').classList.remove('hidden'));
-        document.getElementById('entrarVIP').addEventListener('click', ()=>{
-            if(document.getElementById('claveVIP').value === "55") document.getElementById('contenidoVIP').classList.remove('hidden');
-            else alert("❌ CLAVE INCORRECTA");
-        });
-        document.getElementById('ventanaVIP').addEventListener('click', e=>{if(e.target.id==='ventanaVIP') document.getElementById('ventanaVIP').classList.add('hidden')});
-
-        // ENTRADA 4 SEGUNDOS
+        // OCULTAR INICIO
         setTimeout(()=>{
-            document.getElementById('pantallaEntrada').style.opacity = "0";
+            document.getElementById('pantallaInicio').style.opacity = '0';
             setTimeout(()=>{
-                document.getElementById('pantallaEntrada').classList.add('hidden');
-                document.getElementById('contenedorPrincipal').classList.remove('hidden');
+                document.getElementById('pantallaInicio').classList.add('hidden');
+                document.getElementById('contenido').classList.remove('hidden');
             }, 800);
-        }, 4000);
+        }, 3500);
+
+        // 📌 FUNCIÓN QUE RECIBE LOS DATOS CUANDO INICIAN SESIÓN
+        function respuestaInicioSesion(respuesta) {
+            // Decodificar información segura del usuario
+            const datos = JSON.parse(atob(respuesta.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+            // Mostrar en pantalla
+            document.getElementById('datosUsuario').innerHTML = `
+                <p class="text-green-400 font-semibold">✅ Sesión iniciada como: ${datos.name}</p>
+                <p class="text-gray-300">📧 Correo: ${datos.email}</p>
+                <img src="${datos.picture}" alt="Foto" class="w-10 h-10 rounded-full mx-auto mt-2 border-2 border-dorado">
+            `;
+            document.getElementById('datosUsuario').classList.remove('hidden');
+            document.getElementById('infoUsuario').innerHTML = `<span class="text-dorado">👤 ${datos.given_name}</span>`;
+            // Acá podés guardar o usar estos datos para más funciones de tu app
+        }
     </script>
 </body>
 </html>
