@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Simulación Hacker</title>
+    <title>Hacker</title>
     <style>
         body {
             margin: 0;
@@ -13,7 +13,7 @@
         }
         #terminal {
             padding: 15px;
-            height: 100vh;
+            height: 90vh;
             overflow: auto;
             white-space: pre-wrap;
         }
@@ -29,12 +29,12 @@
         }
         .window {
             position: absolute;
-            width: 250px;
-            height: 150px;
+            width: 260px;
+            height: 170px;
             border: 1px solid #00ff00;
             background: #050505;
             color: #00ff00;
-            padding: 10px;
+            padding: 8px;
             box-shadow: 0 0 12px #00ff00;
         }
         .close {
@@ -51,14 +51,12 @@
     </style>
 </head>
 <body>
-
     <div id="terminal"></div>
     <input id="input" placeholder="Escribe un comando...">
-
     <script>
         const terminal = document.getElementById("terminal");
         const input = document.getElementById("input");
-
+        
         function escribir(texto, i = 0) {
             if (i < texto.length) {
                 terminal.innerHTML += texto[i];
@@ -66,83 +64,66 @@
                 setTimeout(() => escribir(texto, i + 1), 20);
             }
         }
-
+        
         function linea(t) {
             escribir(t + "\n");
         }
-
+        
         function ventana(titulo, contenido, x, y) {
             let w = document.createElement("div");
             w.className = "window";
             w.style.left = x + "px";
             w.style.top = y + "px";
-
-            w.innerHTML =
-                "<div class='close'>✖</div><b>" + titulo +
-                "</b><hr style='border-color:#00ff00'>" + contenido;
-
+            w.innerHTML = "<div class='close'>✖</div><b>" + titulo + "</b><hr style='border-color:#00ff00'>" + contenido;
             w.querySelector(".close").onclick = () => w.remove();
-
             document.body.appendChild(w);
         }
-
+        
         function efecto(nombre) {
             terminal.innerHTML = "";
-            let texto =
-                `> Iniciando sistema internacional...\n
-> Ejecutando comando: ${nombre}\n
-> Conexión a red global...
-> Analizando objetivo...
-> Desencriptando protocolos...
-> Acceso confirmado.
-> Operación ficticia completada.\n`;
-
+            let texto = `> Iniciando sistema...
+            
+> Ejecutando comando: ${nombre}
+            
+> Conectando...
+> Buscando destino...
+> Analizando red...
+> Acceso autorizado.
+> Operación completada.`;
             escribir(texto);
-
+            
             setTimeout(() => {
-                ventana(
-                    "Ubicación Internacional",
-                    "Latitud: 12.345678<br>Longitud: 98.765432<br>Estado: Conexión simulada",
-                    30, 50);
+                ventana("Ubicación", "Latitud: ##.######<br>Longitud: ##.######<br>Estado: CONECTADO", 30, 40);
             }, 1800);
-
+            
             setTimeout(() => {
                 let m = "";
                 for (let i = 0; i < 180; i++)
                     m += Math.random() > 0.5 ? "1" : "0";
-
-                ventana(
-                    "Matrix",
-                    "<div class='matrix'>" + m.replace(/(.{30})/g, "$1<br>") + "</div>",
-                    350, 150);
+                ventana("Matrix", "<div class='matrix'>" + m.replace(/(.{30})/g, "$1<br>") + "</div>", 330, 120);
             }, 2500);
-
+            
             setTimeout(() => {
-                ventana(
-                    "Estado",
-                    "Proceso internacional simulado completado.",
-                    650, 80);
+                ventana("Estado", "Proceso completado correctamente.", 650, 60);
             }, 3200);
         }
-
+        
         input.addEventListener("keydown", e => {
-            if (e.key != "Enter") return;
-
+            if (e.key !== "Enter") return;
             let c = input.value.trim().toLowerCase();
             input.value = "";
-
             switch (c) {
-                case "red global":
-                    efecto("RED GLOBAL");
+                case "internacional":
+                    efecto("DESTINO INTERNACIONAL");
                     break;
-                case "sistema":
-                    efecto("SISTEMA");
+                case "red":
+                    efecto("ACCESO A RED");
                     break;
-                case "protocolo":
-                    efecto("PROTOCOLO");
+                case "datos":
+                    efecto("EXTRAER DATOS");
                     break;
                 default:
-                    linea("> Comando desconocido.");
+                    linea("> Comando no reconocido.");
             }
         });
     </script>
