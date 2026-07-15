@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINI TALENTO 777 -ACTUALIZADO</title>
+    <title>MINI TALENTO 777 + LUXTIN SENCI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; font-weight: bold; }
         html, body {
             min-height: 100vh;
             color: #fff;
             overflow-x: hidden;
-            background: url('fondo.png') center center / contain no-repeat;
             background-color: #000;
             background-attachment: fixed;
         }
         .oculto { display: none !important; }
         .centrar { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 15px; min-height: 100vh; position: relative; }
 
-        /* ✨ TEXTO ACTUALIZADO - INTACTO */
-        #textoActualizado {
+        #textoActualizadoMini {
             position: absolute;
             top: 80px;
             left: 50%;
@@ -32,19 +30,34 @@
             text-shadow: 0 0 8px #ff0000;
             z-index: 10;
         }
-
-        /* 🎨 FONDO MATRIX - INTACTO */
-        #fondoMatrix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; }
-        #codigosFlotantes { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #0f0; pointer-events: none; }
-
-        /* 📦 PANTALLAS Y DISEÑO - INTACTO */
-        #pantallaInicio {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.55);
-            z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
+        #textoActualizadoLuxtin {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffea00;
+            font-size: 2.5rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            text-shadow: 0 0 8px #ffea00;
+            z-index: 10;
         }
-        #pantallaPremium, #anuncioPeriodico {
+
+        /* FONDO ORIGINAL PARA MINI TALENTO */
+        #fondoMatrix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; }
+        /* FONDO NUEVO fondo-2.png EXCLUSIVO PARA LUXTIN */
+        #fondoLuxtin {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
+            background: url('fondo-2.png') center/cover no-repeat fixed;
+            opacity: 0.85;
+        }
+
+        #codigosFlotantesMini { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #0f0; pointer-events: none; }
+        #codigosFlotantesLuxtin { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #ffea00; pointer-events: none; }
+
+        #pantallaInicio, #pantallaPremium, #anuncioPeriodico {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0,0,0,0.92); z-index: 9999;
             display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
@@ -57,11 +70,13 @@
             position: relative;
             margin-top: 140px;
         }
+        .panel-terminal.luxtin { border-color: #ffea00; background: rgba(0,0,0,0.7); }
         .linea-roja {
             height: 3px;
             background: repeating-linear-gradient(90deg, #ff0000, #ff0000 8px, transparent 8px, transparent 16px);
             margin: 12px 0;
         }
+        .linea-roja.luxtin { background: repeating-linear-gradient(90deg, #ffea00, #ffea00 8px, transparent 8px, transparent 16px); }
         .titulo-ascii {
             font-size: 4.5vw;
             line-height: 1;
@@ -71,63 +86,60 @@
             margin: 10px 0;
             letter-spacing: 2px;
         }
+        .titulo-ascii.luxtin { text-shadow: 0 0 8px #ffea00; }
         .subtitulo {
             text-align: center;
             color: #ff0000;
             font-size: 1.1rem;
             margin-bottom: 15px;
         }
+        .subtitulo.luxtin { color: #ffea00; }
         .opcion {
             font-size: 1.2rem;
             margin: 10px 0;
             color: #fff;
         }
         .opcion span { color: #ff0000; }
+        .opcion.luxtin span { color: #ffea00; }
 
-        /* 🎮 BOTONES DE MODOS DE JUEGO - NUEVO BOTÓN AGREGADO */
         .contenedor-botones {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin: 10px 0;
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0;
         }
         .boton-modo {
-            width: auto;
-            min-width: 90px;
-            padding: 8px 12px;
-            font-size: 1rem;
-            margin: 0;
+            width: auto; min-width: 90px; padding: 8px 12px; font-size: 1rem; margin: 0;
         }
         .boton-modo.activo {
-            background: #ff3333;
-            box-shadow: 0 0 12px #ff0000;
-            transform: scale(1.05);
+            background: #ff3333; box-shadow: 0 0 12px #ff0000; transform: scale(1.05);
+        }
+        .boton-modo.luxtin.activo {
+            background: #ffea00; color: #000; box-shadow: 0 0 12px #ffea00;
         }
 
-        /* CAMPOS Y BOTONES GENERALES - INTACTOS */
         input, select, button {
             width: 100%; max-width: 380px; padding: 12px; margin: 8px auto; display:block;
             border: 2px solid #ff0000; border-radius: 0;
-            font-size: 1.1rem; background: #111; color: #fff;
-            font-family: inherit;
+            font-size: 1.1rem; background: #111; color: #fff; font-family: inherit;
         }
+        input.luxtin, select.luxtin, button.luxtin { border-color: #ffea00; }
         select:disabled { background: #0a0a0a; color: #555; border-color: #333; cursor: not-allowed; }
         select option { background: #000; color: #fff; }
         button { background: #ff0000; cursor: pointer; transition: 0.1s; }
+        button.luxtin { background: #ffea00; color: #000; }
         button:disabled { background: #440000; color: #777; border-color: #550000; cursor: not-allowed; }
+        button.luxtin:disabled { background: #444200; color: #777; border-color: #555300; }
         button:hover:not(:disabled):not(.boton-modo) { background: #ff3333; box-shadow: 0 0 10px #ff0000; }
+        button.luxtin:hover:not(:disabled):not(.boton-modo) { background: #fff155; box-shadow: 0 0 10px #ffea00; }
 
         .resultado {
             background: rgba(5,5,5,0.8); padding: 15px; margin-top: 15px;
-            border: 2px solid #ff0000;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            border: 2px solid #ff0000; font-size: 1.1rem; line-height: 1.6;
         }
+        .resultado.luxtin { border-color: #ffea00; }
         .resultado strong { color: #0f0; }
+        .resultado.luxtin strong { color: #ffea00; }
         .aviso { color: #ff0000; text-align: center; margin: 8px 0; }
+        .aviso.luxtin { color: #ffea00; }
 
-        /* ⏳ CARGA - INTACTO */
         .carga-siri {
             width: 60px; height: 60px; margin: 15px auto; position: relative;
         }
@@ -137,47 +149,24 @@
             animation: girar 1.2s linear infinite;
         }
         .carga-siri::after { border-top-color: #ff0000; animation-duration: 0.8s; animation-direction: reverse; }
+        .carga-siri.luxtin::after { border-top-color: #ffea00; }
         @keyframes girar { 100% { transform: rotate(360deg); } }
 
-        /* BOTÓN PREMIUM - INTACTO */
         #btnPremium { position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem; border: 1px solid #ff0000; z-index: 15; }
+        #btnVolverMini { position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem; border: 1px solid #ffea00; z-index: 15; background: #222; color: #ffea00; }
     </style>
 
     <script>
-        // ==============================================
-        // ✅ DATOS Y CLAVES - TODO INTACTO
-        const CLAVE_INGRESO = "777";
-        const CORREO_PREMIUM = "6545";
-        const CLAVE_PREMIUM = "6445";
-        let esPremium = localStorage.getItem('esPremium') === 'SI';
+        // ------------------- CONFIGURACIÓN GENERAL -------------------
+        const CLAVE_INGRESO_MINI = "777";
+        const CORREO_SIN_ANUNCIOS = "472803";
+        const CLAVE_SIN_ANUNCIOS = "472803";
+        const CLAVE_ABRIR_LUXTIN = "50173533";
+        let esSinAnuncios = localStorage.getItem('esSinAnuncios') === 'SI';
         const TIEMPO_ANUNCIO = 2 * 60 * 60 * 1000;
         const TIEMPO_CIERRE_ANUNCIO = 3000;
-        let modoSeleccionado = null;
-        // ==============================================
 
-        // ✨ ANIMACIÓN TEXTO ACTUALIZADO - INTACTA
-        function animarActualizado() {
-            const texto = "ACTUALIZADO";
-            const elemento = document.getElementById('textoActualizado');
-            let indice = 0;
-            function escribir() {
-                if (indice < texto.length) {
-                    elemento.textContent = texto.substring(0, indice + 1);
-                    indice++;
-                    setTimeout(escribir, 150);
-                } else {
-                    elemento.textContent = texto + "...";
-                    setTimeout(() => {
-                        elemento.textContent = "";
-                        indice = 0;
-                        setTimeout(escribir, 500);
-                    }, 1500);
-                }
-            }
-            escribir();
-        }
-
-        // 📋 TODOS LOS DISPOSITIVOS - INTACTOS
+        // ------------------- DISPOSITIVOS (COMPARTIDO POR AMBOS) -------------------
         const dispositivos = {
             "Samsung": ["A01","A02","A03","A04","A05","A10","A10s","A11","A12","A13","A14","A20","A20s","A21","A21s","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","A54","A70","A71","A72","A73","S8","S9","S10","S20","S21","S22","S23","S24","Note 9","Note 10","Note 20","M02","M11","M12","M20","M21","M30","M31","M51"],
             "Xiaomi": ["Redmi 8","Redmi 9","Redmi 10","Redmi 12","Redmi 13","Redmi Note 7","Note 8","Note 9","Note 10","Note 11","Note 12","Note 13","Poco M3","Poco M4","Poco M5","Poco X3","Poco X4","Poco X5","Mi 9","Mi 10","Mi 11","Mi 12","Mi 13","11 Lite","12 Lite","13 Lite"],
@@ -199,51 +188,25 @@
             "iPhone": ["iPhone 6","6 Plus","6s","6s Plus","SE 1ª Gen","7","7 Plus","8","8 Plus","X","XR","XS","XS Max","11","11 Pro","11 Pro Max","SE 2ª Gen","12 Mini","12","12 Pro","12 Pro Max","13 Mini","13","13 Pro","13 Pro Max","SE 3ª Gen","14","14 Plus","14 Pro","14 Pro Max","15","15 Plus","15 Pro","15 Pro Max"]
         };
 
-        // ⚙️ LÓGICA CON EL NUEVO MODO UMP Y ESCOPETA AGREGADO
-        function calcularSensi(marca, modelo, modo) {
-            // Factores por marca adaptados a cada pantalla
+        // ------------------- LÓGICA Y SENSI DE MINI TALENTO 777 (INTACTA) -------------------
+        function calcularSensiMini(marca, modelo, modo) {
             const porMarca = {
-                "Samsung": { factor: 1.05 }, "Xiaomi": { factor: 1.08 }, "Motorola": { factor: 1.03 },
-                "Huawei": { factor: 1.04 }, "Oppo": { factor: 1.06 }, "Vivo": { factor: 1.06 },
-                "Realme": { factor: 1.07 }, "Infinix": { factor: 1.09 }, "Tecno": { factor: 1.08 },
-                "Itel": { factor: 1.10 }, "LG": { factor: 1.02 }, "Sony": { factor: 1.01 },
-                "Asus": { factor: 1.00 }, "Lenovo": { factor: 1.02 }, "Google": { factor: 1.00 },
-                "Nubia": { factor: 1.00 }, "ZTE": { factor: 1.09 }, "iPhone": { factor: 0.95 }
+                "Samsung": { factor: 1.07 }, "Xiaomi": { factor: 1.10 }, "Motorola": { factor: 1.05 },
+                "Huawei": { factor: 1.06 }, "Oppo": { factor: 1.08 }, "Vivo": { factor: 1.08 },
+                "Realme": { factor: 1.09 }, "Infinix": { factor: 1.12 }, "Tecno": { factor: 1.11 },
+                "Itel": { factor: 1.13 }, "LG": { factor: 1.04 }, "Sony": { factor: 1.03 },
+                "Asus": { factor: 1.02 }, "Lenovo": { factor: 1.04 }, "Google": { factor: 1.02 },
+                "Nubia": { factor: 1.02 }, "ZTE": { factor: 1.11 }, "iPhone": { factor: 0.97 }
             };
-
-            // VALORES INCLUYENDO EL NUEVO MODO PARA UMP Y M1887
             const modos = {
-                "pvp": {
-                    nombre: "PVP - SALAS Y COMBATE",
-                    descripcion: "Optimizada para pegar todo rojo en enfrentamientos rápidos",
-                    general: 188, puntoRojo: 185, mira2x: 179, mira4x: 172, francotirador: 158, camara360: 192, boton: 43
-                },
-                "br": {
-                    nombre: "BR - MAPAS GRANDES",
-                    descripcion: "Larga y corta distancia, disparo certero a la cabeza desde lejos",
-                    general: 175, puntoRojo: 170, mira2x: 165, mira4x: 160, francotirador: 168, camara360: 180, boton: 42
-                },
-                "de": {
-                    nombre: "DE - MAPAS MEDIANOS",
-                    descripcion: "Máxima puntería y calibración para espacios reducidos",
-                    general: 182, puntoRojo: 178, mira2x: 173, mira4x: 167, francotirador: 155, camara360: 186, boton: 43
-                },
-                "1vs6": {
-                    nombre: "1 VS 6 - MODO MÁXIMO PODER",
-                    descripcion: "Más precisión, mira directa a la cabeza, gana rondas fácilmente",
-                    general: 195, puntoRojo: 192, mira2x: 187, mira4x: 181, francotirador: 165, camara360: 198, boton: 44
-                },
-                "ump": {
-                    nombre: "🔥 UMP Y ESCOPETA M1887",
-                    descripcion: "Sensibilidad PELIGROSA: subida rápida y directa a la cabeza para armas cortas",
-                    general: 198, puntoRojo: 196, mira2x: 185, mira4x: 175, francotirador: 140, camara360: 199, boton: 45
-                }
+                "pvp": { nombre: "PVP - SALAS Y COMBATE", descripcion: "Más rápida, levanta mira fácil y pega rojo en enfrentamientos", general: 192, puntoRojo: 190, mira2x: 185, mira4x: 178, francotirador: 162, camara360: 195, boton: 42 },
+                "br": { nombre: "BR - MAPAS GRANDES", descripcion: "Rápida y precisa, llega a la cabeza desde cualquier distancia", general: 182, puntoRojo: 178, mira2x: 172, mira4x: 168, francotirador: 172, camara360: 185, boton: 41 },
+                "de": { nombre: "DE - MAPAS MEDIANOS", descripcion: "Máxima respuesta, mira se pega a la cabeza al moverte", general: 188, puntoRojo: 185, mira2x: 180, mira4x: 174, francotirador: 160, camara360: 190, boton: 42 },
+                "1vs6": { nombre: "🔥 1 VS 6 - MODO HACKER", descripcion: "SENSIBILIDAD POTENTE: al levantar la mira VA DIRECTO A LA CABEZA, mata uno por uno sin esfuerzo", general: 200, puntoRojo: 199, mira2x: 195, mira4x: 190, francotirador: 172, camara360: 200, boton: 44 },
+                "ump": { nombre: "💥 UMP Y ESCOPETA M1887 - TODO ROJO", descripcion: "SUBIDA INSTANTÁNEA: cada disparo se clava en la cabeza, no fallas ni un tiro", general: 200, puntoRojo: 200, mira2x: 192, mira4x: 185, francotirador: 150, camara360: 200, boton: 45 }
             };
-
             const ajuste = modos[modo];
             const factor = porMarca[marca]?.factor || 1;
-            
-            // Aplicamos límites y cálculo final
             return {
                 ...ajuste,
                 general: Math.min(200, Math.max(1, Math.round(ajuste.general * factor))),
@@ -255,10 +218,40 @@
             };
         }
 
-        // 🕒 ANUNCIOS - INTACTOS
+        // ------------------- LÓGICA Y SENSI DE LUXTIN SENCI (NUEVA Y DIFERENTE) -------------------
+        function calcularSensiLuxtin(marca, modelo, modo) {
+            const porMarca = {
+                "Samsung": { factor: 1.04 }, "Xiaomi": { factor: 1.06 }, "Motorola": { factor: 1.03 },
+                "Huawei": { factor: 1.05 }, "Oppo": { factor: 1.05 }, "Vivo": { factor: 1.05 },
+                "Realme": { factor: 1.06 }, "Infinix": { factor: 1.08 }, "Tecno": { factor: 1.07 },
+                "Itel": { factor: 1.09 }, "LG": { factor: 1.02 }, "Sony": { factor: 1.01 },
+                "Asus": { factor: 1.00 }, "Lenovo": { factor: 1.02 }, "Google": { factor: 1.00 },
+                "Nubia": { factor: 1.00 }, "ZTE": { factor: 1.07 }, "iPhone": { factor: 0.96 }
+            };
+            const modos = {
+                "pvp": { nombre: "PVP - LUXTIN EDICIÓN", descripcion: "Precisión extrema, sube mira suave y se queda en la cabeza sin sobrepasar", general: 195, puntoRojo: 193, mira2x: 188, mira4x: 182, francotirador: 165, camara360: 197, boton: 43 },
+                "br": { nombre: "BR - LUXTIN LARGA DISTANCIA", descripcion: "Control total, perfecta para pegar rojo desde lejos sin perder puntería", general: 188, puntoRojo: 184, mira2x: 179, mira4x: 174, francotirador: 175, camara360: 190, boton: 42 },
+                "de": { nombre: "DE - LUXTIN CERCA", descripcion: "Respuesta inmediata, ideal para combates rápidos en espacios chicos", general: 192, puntoRojo: 190, mira2x: 184, mira4x: 178, francotirador: 162, camara360: 194, boton: 43 },
+                "1vs6": { nombre: "🔥 1VS6 - LUXTIN PRO", descripcion: "SUBIDA PERFECTA: se ajusta sola a la cabeza de cada enemigo, rachas fáciles", general: 198, puntoRojo: 197, mira2x: 193, mira4x: 188, francotirador: 170, camara360: 199, boton: 44 },
+                "ump": { nombre: "💥 UMP/ESCOPETA - LUXTIN TODO ROJO", descripcion: "Sin dispersión: cada disparo impacta en el casco, letal en corta distancia", general: 199, puntoRojo: 198, mira2x: 190, mira4x: 182, francotirador: 155, camara360: 199, boton: 45 }
+            };
+            const ajuste = modos[modo];
+            const factor = porMarca[marca]?.factor || 1;
+            return {
+                ...ajuste,
+                general: Math.min(200, Math.max(1, Math.round(ajuste.general * factor))),
+                puntoRojo: Math.min(200, Math.max(1, Math.round(ajuste.puntoRojo * factor))),
+                mira2x: Math.min(200, Math.max(1, Math.round(ajuste.mira2x * factor))),
+                mira4x: Math.min(200, Math.max(1, Math.round(ajuste.mira4x * factor))),
+                francotirador: Math.min(200, Math.max(1, Math.round(ajuste.francotirador * factor))),
+                camara360: Math.min(200, Math.max(1, Math.round(ajuste.camara360 * factor)))
+            };
+        }
+
+        // ------------------- FUNCIONES GENERALES -------------------
         function iniciarAnuncios() {
             setInterval(() => {
-                if(!esPremium) {
+                if(!esSinAnuncios) {
                     document.getElementById('anuncioPeriodico').classList.remove('oculto');
                     setTimeout(() => {
                         document.getElementById('anuncioPeriodico').classList.add('oculto');
@@ -266,120 +259,173 @@
                 }
             }, TIEMPO_ANUNCIO);
         }
+        function animarActualizadoMini() {
+            const texto = "ACTUALIZADO - MODO HACKER";
+            const el = document.getElementById('textoActualizadoMini');
+            let i=0;
+            function escribir(){
+                if(i<texto.length){el.textContent=texto.substring(0,i+1);i++;setTimeout(escribir,120);}
+                else{el.textContent=texto+"...";setTimeout(()=>{el.textContent="";i=0;setTimeout(escribir,500);},1500);}
+            } escribir();
+        }
+        function animarActualizadoLuxtin() {
+            const texto = "LUXTIN SENCI - PRECISIÓN TOTAL";
+            const el = document.getElementById('textoActualizadoLuxtin');
+            let i=0;
+            function escribir(){
+                if(i<texto.length){el.textContent=texto.substring(0,i+1);i++;setTimeout(escribir,120);}
+                else{el.textContent=texto+"...";setTimeout(()=>{el.textContent="";i=0;setTimeout(escribir,500);},1500);}
+            } escribir();
+        }
+        function animarCodigosMini() {
+            const cont = document.getElementById('codigosFlotantesMini');
+            const cod = ['01001011','aimbot_head()','mov eax, 200','// MINI TALENTO','todo_rojo = true;'];
+            setInterval(() => {
+                const d=document.createElement('div');d.textContent=cod[Math.floor(Math.random()*cod.length)];
+                d.style.position='absolute';d.style.left=Math.random()*100+'%';d.style.top='-20px';cont.appendChild(d);
+                let alt=-20;const bajar=setInterval(()=>{alt+=1.5;d.style.top=alt+'px';if(alt>window.innerHeight){clearInterval(bajar);cont.removeChild(d);}},50);
+            },400);
+        }
+        function animarCodigosLuxtin() {
+            const cont = document.getElementById('codigosFlotantesLuxtin');
+            const cod = ['precision=100%','luxtin_aim()','subida=perfecta','// LUXTIN SENCI','disparo_cabeza=true;'];
+            setInterval(() => {
+                const d=document.createElement('div');d.textContent=cod[Math.floor(Math.random()*cod.length)];
+                d.style.position='absolute';d.style.left=Math.random()*100+'%';d.style.top='-20px';cont.appendChild(d);
+                let alt=-20;const bajar=setInterval(()=>{alt+=1.5;d.style.top=alt+'px';if(alt>window.innerHeight){clearInterval(bajar);cont.removeChild(d);}},50);
+            },400);
+        }
 
-        // 🎬 INICIO Y CONFIGURACIÓN DE BOTONES
+        // ------------------- INICIO Y NAVEGACIÓN -------------------
         window.addEventListener('DOMContentLoaded', () => {
-            const selMarca = document.getElementById('marca');
+            if(esSinAnuncios) document.getElementById('btnPremium').textContent = "✅ SIN ANUNCIOS";
+            animarCodigosMini();
+            animarCodigosLuxtin();
+            cargarListaDispositivos('marcaMini', 'modeloMini');
+            cargarListaDispositivos('marcaLuxtin', 'modeloLuxtin');
+        });
+        function cargarListaDispositivos(idMarca, idModelo) {
+            const selMarca = document.getElementById(idMarca);
             Object.keys(dispositivos).forEach(m => {
-                let opt = document.createElement('option'); opt.value = m; opt.textContent = m; selMarca.appendChild(opt);
+                const opt = document.createElement('option'); opt.value=m; opt.textContent=m; selMarca.appendChild(opt);
             });
-            const selMod = document.getElementById('modelo');
-            const btnGen = document.getElementById('btnGenerar');
-            const botonesModo = document.querySelectorAll('.boton-modo');
-
-            // Seleccionar modo de juego
-            botonesModo.forEach(boton => {
-                boton.addEventListener('click', () => {
-                    botonesModo.forEach(b => b.classList.remove('activo'));
-                    boton.classList.add('activo');
-                    modoSeleccionado = boton.dataset.modo;
-                    btnGen.disabled = !(selMarca.value && selMod.value && modoSeleccionado);
-                });
-            });
-
+            const selMod = document.getElementById(idModelo);
             selMarca.addEventListener('change', () => {
-                selMod.innerHTML = '<option value="">-- Primero elegí marca --</option>';
-                selMod.disabled = true;
-                modoSeleccionado = null;
-                botonesModo.forEach(b => b.classList.remove('activo'));
-                btnGen.disabled = true;
-                document.getElementById('resultado').classList.add('oculto');
-                const marcaElegida = selMarca.value;
-                if(marcaElegida) {
-                    dispositivos[marcaElegida].forEach(mod => {
-                        let opt = document.createElement('option'); opt.value = mod; opt.textContent = mod; selMod.appendChild(opt);
-                    });
-                    selMod.disabled = false;
+                selMod.innerHTML = '<option value="">-- Primero elegí marca --</option>'; selMod.disabled=true;
+                if(selMarca.value) {
+                    dispositivos[selMarca.value].forEach(mod => {
+                        const opt = document.createElement('option'); opt.value=mod; opt.textContent=mod; selMod.appendChild(opt);
+                    }); selMod.disabled=false;
                 }
             });
-
-            selMod.addEventListener('change', () => {
-                btnGen.disabled = !(selMarca.value && selMod.value && modoSeleccionado);
-                document.getElementById('resultado').classList.add('oculto');
-            });
-
-            if(esPremium) document.getElementById('btnPremium').textContent = "✅ PREMIUM";
-            animarCodigos();
-        });
-
-        // 🔑 VERIFICACIÓN DE CLAVE - INTACTA
-        function verificarClaveIngreso() {
-            const c = document.getElementById('claveIngreso').value.trim().toUpperCase();
-            if(c === CLAVE_INGRESO) {
+        }
+        function verificarIngresoMini() {
+            const c = document.getElementById('claveIngresoMini').value.trim().toUpperCase();
+            if(c === CLAVE_INGRESO_MINI) {
                 document.getElementById('pantallaInicio').classList.add('oculto');
-                document.getElementById('contenidoTotal').classList.remove('oculto');
-                animarActualizado();
-                if(!esPremium) iniciarAnuncios();
-            } else {
-                document.getElementById('mensajeClave').textContent = "❌ CLAVE INCORRECTA - USÁ: MINI TALENTO 777";
+                document.getElementById('contenidoMini').classList.remove('oculto');
+                animarActualizadoMini();
+                if(!esSinAnuncios) iniciarAnuncios();
+            } else document.getElementById('msgClaveMini').textContent = "❌ CLAVE INCORRECTA: USÁ MINI TALENTO 777";
+        }
+        function verificarSeccionPremium() {
+            const correo = document.getElementById('correoSinAnuncios').value.trim().toLowerCase();
+            const claveAcceso = document.getElementById('claveAccesoPremium').value.trim();
+            let ok = false;
+            // OPCIÓN 1: QUITAR ANUNCIOS
+            if(correo === CORREO_SIN_ANUNCIOS && claveAcceso === CLAVE_SIN_ANUNCIOS) {
+                esSinAnuncios = true; localStorage.setItem('esSinAnuncios', 'SI');
+                document.getElementById('btnPremium').textContent = "✅ SIN ANUNCIOS";
+                document.getElementById('msgPremium').textContent = "✅ ANUNCIOS DESACTIVADOS PARA SIEMPRE";
+                ok = true;
             }
-        }
-
-        function activarPremium() {
-            const co = document.getElementById('correoPremium').value.trim().toLowerCase();
-            const cl = document.getElementById('clavePremiumIngreso').value.trim();
-            if(co === CORREO_PREMIUM && cl === CLAVE_PREMIUM) {
-                esPremium = true; localStorage.setItem('esPremium', 'SI');
+            // OPCIÓN 2: ABRIR LUXTIN SENCI
+            if(claveAcceso === CLAVE_ABRIR_LUXTIN) {
                 document.getElementById('pantallaPremium').classList.add('oculto');
-                document.getElementById('btnPremium').textContent = "✅ PREMIUM";
-            } else document.getElementById('mensajePremium').textContent = "❌ ACCESO DENEGADO";
+                document.getElementById('contenidoMini').classList.add('oculto');
+                document.getElementById('contenidoLuxtin').classList.remove('oculto');
+                document.getElementById('fondoLuxtin').classList.remove('oculto');
+                animarActualizadoLuxtin();
+                ok = true;
+            }
+            if(!ok) document.getElementById('msgPremium').textContent = "❌ CLAVE O CORREO INCORRECTO";
+        }
+        function volverAMini() {
+            document.getElementById('contenidoLuxtin').classList.add('oculto');
+            document.getElementById('fondoLuxtin').classList.add('oculto');
+            document.getElementById('contenidoMini').classList.remove('oculto');
+            animarActualizadoMini();
         }
 
-        // 🎯 GENERAR SENSIBILIDAD POR MODO
-        function generarSensibilidad() {
-            document.getElementById('cargaGeneracion').classList.remove('oculto');
-            document.getElementById('resultado').classList.add('oculto');
+        // ------------------- GENERAR SENSI MINI -------------------
+        let modoMini = null;
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.boton-modo.mini').forEach(b => {
+                b.addEventListener('click', () => {
+                    document.querySelectorAll('.boton-modo.mini').forEach(x => x.classList.remove('activo'));
+                    b.classList.add('activo'); modoMini = b.dataset.modo;
+                    document.getElementById('btnGenMini').disabled = !(document.getElementById('marcaMini').value && document.getElementById('modeloMini').value && modoMini);
+                });
+            });
+            document.getElementById('modeloMini').addEventListener('change', () => {
+                document.getElementById('btnGenMini').disabled = !(document.getElementById('marcaMini').value && document.getElementById('modeloMini').value && modoMini);
+            });
+        });
+        function generarMini() {
+            document.getElementById('cargaMini').classList.remove('oculto');
+            document.getElementById('resMini').classList.add('oculto');
             setTimeout(() => {
-                const sensi = calcularSensi(
-                    document.getElementById('marca').value,
-                    document.getElementById('modelo').value,
-                    modoSeleccionado
-                );
-                document.getElementById('tituloResultado').textContent = sensi.nombre;
-                document.getElementById('descripcionResultado').textContent = sensi.descripcion;
-                document.getElementById('valGeneral').textContent = sensi.general;
-                document.getElementById('valPuntoRojo').textContent = sensi.puntoRojo;
-                document.getElementById('val2x').textContent = sensi.mira2x;
-                document.getElementById('val4x').textContent = sensi.mira4x;
-                document.getElementById('valSniper').textContent = sensi.francotirador;
-                document.getElementById('valCamara').textContent = sensi.camara360;
-                document.getElementById('valBoton').textContent = sensi.boton;
-
-                document.getElementById('cargaGeneracion').classList.add('oculto');
-                document.getElementById('resultado').classList.remove('oculto');
-            }, 1500);
+                const s = calcularSensiMini(document.getElementById('marcaMini').value, document.getElementById('modeloMini').value, modoMini);
+                document.getElementById('tMini').textContent = s.nombre;
+                document.getElementById('dMini').textContent = s.descripcion;
+                document.getElementById('gMini').textContent = s.general;
+                document.getElementById('pMini').textContent = s.puntoRojo;
+                document.getElementById('m2Mini').textContent = s.mira2x;
+                document.getElementById('m4Mini').textContent = s.mira4x;
+                document.getElementById('fMini').textContent = s.francotirador;
+                document.getElementById('c360Mini').textContent = s.camara360;
+                document.getElementById('bMini').textContent = s.boton;
+                document.getElementById('cargaMini').classList.add('oculto');
+                document.getElementById('resMini').classList.remove('oculto');
+            },1500);
         }
 
-        // 🟢 CÓDIGOS FLOTANTES - INTACTO
-        function animarCodigos() {
-            const cont = document.getElementById('codigosFlotantes');
-            const codigos = ['01001011','calibrar_sensi()','mov eax, 0FFh','// MINI TALENTO 777','sensi = 200;'];
-            setInterval(() => {
-                const div = document.createElement('div');
-                div.textContent = codigos[Math.floor(Math.random()*codigos.length)];
-                div.style.position = 'absolute'; div.style.left = Math.random()*100+'%'; div.style.top = '-20px';
-                cont.appendChild(div);
-                let alt = -20;
-                const bajar = setInterval(() => {
-                    alt += 1.5; div.style.top = alt+'px';
-                    if(alt > window.innerHeight) { clearInterval(bajar); cont.removeChild(div); }
-                }, 50);
-            }, 400);
+        // ------------------- GENERAR SENSI LUXTIN -------------------
+        let modoLuxtin = null;
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.boton-modo.luxtin').forEach(b => {
+                b.addEventListener('click', () => {
+                    document.querySelectorAll('.boton-modo.luxtin').forEach(x => x.classList.remove('activo'));
+                    b.classList.add('activo'); modoLuxtin = b.dataset.modo;
+                    document.getElementById('btnGenLuxtin').disabled = !(document.getElementById('marcaLuxtin').value && document.getElementById('modeloLuxtin').value && modoLuxtin);
+                });
+            });
+            document.getElementById('modeloLuxtin').addEventListener('change', () => {
+                document.getElementById('btnGenLuxtin').disabled = !(document.getElementById('marcaLuxtin').value && document.getElementById('modeloLuxtin').value && modoLuxtin);
+            });
+        });
+        function generarLuxtin() {
+            document.getElementById('cargaLuxtin').classList.remove('oculto');
+            document.getElementById('resLuxtin').classList.add('oculto');
+            setTimeout(() => {
+                const s = calcularSensiLuxtin(document.getElementById('marcaLuxtin').value, document.getElementById('modeloLuxtin').value, modoLuxtin);
+                document.getElementById('tLuxtin').textContent = s.nombre;
+                document.getElementById('dLuxtin').textContent = s.descripcion;
+                document.getElementById('gLuxtin').textContent = s.general;
+                document.getElementById('pLuxtin').textContent = s.puntoRojo;
+                document.getElementById('m2Luxtin').textContent = s.mira2x;
+                document.getElementById('m4Luxtin').textContent = s.mira4x;
+                document.getElementById('fLuxtin').textContent = s.francotirador;
+                document.getElementById('c360Luxtin').textContent = s.camara360;
+                document.getElementById('bLuxtin').textContent = s.boton;
+                document.getElementById('cargaLuxtin').classList.add('oculto');
+                document.getElementById('resLuxtin').classList.remove('oculto');
+            },1500);
         }
     </script>
 </head>
 <body>
-
+    <!-- FONDO ORIGINAL DE MINI TALENTO -->
     <canvas id="fondoMatrix"></canvas>
     <script>
         const canvas = document.getElementById('fondoMatrix');
@@ -400,83 +446,128 @@
         }
         setInterval(dibujar, 50);
     </script>
-    <div id="codigosFlotantes"></div>
 
+    <!-- FONDO NUEVO fondo-2.png SOLO PARA LUXTIN -->
+    <div id="fondoLuxtin" class="oculto"></div>
+
+    <!-- PANTALLA DE INICIO -->
     <div id="pantallaInicio">
         <div class="titulo-ascii">MINI TALENTO 777</div>
-        <h2 style="text-align:center; color:#fff; margin:10px 0;">BIENVENIDOS A MI GENERADOR DE SENSI</h2>
+        <h2 style="text-align:center; color:#fff; margin:10px 0;">+ LUXTIN SENCI - DOBLE GENERADOR</h2>
         <div class="linea-roja"></div>
         <h3 style="color:#ff0000; margin:10px 0;">INGRESÁ LA CLAVE DE ACCESO</h3>
-        <input type="text" id="claveIngreso" placeholder="Escribí: MINI TALENTO 777" style="text-align:center;">
-        <button onclick="verificarClaveIngreso()">🔓 ENTRAR</button>
-        <div id="mensajeClave" class="aviso"></div>
+        <input type="text" id="claveIngresoMini" placeholder="Escribí: MINI TALENTO" style="text-align:center;">
+        <button onclick="verificarIngresoMini()">🔓 ENTRAR</button>
+        <div id="msgClaveMini" class="aviso"></div>
     </div>
 
-    <div id="contenidoTotal" class="oculto">
+    <!-- GENERADOR MINI TALENTO 777 -->
+    <div id="contenidoMini" class="oculto">
         <button id="btnPremium" onclick="document.getElementById('pantallaPremium').classList.remove('oculto')">🔒 PREMIUM</button>
         <div class="centrar">
-            <div id="textoActualizado"></div>
-
+            <div id="textoActualizadoMini"></div>
+            <div id="codigosFlotantesMini"></div>
             <div class="panel-terminal">
                 <div class="titulo-ascii">MINI TALENTO 777</div>
-                <div class="subtitulo">v2.1 | Nuevo modo UMP y Escopeta M1887</div>
+                <div class="subtitulo">v2.2 | MODO MANCO - SUBIDA INSTANTÁNEA</div>
                 <div class="linea-roja"></div>
-
                 <div class="opcion"><span>1]</span> Seleccionar Marca</div>
-                <select id="marca"><option value="">-- Elegí tu marca --</option></select>
-
+                <select id="marcaMini"><option value="">-- Elegí tu marca --</option></select>
                 <div class="opcion"><span>2]</span> Seleccionar Modelo</div>
-                <select id="modelo" disabled><option value="">-- Primero elegí marca --</option></select>
-
+                <select id="modeloMini" disabled><option value="">-- Primero elegí marca --</option></select>
                 <div class="opcion"><span>3]</span> Elegí tu modo de juego</div>
                 <div class="contenedor-botones">
-                    <button class="boton-modo" data-modo="pvp">⚔️ PVP</button>
-                    <button class="boton-modo" data-modo="br">🗺️ BR</button>
-                    <button class="boton-modo" data-modo="de">🏙️ DE</button>
-                    <button class="boton-modo" data-modo="1vs6">🔥 1VS6</button>
-                    <button class="boton-modo" data-modo="ump">🔫 UMP/ESCOPETA</button>
+                    <button class="boton-modo mini" data-modo="pvp">⚔️ PVP</button>
+                    <button class="boton-modo mini" data-modo="br">🗺️ BR</button>
+                    <button class="boton-modo mini" data-modo="de">🏙️ DE</button>
+                    <button class="boton-modo mini" data-modo="1vs6">🔥 1VS6 HACKER</button>
+                    <button class="boton-modo mini" data-modo="ump">💥 UMP/ESCOPETA</button>
                 </div>
-
                 <div class="linea-roja"></div>
-                <button id="btnGenerar" disabled onclick="generarSensibilidad()">⚡ GENERAR SENSIBILIDAD</button>
-                <div id="cargaGeneracion" class="carga-siri oculto"></div>
-
-                <div id="resultado" class="resultado oculto">
+                <button id="btnGenMini" disabled onclick="generarMini()">⚡ GENERAR SENSI POTENTE</button>
+                <div id="cargaMini" class="carga-siri oculto"></div>
+                <div id="resMini" class="resultado oculto">
                     <div class="linea-roja"></div>
-                    <div style="font-size:1.2rem; color:#ff0000; margin-bottom:5px;" id="tituloResultado"></div>
-                    <div style="font-size:0.95rem; color:#aaa; margin-bottom:10px;" id="descripcionResultado"></div>
+                    <div style="font-size:1.2rem; color:#ff0000; margin-bottom:5px;" id="tMini"></div>
+                    <div style="font-size:0.95rem; color:#aaa; margin-bottom:10px;" id="dMini"></div>
                     <br>
-                    <div>General: <strong id="valGeneral"></strong></div>
-                    <div>Mira de punto rojo: <strong id="valPuntoRojo"></strong></div>
-                    <div>Mira 2x: <strong id="val2x"></strong></div>
-                    <div>Mira 4x: <strong id="val4x"></strong></div>
-                    <div>Mira francotirador: <strong id="valSniper"></strong></div>
-                    <div>Cámara 360: <strong id="valCamara"></strong></div>
-                    <div style="color:#ff0000; margin-top:8px;">👉 Botón recomendado: <strong id="valBoton"></strong></div>
+                    <div>General: <strong id="gMini"></strong></div>
+                    <div>Mira de punto rojo: <strong id="pMini"></strong></div>
+                    <div>Mira 2x: <strong id="m2Mini"></strong></div>
+                    <div>Mira 4x: <strong id="m4Mini"></strong></div>
+                    <div>Mira francotirador: <strong id="fMini"></strong></div>
+                    <div>Cámara 360: <strong id="c360Mini"></strong></div>
+                    <div style="color:#ff0000; margin-top:8px;">👉 Botón recomendado: <strong id="bMini"></strong></div>
                     <div class="linea-roja"></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- PANTALLA PREMIUM CON DOS OPCIONES -->
     <div id="pantallaPremium" class="oculto">
         <div class="panel-terminal">
-            <h2>ACTIVAR MODO PREMIUM</h2>
-            <input type="email" id="correoPremium" placeholder="Tu correo autorizado">
-            <input type="password" id="clavePremiumIngreso" placeholder="Clave Premium">
-            <button onclick="activarPremium()">✅ ACTIVAR SIN ANUNCIOS</button>
+            <h2>🔒 SECCIÓN PREMIUM</h2>
+            <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 1: Quitar anuncios → Correo: Luciano2024@gmail.com + Clave 50173533</p>
+            <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 2: Abrir LUXTIN SENCI → Solo poné la clave: 50173533</p>
+            <input type="email" id="correoSinAnuncios" placeholder="Solo para quitar anuncios: tu correo autorizado">
+            <input type="password" id="claveAccesoPremium" placeholder="Clave de acceso">
+            <button onclick="verificarSeccionPremium()">✅ INGRESAR</button>
             <button onclick="document.getElementById('pantallaPremium').classList.add('oculto')" style="background:#333;">❌ VOLVER</button>
-            <div id="mensajePremium" class="aviso"></div>
+            <div id="msgPremium" class="aviso"></div>
         </div>
     </div>
 
+    <!-- GENERADOR LUXTIN SENCI CON FONDO PROPIO -->
+    <div id="contenidoLuxtin" class="oculto">
+        <button id="btnVolverMini" onclick="volverAMini()">⬅️ VOLVER A MINI TALENTO</button>
+        <div class="centrar">
+            <div id="textoActualizadoLuxtin"></div>
+            <div id="codigosFlotantesLuxtin" class="luxtin"></div>
+            <div class="panel-terminal luxtin">
+                <div class="titulo-ascii luxtin">LUXTIN SENCI</div>
+                <div class="subtitulo luxtin">v1.0 - PRECISIÓN Y CONTROL TOTAL</div>
+                <div class="linea-roja luxtin"></div>
+                <div class="opcion luxtin"><span>1]</span> Seleccionar Marca</div>
+                <select id="marcaLuxtin" class="luxtin"><option value="">-- Elegí tu marca --</option></select>
+                <div class="opcion luxtin"><span>2]</span> Seleccionar Modelo</div>
+                <select id="modeloLuxtin" class="luxtin" disabled><option value="">-- Primero elegí marca --</option></select>
+                <div class="opcion luxtin"><span>3]</span> Elegí tu modo de juego</div>
+                <div class="contenedor-botones">
+                    <button class="boton-modo luxtin" data-modo="pvp">⚔️ PVP</button>
+                    <button class="boton-modo luxtin" data-modo="br">🗺️ BR</button>
+                    <button class="boton-modo luxtin" data-modo="de">🏙️ DE</button>
+                    <button class="boton-modo luxtin" data-modo="1vs6">🔥 1VS6</button>
+                    <button class="boton-modo luxtin" data-modo="ump">💥 UMP/ESCOPETA</button>
+                </div>
+                <div class="linea-roja luxtin"></div>
+                <button id="btnGenLuxtin" class="luxtin" disabled onclick="generarLuxtin()">⚡ GENERAR SENSI LUXTIN</button>
+                <div id="cargaLuxtin" class="carga-siri luxtin oculto"></div>
+                <div id="resLuxtin" class="resultado luxtin oculto">
+                    <div class="linea-roja luxtin"></div>
+                    <div style="font-size:1.2rem; color:#ffea00; margin-bottom:5px;" id="tLuxtin"></div>
+                    <div style="font-size:0.95rem; color:#aaa; margin-bottom:10px;" id="dLuxtin"></div>
+                    <br>
+                    <div>General: <strong id="gLuxtin"></strong></div>
+                    <div>Mira de punto rojo: <strong id="pLuxtin"></strong></div>
+                    <div>Mira 2x: <strong id="m2Luxtin"></strong></div>
+                    <div>Mira 4x: <strong id="m4Luxtin"></strong></div>
+                    <div>Mira francotirador: <strong id="fLuxtin"></strong></div>
+                    <div>Cámara 360: <strong id="c360Luxtin"></strong></div>
+                    <div style="color:#ffea00; margin-top:8px;">👉 Botón recomendado: <strong id="bLuxtin"></strong></div>
+                    <div class="linea-roja luxtin"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANUNCIOS -->
     <div id="anuncioPeriodico" class="oculto">
         <div class="panel-terminal">
             <div class="titulo-ascii">MINI TALENTO 777</div>
-            <p style="margin:15px 0;">🔔 OBTENÉ PREMIUM PARA NO VER MÁS ANUNCIOS</p>
+            <p style="margin:15px 0;">🔔 OBTENÉ EL ACCESO PREMIUM PARA NO VER MÁS ANUNCIOS</p>
             <button onclick="document.getElementById('anuncioPeriodico').classList.add('oculto')">✅ CERRAR Y SEGUIR</button>
         </div>
     </div>
-
 </body>
 </html>
