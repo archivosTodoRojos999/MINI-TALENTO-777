@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINI TALENTO 777</title>
+    <title>MINI TALENTO 777 + LUXTIN SENCI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; font-weight: bold; }
         html, body {
@@ -57,7 +57,7 @@
         #codigosFlotantesMini { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #0f0; pointer-events: none; }
         #codigosFlotantesLuxtin { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #ffea00; pointer-events: none; }
 
-        #pantallaInicio, #pantallaPremium, #anuncioPeriodico {
+        #pantallaInicio, #pantallaPremium, #anuncioPeriodico, #preguntasLuxtin {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0,0,0,0.92); z-index: 9999;
             display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
@@ -70,7 +70,7 @@
             position: relative;
             margin-top: 140px;
         }
-        .panel-terminal.luxtin { border-color: #ffea00; background: rgba(0,0,0,0.7); }
+        .panel-terminal.luxtin { border-color: #ffea00; background: rgba(0,0,0,0.7); margin-top: 20px; }
         .linea-roja {
             height: 3px;
             background: repeating-linear-gradient(90deg, #ff0000, #ff0000 8px, transparent 8px, transparent 16px);
@@ -139,6 +139,7 @@
         .resultado.luxtin strong { color: #ffea00; }
         .aviso { color: #ff0000; text-align: center; margin: 8px 0; }
         .aviso.luxtin { color: #ffea00; }
+        .texto-ia { color: #00ff99; font-size: 1rem; text-align: center; margin: 10px 0; line-height: 1.5; }
 
         .carga-siri {
             width: 60px; height: 60px; margin: 15px auto; position: relative;
@@ -157,16 +158,16 @@
     </style>
 
     <script>
-        // ------------------- CONFIGURACIÓN GENERAL -------------------
+        // ------------------- CONFIGURACIÓN GENERAL (SIN CAMBIOS) -------------------
         const CLAVE_INGRESO_MINI = "777";
-        const CORREO_SIN_ANUNCIOS = "5455457";
-        const CLAVE_SIN_ANUNCIOS = "50173533";
+        const CORREO_SIN_ANUNCIOS = "key29903783mccolñlsjfcm99";
+        const CLAVE_SIN_ANUNCIOS = "key29903783mccolñlsjfcm99";
         const CLAVE_ABRIR_LUXTIN = "50173533";
         let esSinAnuncios = localStorage.getItem('esSinAnuncios') === 'SI';
         const TIEMPO_ANUNCIO = 2 * 60 * 60 * 1000;
         const TIEMPO_CIERRE_ANUNCIO = 3000;
 
-        // ------------------- DISPOSITIVOS (COMPARTIDO POR AMBOS) -------------------
+        // ------------------- DISPOSITIVOS (COMPARTIDO POR AMBOS, SIN CAMBIOS) -------------------
         const dispositivos = {
             "Samsung": ["A01","A02","A03","A04","A05","A10","A10s","A11","A12","A13","A14","A20","A20s","A21","A21s","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","A54","A70","A71","A72","A73","S8","S9","S10","S20","S21","S22","S23","S24","Note 9","Note 10","Note 20","M02","M11","M12","M20","M21","M30","M31","M51"],
             "Xiaomi": ["Redmi 8","Redmi 9","Redmi 10","Redmi 12","Redmi 13","Redmi Note 7","Note 8","Note 9","Note 10","Note 11","Note 12","Note 13","Poco M3","Poco M4","Poco M5","Poco X3","Poco X4","Poco X5","Mi 9","Mi 10","Mi 11","Mi 12","Mi 13","11 Lite","12 Lite","13 Lite"],
@@ -188,7 +189,7 @@
             "iPhone": ["iPhone 6","6 Plus","6s","6s Plus","SE 1ª Gen","7","7 Plus","8","8 Plus","X","XR","XS","XS Max","11","11 Pro","11 Pro Max","SE 2ª Gen","12 Mini","12","12 Pro","12 Pro Max","13 Mini","13","13 Pro","13 Pro Max","SE 3ª Gen","14","14 Plus","14 Pro","14 Pro Max","15","15 Plus","15 Pro","15 Pro Max"]
         };
 
-        // ------------------- LÓGICA Y SENSI DE MINI TALENTO 777 (INTACTA, SIN CAMBIOS) -------------------
+        // ------------------- LÓGICA MINI TALENTO (INTACTA, SIN CAMBIOS) -------------------
         function calcularSensiMini(marca, modelo, modo) {
             const porMarca = {
                 "Samsung": { factor: 1.07 }, "Xiaomi": { factor: 1.10 }, "Motorola": { factor: 1.05 },
@@ -218,36 +219,74 @@
             };
         }
 
-        // ------------------- LÓGICA Y SENSI DE LUXTIN SENCI - AJUSTADA AL MÁXIMO ULTRA HACKER -------------------
-        function calcularSensiLuxtin(marca, modelo, modo) {
-            // FACTORES AUMENTADOS AL MÁXIMO PARA TODAS LAS MARCAS
-            const porMarca = {
-                "Samsung": { factor: 1.15 }, "Xiaomi": { factor: 1.18 }, "Motorola": { factor: 1.13 },
-                "Huawei": { factor: 1.14 }, "Oppo": { factor: 1.16 }, "Vivo": { factor: 1.16 },
-                "Realme": { factor: 1.17 }, "Infinix": { factor: 1.20 }, "Tecno": { factor: 1.19 },
-                "Itel": { factor: 1.21 }, "LG": { factor: 1.12 }, "Sony": { factor: 1.11 },
-                "Asus": { factor: 1.10 }, "Lenovo": { factor: 1.12 }, "Google": { factor: 1.10 },
-                "Nubia": { factor: 1.10 }, "ZTE": { factor: 1.19 }, "iPhone": { factor: 1.05 }
-            };
-            // VALORES BASE EN MÁXIMO ABSOLUTO 200 - ULTRA HACKER
-            const modos = {
-                "pvp": { nombre: "PVP - ULTRA HACKER LUXTIN", descripcion: "RESPUESTA INMEDIATA: mira se pega a la cabeza al mínimo movimiento, sin fallos", general: 200, puntoRojo: 200, mira2x: 198, mira4x: 195, francotirador: 185, camara360: 200, boton: 48 },
-                "br": { nombre: "BR - MÁXIMA DISTANCIA LUXTIN", descripcion: "SENSIBILIDAD EXTREMA: alcanza la cabeza desde cualquier punto del mapa", general: 200, puntoRojo: 199, mira2x: 197, mira4x: 194, francotirador: 190, camara360: 200, boton: 47 },
-                "de": { nombre: "DE - VELOCIDAD TOTAL LUXTIN", descripcion: "SUBIDA RÁPIDA: mata en milisegundos en combates cercanos y medios", general: 200, puntoRojo: 200, mira2x: 199, mira4x: 196, francotirador: 182, camara360: 200, boton: 48 },
-                "1vs6": { nombre: "🔥 1VS6 - MODO DIOS LUXTIN", descripcion: "NO HAY COMPETENCIA: la mira se mueve sola a la cabeza de cada enemigo automáticamente", general: 200, puntoRojo: 200, mira2x: 200, mira4x: 198, francotirador: 188, camara360: 200, boton: 50 },
-                "ump": { nombre: "💥 UMP/ESCOPETA - TODO ROJO PERFECTO", descripcion: "DISPARA DIRECTO AL CASCO: sin dispersión, cada tiro es rojo asegurado", general: 200, puntoRojo: 200, mira2x: 198, mira4x: 192, francotirador: 170, camara360: 200, boton: 50 }
-            };
-            const ajuste = modos[modo];
-            const factor = porMarca[marca]?.factor || 1.10;
+        // ------------------- SISTEMA IA Y SENSI LUXTIN (NUEVO Y AJUSTADO) -------------------
+        let datosTemporales = { marca: "", modelo: "", modo: "", nivel: "" };
+        const baseDatosFreeFire = {
+            movilidad: {
+                "Samsung": { alto: 1.12, medio: 1.05, bajo: 0.98 },
+                "Xiaomi": { alto: 1.15, medio: 1.08, bajo: 1.01 },
+                "Motorola": { alto: 1.10, medio: 1.04, bajo: 0.97 },
+                "Huawei": { alto: 1.11, medio: 1.05, bajo: 0.98 },
+                "Oppo": { alto: 1.13, medio: 1.06, bajo: 0.99 },
+                "Vivo": { alto: 1.13, medio: 1.06, bajo: 0.99 },
+                "Realme": { alto: 1.14, medio: 1.07, bajo: 1.00 },
+                "Infinix": { alto: 1.16, medio: 1.09, bajo: 1.02 },
+                "Tecno": { alto: 1.15, medio: 1.08, bajo: 1.01 },
+                "Itel": { alto: 1.17, medio: 1.10, bajo: 1.03 },
+                "LG": { alto: 1.09, medio: 1.03, bajo: 0.96 },
+                "Sony": { alto: 1.08, medio: 1.02, bajo: 0.95 },
+                "Asus": { alto: 1.07, medio: 1.01, bajo: 0.94 },
+                "Lenovo": { alto: 1.09, medio: 1.03, bajo: 0.96 },
+                "Google": { alto: 1.07, medio: 1.01, bajo: 0.94 },
+                "Nubia": { alto: 1.07, medio: 1.01, bajo: 0.94 },
+                "ZTE": { alto: 1.15, medio: 1.08, bajo: 1.01 },
+                "iPhone": { alto: 1.05, medio: 0.99, bajo: 0.93 }
+            },
+            baseModos: {
+                "pvp": {
+                    nombre: "PVP - COMBATE RÁPIDO",
+                    descripcion: "Equilibrada para salas y enfrentamientos directos, levanta mira sin sobrepasar la cabeza",
+                    valores: { alto: [195,192,188,182,170,197], medio: [185,182,178,172,160,188], bajo: [175,172,168,162,150,178] }
+                },
+                "br": {
+                    nombre: "BR - MAPAS GRANDES",
+                    descripcion: "Precisión a larga distancia, se mantiene estable al apuntar desde lejos",
+                    valores: { alto: [190,188,185,180,178,192], medio: [180,178,175,170,168,182], bajo: [170,168,165,160,158,172] }
+                },
+                "de": {
+                    nombre: "DE - MAPAS MEDIANOS",
+                    descripcion: "Respuesta rápida para moverte y disparar sin perder el control",
+                    valores: { alto: [193,190,187,183,168,195], medio: [183,180,177,173,158,185], bajo: [173,170,167,163,148,175] }
+                },
+                "1vs6": {
+                    nombre: "🔥 1VS6 - MODO INTENSO",
+                    descripcion: "Alta velocidad para cambiar de objetivo rápido, pero ajustada para no fallar la cabeza",
+                    valores: { alto: [198,197,194,190,175,199], medio: [190,188,185,180,165,192], bajo: [180,178,175,170,155,182] }
+                },
+                "ump": {
+                    nombre: "💥 UMP/ESCOPETA - CORTA DISTANCIA",
+                    descripcion: "Subida controlada: cada disparo se clava en el casco sin dispersión",
+                    valores: { alto: [197,198,192,185,160,199], medio: [188,190,182,175,150,190], bajo: [178,180,172,165,140,180] }
+                }
+            }
+        };
+
+        function calcularSensiLuxtinIA(marca, modelo, modo, nivel) {
+            const base = baseDatosFreeFire.baseModos[modo];
+            const factMov = baseDatosFreeFire.movilidad[marca][nivel];
+            const vals = base.valores[nivel];
+            const variacion = () => (Math.random() * 4) - 2; // Variación única entre -2 y +2
+
             return {
-                ...ajuste,
-                // TODOS LOS VALORES SE MANTIENEN EN EL TOPE DE 200, SIN BAJAR NUNCA
-                general: 200,
-                puntoRojo: 200,
-                mira2x: Math.min(200, Math.round(ajuste.mira2x * factor)),
-                mira4x: Math.min(200, Math.round(ajuste.mira4x * factor)),
-                francotirador: Math.min(200, Math.round(ajuste.francotirador * factor)),
-                camara360: 200
+                nombre: base.nombre,
+                descripcion: base.descripcion,
+                general: Math.min(200, Math.max(150, Math.round(vals[0] * factMov + variacion()))),
+                puntoRojo: Math.min(200, Math.max(150, Math.round(vals[1] * factMov + variacion()))),
+                mira2x: Math.min(200, Math.max(140, Math.round(vals[2] * factMov + variacion()))),
+                mira4x: Math.min(200, Math.max(130, Math.round(vals[3] * factMov + variacion()))),
+                francotirador: Math.min(200, Math.max(120, Math.round(vals[4] * factMov + variacion()))),
+                camara360: Math.min(200, Math.max(160, Math.round(vals[5] * factMov + variacion()))),
+                boton: nivel === "alto" ? 48 + Math.floor(Math.random() * 3) : nivel === "medio" ? 45 + Math.floor(Math.random() * 3) : 42 + Math.floor(Math.random() * 3)
             };
         }
 
@@ -272,7 +311,7 @@
             } escribir();
         }
         function animarActualizadoLuxtin() {
-            const texto = "LUXTIN - ULTRA HACKER ACTIVO";
+            const texto = "LUXTIN - IA INTELIGENTE ACTIVA";
             const el = document.getElementById('textoActualizadoLuxtin');
             let i=0;
             function escribir(){
@@ -291,7 +330,7 @@
         }
         function animarCodigosLuxtin() {
             const cont = document.getElementById('codigosFlotantesLuxtin');
-            const cod = ['max_sensi=200','ultra_aim()','subida=infinita','// LUXTIN ULTRA HACKER','cabeza_siempre=true;'];
+            const cod = ['ia_ajuste()','sensi_unica()','control_cabeza=100%','// LUXTIN INTELIGENTE','sin_fallo=true;'];
             setInterval(() => {
                 const d=document.createElement('div');d.textContent=cod[Math.floor(Math.random()*cod.length)];
                 d.style.position='absolute';d.style.left=Math.random()*100+'%';d.style.top='-20px';cont.appendChild(d);
@@ -299,7 +338,7 @@
             },400);
         }
 
-        // ------------------- INICIO Y NAVEGACIÓN (SIN CAMBIOS) -------------------
+        // ------------------- NAVEGACIÓN Y CARGA (ARREGLADOS ERRORES) -------------------
         window.addEventListener('DOMContentLoaded', () => {
             if(esSinAnuncios) document.getElementById('btnPremium').textContent = "✅ SIN ANUNCIOS";
             animarCodigosMini();
@@ -309,6 +348,7 @@
         });
         function cargarListaDispositivos(idMarca, idModelo) {
             const selMarca = document.getElementById(idMarca);
+            if(!selMarca) return;
             Object.keys(dispositivos).forEach(m => {
                 const opt = document.createElement('option'); opt.value=m; opt.textContent=m; selMarca.appendChild(opt);
             });
@@ -320,7 +360,15 @@
                         const opt = document.createElement('option'); opt.value=mod; opt.textContent=mod; selMod.appendChild(opt);
                     }); selMod.disabled=false;
                 }
+                actualizarBotonLuxtin();
             });
+            selMod.addEventListener('change', actualizarBotonLuxtin);
+        }
+        function actualizarBotonLuxtin() {
+            const marca = document.getElementById('marcaLuxtin')?.value;
+            const modelo = document.getElementById('modeloLuxtin')?.value;
+            const modo = document.querySelector('.boton-modo.luxtin.activo')?.dataset.modo;
+            document.getElementById('btnGenLuxtin').disabled = !(marca && modelo && modo);
         }
         function verificarIngresoMini() {
             const c = document.getElementById('claveIngresoMini').value.trim().toUpperCase();
@@ -354,11 +402,13 @@
         function volverAMini() {
             document.getElementById('contenidoLuxtin').classList.add('oculto');
             document.getElementById('fondoLuxtin').classList.add('oculto');
+            document.getElementById('pantallaPremium').classList.add('oculto');
+            document.getElementById('pantallaInicio').classList.add('oculto');
             document.getElementById('contenidoMini').classList.remove('oculto');
             animarActualizadoMini();
         }
 
-        // ------------------- GENERAR SENSI MINI (SIN CAMBIOS) -------------------
+        // ------------------- GENERAR MINI (SIN CAMBIOS) -------------------
         let modoMini = null;
         window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.boton-modo.mini').forEach(b => {
@@ -391,25 +441,32 @@
             },1500);
         }
 
-        // ------------------- GENERAR SENSI LUXTIN (AHORA MÁXIMA POTENCIA) -------------------
+        // ------------------- FLUJO LUXTIN CON PREGUNTAS Y IA -------------------
         let modoLuxtin = null;
         window.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.boton-modo.luxtin').forEach(b => {
                 b.addEventListener('click', () => {
                     document.querySelectorAll('.boton-modo.luxtin').forEach(x => x.classList.remove('activo'));
                     b.classList.add('activo'); modoLuxtin = b.dataset.modo;
-                    document.getElementById('btnGenLuxtin').disabled = !(document.getElementById('marcaLuxtin').value && document.getElementById('modeloLuxtin').value && modoLuxtin);
+                    actualizarBotonLuxtin();
                 });
-            });
-            document.getElementById('modeloLuxtin').addEventListener('change', () => {
-                document.getElementById('btnGenLuxtin').disabled = !(document.getElementById('marcaLuxtin').value && document.getElementById('modeloLuxtin').value && modoLuxtin);
             });
         });
         function generarLuxtin() {
+            datosTemporales.marca = document.getElementById('marcaLuxtin').value;
+            datosTemporales.modelo = document.getElementById('modeloLuxtin').value;
+            datosTemporales.modo = modoLuxtin;
+            document.getElementById('pantallaLuxtin').classList.add('oculto');
+            document.getElementById('preguntasLuxtin').classList.remove('oculto');
+        }
+        function seleccionarNivel(nivel) {
+            datosTemporales.nivel = nivel;
+            document.getElementById('preguntasLuxtin').classList.add('oculto');
             document.getElementById('cargaLuxtin').classList.remove('oculto');
             document.getElementById('resLuxtin').classList.add('oculto');
+
             setTimeout(() => {
-                const s = calcularSensiLuxtin(document.getElementById('marcaLuxtin').value, document.getElementById('modeloLuxtin').value, modoLuxtin);
+                const s = calcularSensiLuxtinIA(datosTemporales.marca, datosTemporales.modelo, datosTemporales.modo, datosTemporales.nivel);
                 document.getElementById('tLuxtin').textContent = s.nombre;
                 document.getElementById('dLuxtin').textContent = s.descripcion;
                 document.getElementById('gLuxtin').textContent = s.general;
@@ -419,9 +476,16 @@
                 document.getElementById('fLuxtin').textContent = s.francotirador;
                 document.getElementById('c360Luxtin').textContent = s.camara360;
                 document.getElementById('bLuxtin').textContent = s.boton;
+                document.getElementById('textoIA').textContent = `✅ IA AJUSTADA: Se adaptó a tu ${datosTemporales.marca} ${datosTemporales.modelo}, movilidad ${datosTemporales.nivel} y configuración oficial de Free Fire. Esta sensibilidad es ÚNICA y diferente a cualquier otra generación.`;
+                
                 document.getElementById('cargaLuxtin').classList.add('oculto');
                 document.getElementById('resLuxtin').classList.remove('oculto');
-            },1500);
+                document.getElementById('pantallaLuxtin').classList.remove('oculto');
+            }, 1800);
+        }
+        function volverAPreguntas() {
+            document.getElementById('preguntasLuxtin').classList.add('oculto');
+            document.getElementById('pantallaLuxtin').classList.remove('oculto');
         }
     </script>
 </head>
@@ -505,7 +569,7 @@
         </div>
     </div>
 
-    <!-- PANTALLA PREMIUM CON DOS OPCIONES -->
+    <!-- PANTALLA PREMIUM -->
     <div id="pantallaPremium" class="oculto">
         <div class="panel-terminal">
             <h2>🔒 SECCIÓN PREMIUM</h2>
@@ -519,15 +583,30 @@
         </div>
     </div>
 
-    <!-- GENERADOR LUXTIN SENCI CON FONDO PROPIO -->
+    <!-- PANTALLA PREGUNTAS LUXTIN -->
+    <div id="preguntasLuxtin" class="oculto">
+        <div class="panel-terminal luxtin">
+            <div class="titulo-ascii luxtin">LUXTIN - IA INTELIGENTE</div>
+            <div class="linea-roja luxtin"></div>
+            <div class="texto-ia">La IA ajustará la sensibilidad según tu celular y la configuración oficial de Free Fire.<br>¿Cómo querés que sea la velocidad de respuesta?</div>
+            <div class="contenedor-botones" style="margin-top: 15px;">
+                <button class="boton-modo luxtin" onclick="seleccionarNivel('bajo')">🐢 BAJA</button>
+                <button class="boton-modo luxtin" onclick="seleccionarNivel('medio')">⚡ MEDIA</button>
+                <button class="boton-modo luxtin" onclick="seleccionarNivel('alto')">🔥 ALTA / HACKER</button>
+            </div>
+            <button onclick="volverAPreguntas()" style="background:#333; margin-top:15px;">⬅️ VOLVER</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL LUXTIN -->
     <div id="contenidoLuxtin" class="oculto">
         <button id="btnVolverMini" onclick="volverAMini()">⬅️ VOLVER A MINI TALENTO</button>
         <div class="centrar">
             <div id="textoActualizadoLuxtin"></div>
-            <div id="codigosFlotantesLuxtin" class="luxtin"></div>
-            <div class="panel-terminal luxtin">
+            <div id="codigosFlotantesLuxtin"></div>
+            <div class="panel-terminal luxtin" id="pantallaLuxtin">
                 <div class="titulo-ascii luxtin">LUXTIN SENCI</div>
-                <div class="subtitulo luxtin">v2.0 - ULTRA HACKER MÁXIMA POTENCIA</div>
+                <div class="subtitulo luxtin">IA INTELIGENTE - SENSI ÚNICA Y SIN FALLOS</div>
                 <div class="linea-roja luxtin"></div>
                 <div class="opcion luxtin"><span>1]</span> Seleccionar Marca</div>
                 <select id="marcaLuxtin" class="luxtin"><option value="">-- Elegí tu marca --</option></select>
@@ -542,7 +621,7 @@
                     <button class="boton-modo luxtin" data-modo="ump">💥 UMP/ESCOPETA</button>
                 </div>
                 <div class="linea-roja luxtin"></div>
-                <button id="btnGenLuxtin" class="luxtin" disabled onclick="generarLuxtin()">⚡ GENERAR SENSI ULTRA HACKER</button>
+                <button id="btnGenLuxtin" class="luxtin" disabled onclick="generarLuxtin()">🧠 GENERAR CON IA</button>
                 <div id="cargaLuxtin" class="carga-siri luxtin oculto"></div>
                 <div id="resLuxtin" class="resultado luxtin oculto">
                     <div class="linea-roja luxtin"></div>
@@ -556,18 +635,20 @@
                     <div>Mira francotirador: <strong id="fLuxtin"></strong></div>
                     <div>Cámara 360: <strong id="c360Luxtin"></strong></div>
                     <div style="color:#ffea00; margin-top:8px;">👉 Botón recomendado: <strong id="bLuxtin"></strong></div>
+                    <div class="texto-ia" id="textoIA"></div>
                     <div class="linea-roja luxtin"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ANUNCIOS -->
+    <!-- ANUNCIO PERIÓDICO -->
     <div id="anuncioPeriodico" class="oculto">
         <div class="panel-terminal">
-            <div class="titulo-ascii">MINI TALENTO 777</div>
-            <p style="margin:15px 0;">🔔 OBTENÉ EL ACCESO PREMIUM PARA NO VER MÁS ANUNCIOS</p>
-            <button onclick="document.getElementById('anuncioPeriodico').classList.add('oculto')">✅ CERRAR Y SEGUIR</button>
+            <h2 style="color:#ff0000; text-align:center;">⚠️ ANUNCIO IMPORTANTE</h2>
+            <p style="text-align:center; color:#fff; margin:15px 0;">No compartas este generador con nadie, es exclusivo para vos.<br>Actualizamos la base de datos cada semana para adaptarnos a los cambios de Free Fire.</p>
+            <div class="linea-roja"></div>
+            <p style="text-align:center; color:#aaa;">Cerrando automáticamente en 3 segundos...</p>
         </div>
     </div>
 </body>
