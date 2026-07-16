@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINI TALENTO 777 + LUXTIN SENCI</title>
+    <title>MINI TALENTO 777/title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; font-weight: bold; }
         html, body {
@@ -35,14 +35,13 @@
             top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            color: #ffea00;
             font-size: 2.5rem;
             font-family: 'Courier New', monospace;
             font-weight: bold;
             letter-spacing: 2px;
             white-space: nowrap;
-            text-shadow: 0 0 8px #ffea00;
             z-index: 10;
+            transition: all 1s ease;
         }
 
         /* FONDO ORIGINAL PARA MINI TALENTO */
@@ -55,7 +54,7 @@
         }
 
         #codigosFlotantesMini { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #0f0; pointer-events: none; }
-        #codigosFlotantesLuxtin { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #ffea00; pointer-events: none; }
+        #codigosFlotantesLuxtin { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; pointer-events: none; transition: color 1s ease; }
 
         #pantallaInicio, #pantallaPremium, #anuncioPeriodico, #preguntasLuxtin {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -70,13 +69,21 @@
             position: relative;
             margin-top: 140px;
         }
-        .panel-terminal.luxtin { border-color: #ffea00; background: rgba(0,0,0,0.7); margin-top: 20px; }
+        .panel-terminal.luxtin {
+            background: rgba(0,0,0,0.7);
+            margin-top: 20px;
+            border: 3px solid var(--color-luxtin);
+            transition: border-color 1s ease;
+        }
         .linea-roja {
             height: 3px;
             background: repeating-linear-gradient(90deg, #ff0000, #ff0000 8px, transparent 8px, transparent 16px);
             margin: 12px 0;
         }
-        .linea-roja.luxtin { background: repeating-linear-gradient(90deg, #ffea00, #ffea00 8px, transparent 8px, transparent 16px); }
+        .linea-roja.luxtin {
+            background: repeating-linear-gradient(90deg, var(--color-luxtin), var(--color-luxtin) 8px, transparent 8px, transparent 16px);
+            transition: background 1s ease;
+        }
         .titulo-ascii {
             font-size: 4.5vw;
             line-height: 1;
@@ -86,21 +93,30 @@
             margin: 10px 0;
             letter-spacing: 2px;
         }
-        .titulo-ascii.luxtin { text-shadow: 0 0 8px #ffea00; }
+        .titulo-ascii.luxtin {
+            text-shadow: 0 0 8px var(--color-luxtin);
+            transition: text-shadow 1s ease;
+        }
         .subtitulo {
             text-align: center;
             color: #ff0000;
             font-size: 1.1rem;
             margin-bottom: 15px;
         }
-        .subtitulo.luxtin { color: #ffea00; }
+        .subtitulo.luxtin {
+            color: var(--color-luxtin);
+            transition: color 1s ease;
+        }
         .opcion {
             font-size: 1.2rem;
             margin: 10px 0;
             color: #fff;
         }
         .opcion span { color: #ff0000; }
-        .opcion.luxtin span { color: #ffea00; }
+        .opcion.luxtin span {
+            color: var(--color-luxtin);
+            transition: color 1s ease;
+        }
 
         .contenedor-botones {
             display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0;
@@ -111,8 +127,17 @@
         .boton-modo.activo {
             background: #ff3333; box-shadow: 0 0 12px #ff0000; transform: scale(1.05);
         }
+        .boton-modo.luxtin {
+            border: 2px solid var(--color-luxtin);
+            background: rgba(20,20,20,0.8);
+            color: var(--color-luxtin);
+            transition: all 1s ease;
+        }
         .boton-modo.luxtin.activo {
-            background: #ffea00; color: #000; box-shadow: 0 0 12px #ffea00;
+            background: var(--color-luxtin);
+            color: #000;
+            box-shadow: 0 0 15px var(--color-luxtin);
+            transform: scale(1.05);
         }
 
         input, select, button {
@@ -120,26 +145,50 @@
             border: 2px solid #ff0000; border-radius: 0;
             font-size: 1.1rem; background: #111; color: #fff; font-family: inherit;
         }
-        input.luxtin, select.luxtin, button.luxtin { border-color: #ffea00; }
+        input.luxtin, select.luxtin, button.luxtin {
+            border-color: var(--color-luxtin);
+            transition: border-color 1s ease;
+        }
         select:disabled { background: #0a0a0a; color: #555; border-color: #333; cursor: not-allowed; }
         select option { background: #000; color: #fff; }
         button { background: #ff0000; cursor: pointer; transition: 0.1s; }
-        button.luxtin { background: #ffea00; color: #000; }
+        button.luxtin {
+            background: var(--color-luxtin);
+            color: #000;
+            transition: all 1s ease;
+        }
         button:disabled { background: #440000; color: #777; border-color: #550000; cursor: not-allowed; }
-        button.luxtin:disabled { background: #444200; color: #777; border-color: #555300; }
+        button.luxtin:disabled {
+            background: rgba(40,40,40,0.8);
+            color: #444;
+            border-color: #333;
+            cursor: not-allowed;
+        }
         button:hover:not(:disabled):not(.boton-modo) { background: #ff3333; box-shadow: 0 0 10px #ff0000; }
-        button.luxtin:hover:not(:disabled):not(.boton-modo) { background: #fff155; box-shadow: 0 0 10px #ffea00; }
+        button.luxtin:hover:not(:disabled):not(.boton-modo) {
+            filter: brightness(1.2);
+            box-shadow: 0 0 12px var(--color-luxtin);
+        }
 
         .resultado {
             background: rgba(5,5,5,0.8); padding: 15px; margin-top: 15px;
             border: 2px solid #ff0000; font-size: 1.1rem; line-height: 1.6;
         }
-        .resultado.luxtin { border-color: #ffea00; }
+        .resultado.luxtin {
+            border-color: var(--color-luxtin);
+            transition: border-color 1s ease;
+        }
         .resultado strong { color: #0f0; }
-        .resultado.luxtin strong { color: #ffea00; }
+        .resultado.luxtin strong {
+            color: var(--color-luxtin);
+            transition: color 1s ease;
+        }
         .aviso { color: #ff0000; text-align: center; margin: 8px 0; }
-        .aviso.luxtin { color: #ffea00; }
-        .texto-ia { color: #00ff99; font-size: 1rem; text-align: center; margin: 10px 0; line-height: 1.5; }
+        .aviso.luxtin {
+            color: var(--color-luxtin);
+            transition: color 1s ease;
+        }
+        .texto-ia { display: none; } /* ELIMINADO EL TEXTO DE IA QUE PEDISTE SACAR */
 
         .carga-siri {
             width: 60px; height: 60px; margin: 15px auto; position: relative;
@@ -150,22 +199,58 @@
             animation: girar 1.2s linear infinite;
         }
         .carga-siri::after { border-top-color: #ff0000; animation-duration: 0.8s; animation-direction: reverse; }
-        .carga-siri.luxtin::after { border-top-color: #ffea00; }
+        .carga-siri.luxtin::after {
+            border-top-color: var(--color-luxtin);
+            transition: border-top-color 1s ease;
+        }
         @keyframes girar { 100% { transform: rotate(360deg); } }
 
         #btnPremium { position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem; border: 1px solid #ff0000; z-index: 15; }
-        #btnVolverMini { position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem; border: 1px solid #ffea00; z-index: 15; background: #222; color: #ffea00; }
-    </style>
+        #btnVolverMini {
+            position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem;
+            border: 1px solid var(--color-luxtin); z-index: 15;
+            background: #222; color: var(--color-luxtin);
+            transition: all 1s ease;
+        }
 
-    <script>
+        /* VARIABLE PARA CAMBIO DE COLOR AUTOMÁTICO LUXTIN */
+        :root {
+            --color-luxtin: #b040ff; /* MORADO FLÚOR INICIAL */
+        }
+    </style>
+       <script>
         // ------------------- CONFIGURACIÓN GENERAL (SIN CAMBIOS) -------------------
         const CLAVE_INGRESO_MINI = "777";
-        const CORREO_SIN_ANUNCIOS = "key29903783mccolñlsjfcm99";
-        const CLAVE_SIN_ANUNCIOS = "key29903783mccolñlsjfcm99";
+        const CORREO_SIN_ANUNCIOS = "keyiienc948495mg7897";
+        const CLAVE_SIN_ANUNCIOS = "keyiienc948495mg94370o";
         const CLAVE_ABRIR_LUXTIN = "50173533";
         let esSinAnuncios = localStorage.getItem('esSinAnuncios') === 'SI';
         const TIEMPO_ANUNCIO = 2 * 60 * 60 * 1000;
         const TIEMPO_CIERRE_ANUNCIO = 3000;
+        const TIEMPO_CAMBIO_COLOR = 10 * 60 * 1000; // 10 MINUTOS POR COLOR
+
+        // ------------------- SISTEMA DE CAMBIO DE COLOR LUXTIN -------------------
+        const coloresLuxtin = [
+            '#b040ff', // MORADO FLÚOR
+            '#ff3a3a', // ROJO FLÚOR
+            '#3aff5a'  // VERDE FLÚOR
+        ];
+        let indiceColorActual = 0;
+
+        function aplicarColorLuxtin() {
+            const color = coloresLuxtin[indiceColorActual];
+            document.documentElement.style.setProperty('--color-luxtin', color);
+            document.getElementById('textoActualizadoLuxtin').style.color = color;
+            document.getElementById('codigosFlotantesLuxtin').style.color = color;
+        }
+
+        function iniciarCicloColores() {
+            aplicarColorLuxtin();
+            setInterval(() => {
+                indiceColorActual = (indiceColorActual + 1) % coloresLuxtin.length;
+                aplicarColorLuxtin();
+            }, TIEMPO_CAMBIO_COLOR);
+        }
 
         // ------------------- DISPOSITIVOS (COMPARTIDO POR AMBOS, SIN CAMBIOS) -------------------
         const dispositivos = {
@@ -218,8 +303,7 @@
                 camara360: Math.min(200, Math.max(1, Math.round(ajuste.camara360 * factor)))
             };
         }
-
-        // ------------------- SISTEMA IA Y SENSI LUXTIN (NUEVO Y AJUSTADO) -------------------
+                // ------------------- SISTEMA IA Y SENSI LUXTIN (AJUSTADO SIN TEXTO SOBRANTE) -------------------
         let datosTemporales = { marca: "", modelo: "", modo: "", nivel: "" };
         const baseDatosFreeFire = {
             movilidad: {
@@ -337,14 +421,14 @@
                 let alt=-20;const bajar=setInterval(()=>{alt+=1.5;d.style.top=alt+'px';if(alt>window.innerHeight){clearInterval(bajar);cont.removeChild(d);}},50);
             },400);
         }
-
-        // ------------------- NAVEGACIÓN Y CARGA (ARREGLADOS ERRORES) -------------------
+                   // ------------------- NAVEGACIÓN Y CARGA (ARREGLADOS ERRORES) -------------------
         window.addEventListener('DOMContentLoaded', () => {
             if(esSinAnuncios) document.getElementById('btnPremium').textContent = "✅ SIN ANUNCIOS";
             animarCodigosMini();
             animarCodigosLuxtin();
             cargarListaDispositivos('marcaMini', 'modeloMini');
             cargarListaDispositivos('marcaLuxtin', 'modeloLuxtin');
+            iniciarCicloColores(); // INICIA EL CAMBIO DE COLOR AUTOMÁTICO
         });
         function cargarListaDispositivos(idMarca, idModelo) {
             const selMarca = document.getElementById(idMarca);
@@ -476,7 +560,6 @@
                 document.getElementById('fLuxtin').textContent = s.francotirador;
                 document.getElementById('c360Luxtin').textContent = s.camara360;
                 document.getElementById('bLuxtin').textContent = s.boton;
-                document.getElementById('textoIA').textContent = `✅ IA AJUSTADA: Se adaptó a tu ${datosTemporales.marca} ${datosTemporales.modelo}, movilidad ${datosTemporales.nivel} y configuración oficial de Free Fire. Esta sensibilidad es ÚNICA y diferente a cualquier otra generación.`;
                 
                 document.getElementById('cargaLuxtin').classList.add('oculto');
                 document.getElementById('resLuxtin').classList.remove('oculto');
@@ -512,16 +595,16 @@
         setInterval(dibujar, 50);
     </script>
 
-    <!-- FONDO NUEVO FONDO-2.jpeg SOLO PARA LUXTIN -->
+    <!-- FONDO NUEVO fondo-2.png SOLO PARA LUXTIN -->
     <div id="fondoLuxtin" class="oculto"></div>
 
     <!-- PANTALLA DE INICIO -->
     <div id="pantallaInicio">
         <div class="titulo-ascii">MINI TALENTO 777</div>
-        <h2 style="text-align:center; color:#fff; margin:10px 0;">+ LUXTIN SENCI - DOBLE GENERADOR</h2>
+        <h2 style="text-align:center; color:#fff; margin:10px 0;">+GENERADOR OPTIMIZADO/h2>
         <div class="linea-roja"></div>
         <h3 style="color:#ff0000; margin:10px 0;">INGRESÁ LA CLAVE DE ACCESO</h3>
-        <input type="text" id="claveIngresoMini" placeholder="Escribí: MINI TALENTO 777" style="text-align:center;">
+        <input type="text" id="claveIngresoMini" placeholder="Escribí: clave " style="text-align:center;">
         <button onclick="verificarIngresoMini()">🔓 ENTRAR</button>
         <div id="msgClaveMini" class="aviso"></div>
     </div>
@@ -573,7 +656,7 @@
     <div id="pantallaPremium" class="oculto">
         <div class="panel-terminal">
             <h2>🔒 SECCIÓN PREMIUM</h2>
-            <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 1: Quitar anuncios → Correo: Luciano2024@gmail.com + Clave 50173533</p>
+            <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 1: Quitar anuncios → Correo: lucianosala269@gmail.com + Clave 50173533</p>
             <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 2: Abrir LUXTIN SENCI → Solo poné la clave: 50173533</p>
             <input type="email" id="correoSinAnuncios" placeholder="Solo para quitar anuncios: tu correo autorizado">
             <input type="password" id="claveAccesoPremium" placeholder="Clave de acceso">
@@ -600,7 +683,7 @@
 
     <!-- PANTALLA PRINCIPAL LUXTIN -->
     <div id="contenidoLuxtin" class="oculto">
-        <button id="btnVolverMini" onclick="volverAMini()">⬅️ VOLVER A MINI TALENTO</button>
+        <button id="btnVolverMini" onclick="volverAMini()">⬅️ VOLVER AL MENU</button>
         <div class="centrar">
             <div id="textoActualizadoLuxtin"></div>
             <div id="codigosFlotantesLuxtin"></div>
@@ -625,7 +708,7 @@
                 <div id="cargaLuxtin" class="carga-siri luxtin oculto"></div>
                 <div id="resLuxtin" class="resultado luxtin oculto">
                     <div class="linea-roja luxtin"></div>
-                    <div style="font-size:1.2rem; color:#ffea00; margin-bottom:5px;" id="tLuxtin"></div>
+                    <div style="font-size:1.2rem; color:var(--color-luxtin); margin-bottom:5px;" id="tLuxtin"></div>
                     <div style="font-size:0.95rem; color:#aaa; margin-bottom:10px;" id="dLuxtin"></div>
                     <br>
                     <div>General: <strong id="gLuxtin"></strong></div>
@@ -634,8 +717,7 @@
                     <div>Mira 4x: <strong id="m4Luxtin"></strong></div>
                     <div>Mira francotirador: <strong id="fLuxtin"></strong></div>
                     <div>Cámara 360: <strong id="c360Luxtin"></strong></div>
-                    <div style="color:#ffea00; margin-top:8px;">👉 Botón recomendado: <strong id="bLuxtin"></strong></div>
-                    <div class="texto-ia" id="textoIA"></div>
+                    <div style="color:var(--color-luxtin); margin-top:8px;">👉 Botón recomendado: <strong id="bLuxtin"></strong></div>
                     <div class="linea-roja luxtin"></div>
                 </div>
             </div>
